@@ -11,11 +11,23 @@
         tools:context=".ui.SpotChoiceActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-
+    <TextView
+            android:text="SpotChoiceActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            tools:layout_editor_absoluteY="397dp"
+            tools:layout_editor_absoluteX="151dp"/>
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_revert"
+            android:id="@+id/backButton"
+            tools:layout_editor_absoluteY="628dp"
+            tools:layout_editor_absoluteX="52dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
