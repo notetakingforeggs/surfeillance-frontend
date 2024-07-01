@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.surfeillancefrontend.MainActivity;
 import com.example.surfeillancefrontend.R;
-import com.example.surfeillancefrontend.model.Location;
+import com.example.surfeillancefrontend.model.data.Location;
 
 import java.util.ArrayList;
 import java.util.List;

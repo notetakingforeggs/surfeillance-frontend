@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.surfeillancefrontend.R;
-import com.example.surfeillancefrontend.model.Location;
+import com.example.surfeillancefrontend.model.data.Location;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -40,6 +40,8 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotAdapter.SpotViewHolder
     public int getItemCount() {
         return spots.size();
     }
+
+
     public static class SpotViewHolder extends RecyclerView.ViewHolder {
         // we are creating a custom ViewHolder class here - it holds references to all the views (Button/s, TextView/s etc.) in the item layout i.e., location_item_layout.xml.
         // declare here the Views (Button/s, TextView/s etc) defined in location_item_layout.xml
