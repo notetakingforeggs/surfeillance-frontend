@@ -1,5 +1,6 @@
-package com.example.surfeillancefrontend.ui;
+package com.example.surfeillancefrontend.ui.spot.spotchoice;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,21 +9,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.surfeillancefrontend.R;
 import com.example.surfeillancefrontend.model.data.Location;
+import com.example.surfeillancefrontend.ui.spot.displayspot.DisplaySpotActivity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class SpotAdapter extends RecyclerView.Adapter<SpotAdapter.SpotViewHolder> {
-    List<Location> spots;
+    private List<Location> spots;
 
     public SpotAdapter(List<Location> spots) {
         this.spots = spots;
     }
+
     @NonNull
     @NotNull
     @Override
     public SpotViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup viewGroup, int itemPosition) { // creates new view holders for the items
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.location_item_layout, viewGroup, false);
+        View view = LayoutInflater
+                .from(viewGroup.getContext())
+                .inflate(R.layout.location_item_layout, viewGroup, false);
         return new SpotViewHolder(view);
     }
     @Override
@@ -52,7 +57,7 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotAdapter.SpotViewHolder
         private TextView waveDirection;
 
         // SpotViewHolder acts as a cache, and stores references to the item views, reducing the need to keep calling findViewById() method every time the views need to be updated. This greatly reduces computational overhead and memory usage.
-        public SpotViewHolder(@NonNull @NotNull View itemView) { 
+        public SpotViewHolder(@NonNull @NotNull View itemView) {
             super(itemView); //  the super keyword is calling the ViewHolder super class' constructor which initialises the ViewHolder with the root view of the item layout
             // The variables we've declared need to have a particular view element attached to them. We do this via the id we gave them in the item_layout.xml file:
             spotName = itemView.findViewById(R.id.spotName);
@@ -60,6 +65,14 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotAdapter.SpotViewHolder
             latitude = itemView.findViewById(R.id.latitude);
             timezone = itemView.findViewById(R.id.timezone);
             waveDirection = itemView.findViewById(R.id.waveDirection);
+            itemView.setOnClickListener(this); // Set the listener here
+        }
+        @Override
+        public void onClick(View v) {
+            // Handle item click here
+            Intent intent = new Intent(itemView.getContext(), DisplaySpotActivity.class);
+            intent.putExtra("item", spots.get(getAdapterPosition()));
+            itemView.getContext().startActivity(intent);
         }
     }
 

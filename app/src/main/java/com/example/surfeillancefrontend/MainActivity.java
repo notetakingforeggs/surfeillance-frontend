@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.surfeillancefrontend.ui.SpotChoiceActivity;
+import com.example.surfeillancefrontend.ui.spot.spotchoice.SpotChoiceActivity;
 
 public class MainActivity extends AppCompatActivity {
 

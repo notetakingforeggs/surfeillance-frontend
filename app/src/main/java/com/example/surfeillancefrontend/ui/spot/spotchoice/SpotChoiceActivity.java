@@ -1,4 +1,4 @@
-package com.example.surfeillancefrontend.ui;
+package com.example.surfeillancefrontend.ui.spot.spotchoice;
 
 import android.content.Intent;
 import android.os.Bundle;

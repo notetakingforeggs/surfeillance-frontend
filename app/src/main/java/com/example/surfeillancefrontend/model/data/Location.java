@@ -1,6 +1,10 @@
 package com.example.surfeillancefrontend.model.data;
 
-public class Location {
+import android.os.Parcel;
+import android.os.Parcelable;
+import androidx.annotation.NonNull;
+
+public class Location implements Parcelable {
     String name;
     String details;
     String requestTime;
@@ -159,5 +163,15 @@ public class Location {
 
     public void setLowTideTime(String lowTideTime) {
         this.lowTideTime = lowTideTime;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+
     }
 }
