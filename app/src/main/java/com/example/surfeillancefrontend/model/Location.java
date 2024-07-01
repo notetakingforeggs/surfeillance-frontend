@@ -1,8 +1,6 @@
 package com.example.surfeillancefrontend.model;
 
 public class Location {
-
-
     String name;
     String details;
     String requestTime;
@@ -14,12 +12,12 @@ public class Location {
     Double wavePeriod;
     Double windSpeed;
     Double gusts;
-    Double highTideheight;
+    Double highTideHeight;
     String highTideTime;
     Double lowTideHeight;
     String lowTideTime;
 
-    public Location(String name, String details, String requestTime, String latitude, String longitude, String timezone, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, Double gusts, Double highTideheight, String highTideTime, Double lowTideHeight, String lowTideTime) {
+    public Location(String name, String details, String requestTime, String latitude, String longitude, String timezone, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, Double gusts, Double highTideHeight, String highTideTime, Double lowTideHeight, String lowTideTime) {
         this.name = name;
         this.details = details;
         this.requestTime = requestTime;
@@ -31,16 +29,22 @@ public class Location {
         this.wavePeriod = wavePeriod;
         this.windSpeed = windSpeed;
         this.gusts = gusts;
-        this.highTideheight = highTideheight;
+        this.highTideHeight = highTideHeight;
         this.highTideTime = highTideTime;
         this.lowTideHeight = lowTideHeight;
         this.lowTideTime = lowTideTime;
     }
 
+    public Location(String name, String latitude, String longitude, String timezone, String waveDirection) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.timezone = timezone;
+        this.waveDirection = waveDirection;
+    }
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -125,12 +129,12 @@ public class Location {
         this.gusts = gusts;
     }
 
-    public Double getHighTideheight() {
-        return highTideheight;
+    public Double getHighTideHeight() {
+        return highTideHeight;
     }
 
-    public void setHighTideheight(Double highTideheight) {
-        this.highTideheight = highTideheight;
+    public void setHighTideHeight(Double highTideHeight) {
+        this.highTideHeight = highTideHeight;
     }
 
     public String getHighTideTime() {

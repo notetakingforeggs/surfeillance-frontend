@@ -13,10 +13,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        switchToSpotChoiceActivity();
+        navigateToSpotChoiceActivity();
 
     }
-    public void switchToSpotChoiceActivity() {
+    public void navigateToSpotChoiceActivity() {
         Button chooseTrip = (Button) findViewById(R.id.chooseSpotButton);
         chooseTrip.setOnClickListener(new View.OnClickListener() {
             @Override
