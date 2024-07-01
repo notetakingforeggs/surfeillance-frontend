@@ -1,6 +1,5 @@
 package com.example.surfeillancefrontend.ui.spot.spotchoice;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,17 +7,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.surfeillancefrontend.R;
+import com.example.surfeillancefrontend.RecyclerViewInterface;
 import com.example.surfeillancefrontend.model.data.Location;
-import com.example.surfeillancefrontend.ui.spot.displayspot.DisplaySpotActivity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class SpotAdapter extends RecyclerView.Adapter<SpotAdapter.SpotViewHolder> {
     private List<Location> spots;
-
-    public SpotAdapter(List<Location> spots) {
+    RecyclerViewInterface recyclerViewInterface;
+    public SpotAdapter(List<Location> spots, RecyclerViewInterface recyclerViewInterface) {
         this.spots = spots;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
@@ -28,7 +28,7 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotAdapter.SpotViewHolder
         View view = LayoutInflater
                 .from(viewGroup.getContext())
                 .inflate(R.layout.location_item_layout, viewGroup, false);
-        return new SpotViewHolder(view);
+        return new SpotViewHolder(view, recyclerViewInterface);
     }
     @Override
     public void onBindViewHolder(@NonNull @NotNull SpotViewHolder spotViewHolder, int itemPosition) { // binds data from your dataset to the views within the ViewHolder. This method is called by the RecyclerView when an item is about to be displayed in the UI (when it's scrolled on, or if the contents of the item need to be updated) and fetches the appropriate data.
@@ -47,7 +47,7 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotAdapter.SpotViewHolder
     }
 
 
-    public static class SpotViewHolder extends RecyclerView.ViewHolder {
+    public static class SpotViewHolder extends RecyclerView.ViewHolder /*implements View.OnClickListener*/ {
         // we are creating a custom ViewHolder class here - it holds references to all the views (Button/s, TextView/s etc.) in the item layout i.e., location_item_layout.xml.
         // declare here the Views (Button/s, TextView/s etc) defined in location_item_layout.xml
         private TextView spotName;
@@ -57,7 +57,7 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotAdapter.SpotViewHolder
         private TextView waveDirection;
 
         // SpotViewHolder acts as a cache, and stores references to the item views, reducing the need to keep calling findViewById() method every time the views need to be updated. This greatly reduces computational overhead and memory usage.
-        public SpotViewHolder(@NonNull @NotNull View itemView) {
+        public SpotViewHolder(@NonNull @NotNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView); //  the super keyword is calling the ViewHolder super class' constructor which initialises the ViewHolder with the root view of the item layout
             // The variables we've declared need to have a particular view element attached to them. We do this via the id we gave them in the item_layout.xml file:
             spotName = itemView.findViewById(R.id.spotName);
@@ -65,14 +65,17 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotAdapter.SpotViewHolder
             latitude = itemView.findViewById(R.id.latitude);
             timezone = itemView.findViewById(R.id.timezone);
             waveDirection = itemView.findViewById(R.id.waveDirection);
-            itemView.setOnClickListener(this); // Set the listener here
-        }
-        @Override
-        public void onClick(View v) {
-            // Handle item click here
-            Intent intent = new Intent(itemView.getContext(), DisplaySpotActivity.class);
-            intent.putExtra("item", spots.get(getAdapterPosition()));
-            itemView.getContext().startActivity(intent);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (recyclerViewInterface != null) {
+                        int pos = getAdapterPosition();
+                        if (pos != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onClickItem(pos);
+                        }
+                    }
+                }
+            });
         }
     }
 

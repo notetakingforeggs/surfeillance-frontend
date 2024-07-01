@@ -20,6 +20,10 @@
                 android:exported="false"/>
 
         <activity
+                android:name=".ui.spot.displayspot.DisplaySpotActivity"
+                android:exported="false"/>
+
+        <activity
                 android:name=".MainActivity"
                 android:exported="true">
             <intent-filter>

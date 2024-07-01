@@ -46,6 +46,61 @@ public class Location implements Parcelable {
         this.timezone = timezone;
         this.waveDirection = waveDirection;
     }
+
+    protected Location(Parcel in) {
+        name = in.readString();
+        details = in.readString();
+        requestTime = in.readString();
+        latitude = in.readString();
+        longitude = in.readString();
+        timezone = in.readString();
+        if (in.readByte() == 0) {
+            waveHeight = null;
+        } else {
+            waveHeight = in.readDouble();
+        }
+        waveDirection = in.readString();
+        if (in.readByte() == 0) {
+            wavePeriod = null;
+        } else {
+            wavePeriod = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            windSpeed = null;
+        } else {
+            windSpeed = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            gusts = null;
+        } else {
+            gusts = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            highTideHeight = null;
+        } else {
+            highTideHeight = in.readDouble();
+        }
+        highTideTime = in.readString();
+        if (in.readByte() == 0) {
+            lowTideHeight = null;
+        } else {
+            lowTideHeight = in.readDouble();
+        }
+        lowTideTime = in.readString();
+    }
+
+    public static final Creator<Location> CREATOR = new Creator<Location>() {
+        @Override
+        public Location createFromParcel(Parcel in) {
+            return new Location(in);
+        }
+
+        @Override
+        public Location[] newArray(int size) {
+            return new Location[size];
+        }
+    };
+
     public String getName() {
         return name;
     }
@@ -165,6 +220,7 @@ public class Location implements Parcelable {
         this.lowTideTime = lowTideTime;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -173,5 +229,50 @@ public class Location implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
 
+        dest.writeString(name);
+        dest.writeString(details);
+        dest.writeString(requestTime);
+        dest.writeString(latitude);
+        dest.writeString(longitude);
+        dest.writeString(timezone);
+        if (waveHeight == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(waveHeight);
+        }
+        dest.writeString(waveDirection);
+        if (wavePeriod == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(wavePeriod);
+        }
+        if (windSpeed == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(windSpeed);
+        }
+        if (gusts == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(gusts);
+        }
+        if (highTideHeight == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(highTideHeight);
+        }
+        dest.writeString(highTideTime);
+        if (lowTideHeight == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(lowTideHeight);
+        }
+        dest.writeString(lowTideTime);
     }
 }
