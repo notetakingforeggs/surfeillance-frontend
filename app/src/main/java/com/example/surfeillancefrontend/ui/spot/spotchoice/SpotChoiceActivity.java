@@ -1,4 +1,4 @@
-package com.example.surfeillancefrontend.ui;
+package com.example.surfeillancefrontend.ui.spot.spotchoice;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.surfeillancefrontend.MainActivity;
 import com.example.surfeillancefrontend.R;
-import com.example.surfeillancefrontend.model.Location;
+import com.example.surfeillancefrontend.RecyclerViewInterface;
+import com.example.surfeillancefrontend.model.data.Location;
+import com.example.surfeillancefrontend.ui.spot.displayspot.DisplaySpotActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpotChoiceActivity extends AppCompatActivity {
+public class SpotChoiceActivity extends AppCompatActivity implements RecyclerViewInterface {
     SpotAdapter adapter;
     List<Location> spots;
     RecyclerView recyclerView;
@@ -44,13 +46,9 @@ public class SpotChoiceActivity extends AppCompatActivity {
         spots.add(location2);
         spots.add(location3);
 
-        adapter = new SpotAdapter(spots);
+        adapter = new SpotAdapter(spots, this);
         recyclerView.setAdapter(adapter); // sets adapter to the recyclerView
-
-
-
     } // When onCreate() finishes, the next callback is always onStart(). As onCreate() exits, the activity enters the Started state, and the activity becomes visible to the user. This callback contains what amounts to the activity’s final preparations for coming to the foreground and becoming interactive.
-
 
     public void navigateToPreviousActivity() {
         ImageButton back = (ImageButton) findViewById(R.id.backButton);
@@ -64,6 +62,15 @@ public class SpotChoiceActivity extends AppCompatActivity {
         });
     }
 
-
-
+    @Override
+    public void onClickItem(int position) {
+        Intent intent = new Intent(SpotChoiceActivity.this, DisplaySpotActivity.class);
+        intent.putExtra("spotName", spots.get(position).getName());
+        intent.putExtra("details", spots.get(position).getDetails());
+        intent.putExtra("longitude", spots.get(position).getLongitude());
+        intent.putExtra("latitude", spots.get(position).getLatitude());
+        intent.putExtra("waveDirection", spots.get(position).getWaveDirection());
+        intent.putExtra("timezone", spots.get(position).getTimezone());
+        startActivity(intent);
+    }
 }
