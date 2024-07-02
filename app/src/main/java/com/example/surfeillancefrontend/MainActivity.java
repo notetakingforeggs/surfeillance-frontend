@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.i("000000000000000000", "onCreate: ");
         navigateToTripChoiceActivity();
 
     }
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Start the new activity
                 Intent intent = new Intent(MainActivity.this, TripChoiceActivity.class);
-                Log.i("11111111111111111", "onClick: ");
                 startActivity(intent);
             }
         });

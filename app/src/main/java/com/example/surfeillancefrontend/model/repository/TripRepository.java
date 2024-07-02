@@ -35,7 +35,6 @@ public class TripRepository {
                 for (Trip trip : trips) {
                     Log.d(trip.getLocationConditions().getName(), "onResponse: ");
                 }
-
             }
 
             @Override
