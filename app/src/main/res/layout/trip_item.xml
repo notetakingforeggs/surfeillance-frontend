@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="trip" type="com.example.surfeillancefrontend.model.data.Trip"/>
+        <variable name="locationConditions" type="com.example.surfeillancefrontend.model.data.Location"/>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintOuter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    >
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/verticalGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.90"
+
+        />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/horizontalGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.2"
+
+        />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/innerConstraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/holo_blue_light"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/verticalGuide"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/horizontalGuide"
+                android:layout_margin="20dp"
+        >
+
+            <TextView
+                    android:id="@+id/tripDate"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/spotTitle"
+                    android:text="@{trip.dateTime}"
+                    android:textSize="32px"
+                    app:layout_constraintDimensionRatio="1:0.1"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:background="@color/material_dynamic_neutral50"
+            />
+
+
+            <TextView
+                    android:id="@+id/spotTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tripDate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@{trip.locationConditions.name}"
+                    android:textSize="32px"
+                    app:layout_constraintDimensionRatio="1:0.1"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:background="@color/material_dynamic_neutral50"
+            />
+
+            <TextView
+                    android:text="@{trip.locationConditions.waveHeight.toString()}"
+                    android:id="@+id/chain1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/spotTitle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/chain2"
+
+                    />
+
+            <TextView
+                    android:text="@{trip.locationConditions.windSpeed.toString()}"
+                    android:id="@+id/chain2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/spotTitle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/chain1"
+                    app:layout_constraintEnd_toStartOf="@id/chain3"
+            />
+            <TextView
+                    android:text="@{trip.locationConditions.wavePeriod.toString()}"
+                    android:id="@+id/chain3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/spotTitle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/chain2"
+                    app:layout_constraintEnd_toStartOf="@id/chain4"
+            />
+            <TextView
+                    android:text="your rating"
+                    android:id="@+id/chain4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/spotTitle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/chain3"
+                    app:layout_constraintEnd_toEndOf="parent"
+            />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -2,10 +2,12 @@ package com.example.surfeillancefrontend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.surfeillancefrontend.ui.spot.spotchoice.SpotChoiceActivity;
+import com.example.surfeillancefrontend.ui.spot.trip.tripchoice.TripChoiceActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        navigateToSpotChoiceActivity();
+        Log.i("000000000000000000", "onCreate: ");
+        navigateToTripChoiceActivity();
 
     }
     public void navigateToSpotChoiceActivity() {
@@ -23,6 +26,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Start the new activity
                 Intent intent = new Intent(MainActivity.this, SpotChoiceActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    public void navigateToTripChoiceActivity() {
+        Button myTrips = findViewById(R.id.myTripsButton);
+        myTrips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the new activity
+                Intent intent = new Intent(MainActivity.this, TripChoiceActivity.class);
+                Log.i("11111111111111111", "onClick: ");
                 startActivity(intent);
             }
         });
