@@ -28,15 +28,152 @@
            />
 
     <androidx.cardview.widget.CardView
+            android:id="@+id/card_View"
             android:layout_width="300dp"
             android:layout_height="340dp"
+            android:background="@drawable/card_border"
             app:layout_constraintTop_toBottomOf="@id/surfeillancelogo"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="10dp">
 
-    >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <!-- Add your widgets here within the CardView's ConstraintLayout -->
+            <TextView
+                    android:id="@+id/tv_profile_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profile Photo:"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_profile"
+                    app:layout_constraintEnd_toStartOf="@id/iv_profile"
+            />
+
+            <ImageView
+                    android:id="@+id/iv_profile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:srcCompat="@drawable/googleg_disabled_color_18"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
+            />
+
+            <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name: "
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_profile_photo"
+                    app:layout_constraintStart_toStartOf="@id/tv_profile_photo"
+            />
+
+            <TextView
+                    android:id="@+id/tv_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location: "
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    app:layout_constraintStart_toStartOf="@id/tv_name"
+            />
+
+            <TextView
+                    android:id="@+id/tv_skill_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Skill Level: "
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_location"
+                    app:layout_constraintStart_toStartOf="@id/tv_location"
+            />
+
+            <TextView
+                    android:id="@+id/tv_my_trips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="My trips"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_skill_level"
+                    app:layout_constraintStart_toStartOf="@id/tv_skill_level"
+            />
+
+            <TextView
+                    android:id="@+id/tv_fav_spots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite spots/trips: MVP+ "
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_my_trips"
+                    app:layout_constraintStart_toStartOf="@id/tv_my_trips"
+            />
+
+            <TextView
+                    android:id="@+id/tv_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Review a trip"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_fav_spots"
+                    app:layout_constraintStart_toStartOf="@id/tv_fav_spots"
+            />
+
+            <TextView
+                    android:id="@+id/tv_photos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Review a trip"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_fav_spots"
+                    app:layout_constraintStart_toStartOf="@id/tv_fav_spots"
+            />
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
 
 
     </androidx.cardview.widget.CardView>
+
+    <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_revert"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="@color/blue"/>
+    <ImageButton
+            android:id="@+id/returnHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_myplaces"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/blue"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/card_View"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="SIGN OUT"
+            android:layout_marginTop="10dp"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
