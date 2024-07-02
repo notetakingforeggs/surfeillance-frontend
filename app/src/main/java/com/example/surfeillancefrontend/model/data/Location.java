@@ -3,23 +3,42 @@ package com.example.surfeillancefrontend.model.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
+import com.google.gson.annotations.SerializedName;
 
 public class Location implements Parcelable {
+    @SerializedName("name") // This allows GSON to map the key names in the JSON string to the Java object and vice-versa while serialising and deserialising. The String argument the annotation is expecting has to exactly match the key name in the JSON string
     String name;
+    @SerializedName("details")
     String details;
+    @SerializedName("requestTime")
     String requestTime;
+    @SerializedName("latitude")
     String latitude;
+    @SerializedName("longitude")
     String longitude;
+    @SerializedName("timezone")
     String timezone;
+    @SerializedName("waveHeight")
     Double waveHeight;
+    @SerializedName("waveDirection")
     String waveDirection;
+    @SerializedName("wavePeriod")
     Double wavePeriod;
+    @SerializedName("windspeed")
     Double windSpeed;
+    @SerializedName("gusts")
     Double gusts;
+    @SerializedName("highTideHeight")
     Double highTideHeight;
+    @SerializedName("highTideTime")
     String highTideTime;
+    @SerializedName("lowTideHeight")
     Double lowTideHeight;
+    @SerializedName("lowTideTime")
     String lowTideTime;
+
+    public Location() {
+    }
 
     public Location(String name, String details, String requestTime, String latitude, String longitude, String timezone, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, Double gusts, Double highTideHeight, String highTideTime, Double lowTideHeight, String lowTideTime) {
         this.name = name;

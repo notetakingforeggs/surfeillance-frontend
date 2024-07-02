@@ -71,6 +71,18 @@
             android:text="@={spot.details}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/waveDirectionTV"/>
+
+    <Button
+            android:id="@+id/addTrip"
+            android:text="Add to my trips"
+            android:layout_width="312dp"
+            android:layout_height="87dp"
+            app:layout_constraintTop_toBottomOf="@id/descriptionTV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/blue"
+            android:layout_marginBottom="84dp"/>
+
     <ImageButton
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
@@ -87,6 +99,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:backgroundTint="@color/blue"/>
+
+    <TextView
+            android:id="@+id/mainActivityRef"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(3) SpotDisplayActivity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

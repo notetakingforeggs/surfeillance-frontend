@@ -3,6 +3,7 @@ package com.example.surfeillancefrontend.ui.spot.displayspot;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +40,7 @@ public class DisplaySpotActivity extends AppCompatActivity {
 
         navigateToHomePage();
         navigateToSpotChoiceActivity();
+        postTripAndReturnToHomePage();
     }
     public void navigateToHomePage() {
         ImageButton back = (ImageButton) findViewById(R.id.returnHome);
@@ -59,6 +61,18 @@ public class DisplaySpotActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Start the new activity i.e. return to previous screen
                 Intent intent = new Intent(DisplaySpotActivity.this, SpotChoiceActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void postTripAndReturnToHomePage() {
+        Button back = (Button) findViewById(R.id.addTrip);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the new activity i.e. return to homepage after posting trip to DB
+                Intent intent = new Intent(DisplaySpotActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
