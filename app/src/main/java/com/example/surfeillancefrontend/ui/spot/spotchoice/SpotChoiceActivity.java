@@ -13,6 +13,7 @@ import com.example.surfeillancefrontend.R;
 import com.example.surfeillancefrontend.RecyclerViewInterface;
 import com.example.surfeillancefrontend.model.data.Location;
 import com.example.surfeillancefrontend.service.ApiClient;
+import com.example.surfeillancefrontend.service.SpotApiService;
 import com.example.surfeillancefrontend.ui.spot.displayspot.DisplaySpotActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +25,7 @@ public class SpotChoiceActivity extends AppCompatActivity implements RecyclerVie
     SpotAdapter adapter;
     List<Location> spots;
     RecyclerView recyclerView;
+    SpotApiService spotApiService;
     @Override
     protected void onCreate(Bundle savedInstanceState) { // You must implement this callback, which fires when the system creates your activity. Your implementation should initialize the essential components of your activity; for example, your app should create views and bind data to lists here.
         super.onCreate(savedInstanceState);
@@ -38,8 +40,8 @@ public class SpotChoiceActivity extends AppCompatActivity implements RecyclerVie
         // Instantiate a LinearLayoutManager class to allow the items to be displayed in a linear scrolling vertical list and assign this layout to the recyclerView variable
         LinearLayoutManager layoutManager = new LinearLayoutManager(this); // The context is this, referring to the current activity
         recyclerView.setLayoutManager(layoutManager);
-
-        ApiClient.getService().getAllSpots().enqueue(new Callback<List<Location>>() {
+        spotApiService = ApiClient.getInstance().create(SpotApiService.class);
+                spotApiService.getAllSpots().enqueue(new Callback<List<Location>>() {
             @Override
             public void onResponse(Call<List<Location>> call, Response<List<Location>> response) {
                 spots = response.body();
