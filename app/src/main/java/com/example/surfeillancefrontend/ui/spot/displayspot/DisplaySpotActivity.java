@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.surfeillancefrontend.MainActivity;
 import com.example.surfeillancefrontend.R;
+import com.example.surfeillancefrontend.model.data.Location;
 import com.example.surfeillancefrontend.ui.spot.spotchoice.SpotChoiceActivity;
 
 public class DisplaySpotActivity extends AppCompatActivity {
@@ -17,34 +18,39 @@ public class DisplaySpotActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spot_display);
 
-        String spotName = getIntent().getStringExtra("spotName");
-        String spotDetails = getIntent().getStringExtra("details");
-        String longitude = getIntent().getStringExtra("longitude");
-        String latitude = getIntent().getStringExtra("latitude");
-        String waveDirection = getIntent().getStringExtra("waveDirection");
-        String timezone = getIntent().getStringExtra("timezone");
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            Location spot = getIntent().getParcelableExtra("Spot", Location.class);
 
-        TextView spotNameTV = findViewById(R.id.spotNameTV);
-        TextView spotDetailsTV = findViewById(R.id.descriptionTV);
-        TextView longitudeTV = findViewById(R.id.longitudeTV);
-        TextView latitudeTV = findViewById(R.id.latitudeTV);
-        TextView waveDirectionTV = findViewById(R.id.waveDirectionTV);
-        TextView timezoneTV = findViewById(R.id.timezoneTV);
+            String spotName = spot.getName();
+            String spotDetails = spot.getDetails();
+            String longitude = spot.getLongitude();
+            String latitude = spot.getLatitude();
+            String waveDirection = spot.getWaveDirection();
+            String timezone = spot.getTimezone();
 
-        spotNameTV.setText(spotName);
-        spotDetailsTV.setText(spotDetails);
-        longitudeTV.setText(longitude);
-        latitudeTV.setText(latitude);
-        waveDirectionTV.setText(waveDirection);
-        timezoneTV.setText(timezone);
+            TextView spotNameTV = findViewById(R.id.spotNameTV);
+            TextView spotDetailsTV = findViewById(R.id.descriptionTV);
+            TextView longitudeTV = findViewById(R.id.longitudeTV);
+            TextView latitudeTV = findViewById(R.id.latitudeTV);
+            TextView waveDirectionTV = findViewById(R.id.waveDirectionTV);
+            TextView timezoneTV = findViewById(R.id.timezoneTV);
+
+            spotNameTV.setText(spotName);
+            spotDetailsTV.setText(spotDetails);
+            longitudeTV.setText(longitude);
+            latitudeTV.setText(latitude);
+            waveDirectionTV.setText(waveDirection);
+            timezoneTV.setText(timezone);
+        }
 
         navigateToHomePage();
         navigateToSpotChoiceActivity();
         postTripAndReturnToHomePage();
+
     }
     public void navigateToHomePage() {
-        ImageButton back = (ImageButton) findViewById(R.id.returnHome);
-        back.setOnClickListener(new View.OnClickListener() {
+        ImageButton goHomeButton = (ImageButton) findViewById(R.id.returnHome);
+        goHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start the new activity i.e. return to previous screen
@@ -55,8 +61,8 @@ public class DisplaySpotActivity extends AppCompatActivity {
     }
 
     public void navigateToSpotChoiceActivity() {
-        ImageButton back = (ImageButton) findViewById(R.id.backButton);
-        back.setOnClickListener(new View.OnClickListener() {
+        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start the new activity i.e. return to previous screen
@@ -67,8 +73,8 @@ public class DisplaySpotActivity extends AppCompatActivity {
     }
 
     public void postTripAndReturnToHomePage() {
-        Button back = (Button) findViewById(R.id.addTrip);
-        back.setOnClickListener(new View.OnClickListener() {
+        Button addTripAndReturnHome = (Button) findViewById(R.id.addTrip);
+        addTripAndReturnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start the new activity i.e. return to homepage after posting trip to DB
