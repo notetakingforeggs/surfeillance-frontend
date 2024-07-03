@@ -19,6 +19,18 @@ public class Trip implements Parcelable {
         this.locationConditions = locationConditions;
     }
 
+    public static final Creator<Trip> CREATOR = new Creator<Trip>() {
+        @Override
+        public Trip createFromParcel(Parcel in) {
+            return new Trip(in);
+        }
+
+        @Override
+        public Trip[] newArray(int size) {
+            return new Trip[size];
+        }
+    };
+
     public int getTripID() {
         return tripID;
     }
@@ -51,6 +63,23 @@ public class Trip implements Parcelable {
         this.locationConditions = locationConditions;
     }
 
+
+    protected Trip(Parcel in) {
+        if (in.readByte() == 0) {
+            tripID = null;
+        } else {
+            tripID = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            userID = null;
+        } else {
+            userID = in.readInt();
+        }
+        dateTime = in.readString();
+        locationConditions = in.readParcelable(Location.class.getClassLoader());
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -58,25 +87,19 @@ public class Trip implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(tripID.toString());
-        dest.writeString(userID.toString());
+        if (tripID == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(tripID);
+        }
+        if (userID == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(userID);
+        }
         dest.writeString(dateTime);
-        dest.writeString(locationConditions.details);
-        dest.writeString(locationConditions.name);
-        dest.writeString(locationConditions.waveDirection);
-        dest.writeString(locationConditions.waveHeight.toString());
-        dest.writeString(locationConditions.wavePeriod.toString());
-        dest.writeString(locationConditions.windSpeed.toString());
-        dest.writeString(locationConditions.gusts.toString());
-        dest.writeString(locationConditions.latitude);
-        dest.writeString(locationConditions.longitude);
-        dest.writeString(locationConditions.highTideTime);
-        dest.writeString(locationConditions.highTideHeight.toString());
-        dest.writeString(locationConditions.lowTideTime);
-        dest.writeString(locationConditions.lowTideHeight.toString());
-        dest.writeString(locationConditions.requestTime);
-        dest.writeString(locationConditions.timezone);
-
+        dest.writeParcelable(locationConditions, flags);
     }
 }
-

@@ -55,12 +55,20 @@
                 android:background="@color/material_dynamic_neutral50"
         />
 
+        <ImageView
+                android:id="@+id/tripImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/weather"
+                app:layout_constraintTop_toBottomOf="@id/spotTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
         <TextView
                 android:text="@{trip.locationConditions.waveHeight.toString()}"
                 android:id="@+id/chain1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/spotTitle"
+                app:layout_constraintTop_toBottomOf="@id/tripImage"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/chain2"
@@ -108,14 +116,7 @@
                 app:layout_constraintStart_toEndOf="@id/chain3"
                 app:layout_constraintEnd_toEndOf="parent"
         />
-        <RatingBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ratingBar"
-                app:layout_constraintTop_toBottomOf="@id/chain3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-        />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

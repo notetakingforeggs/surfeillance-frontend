@@ -73,7 +73,7 @@ public class TripChoiceActivity extends AppCompatActivity implements RecyclerVie
         Log.i("1", "onItemClick: ");
         Trip trip = tripList.get(position); // this code takes a Location spot at the argued position from the List<Location> spots
         Log.i("2", "onItemClick: ");
-        //intent.putExtra("Trip", trip); // putExtra() sends whatever data you pass as an argument to the new Activity
+        intent.putExtra("Trip", trip); // putExtra() sends whatever data you pass as an argument to the new Activity
         Log.i("3", "onItemClick: ");
         startActivity(intent); // this code switches the current Activity to the new Activity and passes a Location object called spot
     }
