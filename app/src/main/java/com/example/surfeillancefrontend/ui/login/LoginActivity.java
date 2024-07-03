@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.surfeillancefrontend.R;
@@ -72,6 +73,9 @@ public class LoginActivity extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             if (account != null) {
                 String idToken = account.getIdToken();
+
+
+                authCheck(idToken);
                 Log.w("Sign In: ", idToken);
 
             }
@@ -89,7 +93,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void authCheck(String token) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://localhost:8080/oauth/check?token=" + token;
+        String url = "http://10.0.2.2:8080/oauth/check?token=" + token;
+
+        Log.i("url:",url);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -98,7 +104,12 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("Response: ", response);
                     }
                 },
-                error -> Log.d("Response: ", "Didn't Work!")
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Log.e("Response Error","didnt work");
+                    }
+                }
         );
 
         queue.add(stringRequest);
