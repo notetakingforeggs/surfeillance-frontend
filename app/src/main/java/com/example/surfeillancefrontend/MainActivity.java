@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.surfeillancefrontend.ui.spot.spotchoice.SpotChoiceActivity;
-import com.example.surfeillancefrontend.ui.spot.trip.tripchoice.TripChoiceActivity;
+import com.example.surfeillancefrontend.ui.trip.tripchoice.TripChoiceActivity;
 
 public class MainActivity extends AppCompatActivity {
 

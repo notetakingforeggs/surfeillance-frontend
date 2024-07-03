@@ -25,7 +25,11 @@
                 android:exported="false"/>
 
         <activity
-                android:name=".ui.spot.trip.tripchoice.TripChoiceActivity"
+                android:name=".ui.trip.tripchoice.TripChoiceActivity"
+                android:exported="false"/>
+
+        <activity
+                android:name=".ui.trip.displaytrip.DisplayTripActivity"
                 android:exported="false"/>
 
         <activity
