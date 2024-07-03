@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.surfeillancefrontend.ui.profile.ProfileActivity;
 import com.example.surfeillancefrontend.ui.spot.spotchoice.SpotChoiceActivity;
 import com.example.surfeillancefrontend.ui.spot.trip.tripchoice.TripChoiceActivity;
 
@@ -15,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         navigateToSpotChoiceActivity();
         navigateToUserAccount();
         navigateToUsersTrips();
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start the new activity
-                Intent intent = new Intent(MainActivity.this, SpotChoiceActivity.class);
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });

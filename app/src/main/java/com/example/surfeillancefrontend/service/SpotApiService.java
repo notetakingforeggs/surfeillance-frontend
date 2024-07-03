@@ -17,7 +17,7 @@ public interface SpotApiService {
     @GET("fakelocationdata")
     Call<List<Location>> getAllSpots(); // i.e., with the @GET annotation, this method is making a GET request to the "/spots" endpoint and expects a list of Location objects in return. Different annotations are used to specify the HTTP request type: GET, POST, PUT, DELETE
 
-    @POST("endpoint")
+    @POST("fakelocationdata/addfaketrip")
     Call<Location> postData(@Body Location model);
 
 }
