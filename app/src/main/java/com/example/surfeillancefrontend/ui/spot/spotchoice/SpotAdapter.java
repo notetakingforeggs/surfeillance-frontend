@@ -36,10 +36,10 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotAdapter.SpotViewHolder
         // The int is the position of the item in the dataset which needs to be bound to the views.
         Location spot = spots.get(itemPosition);
         spotViewHolder.spotName.setText(spot.getName());
-        spotViewHolder.longitude.setText(spot.getLongitude());
-        spotViewHolder.latitude.setText(spot.getLatitude());
-        spotViewHolder.timezone.setText((spot.getTimezone()));
-        spotViewHolder.waveDirection.setText(spot.getWaveDirection());
+//        spotViewHolder.longitude.setText(spot.getLongitude());
+//        spotViewHolder.latitude.setText(spot.getLatitude());
+//        spotViewHolder.timezone.setText((spot.getTimezone()));
+//        spotViewHolder.waveDirection.setText(spot.getWaveDirection());
     }
     @Override
     public int getItemCount() {
@@ -61,10 +61,11 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotAdapter.SpotViewHolder
             super(itemView); //  the super keyword is calling the ViewHolder super class' constructor which initialises the ViewHolder with the root view of the item layout
             // The variables we've declared need to have a particular view element attached to them. We do this via the id we gave them in the item_layout.xml file:
             spotName = itemView.findViewById(R.id.spotName);
-            longitude = itemView.findViewById(R.id.longitude);
-            latitude = itemView.findViewById(R.id.latitude);
-            timezone = itemView.findViewById(R.id.timezone);
-            waveDirection = itemView.findViewById(R.id.waveDirection);
+//            longitude = itemView.findViewById(R.id.longitude);
+//            latitude = itemView.findViewById(R.id.latitude);
+//            timezone = itemView.findViewById(R.id.timezone);
+//            waveDirection = itemView.findViewById(R.id.waveDirection);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

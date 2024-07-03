@@ -5,7 +5,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
-public class Location implements Parcelable {
+public class Location /*extends BaseObservable*/ implements Parcelable {
     @SerializedName("name") // This allows GSON to map the key names in the JSON string to the Java object and vice-versa while serialising and deserialising. The String argument the annotation is expecting has to exactly match the key name in the JSON string
     String name;
     @SerializedName("details")
@@ -58,8 +58,9 @@ public class Location implements Parcelable {
         this.lowTideTime = lowTideTime;
     }
 
-    public Location(String name, String latitude, String longitude, String timezone, String waveDirection) {
+    public Location(String name, String details, String latitude, String longitude, String timezone, String waveDirection) {
         this.name = name;
+        this.details = details;
         this.latitude = latitude;
         this.longitude = longitude;
         this.timezone = timezone;
