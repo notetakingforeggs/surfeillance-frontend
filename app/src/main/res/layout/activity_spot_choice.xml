@@ -46,6 +46,15 @@
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:backgroundTint="@color/blue"/>
 
+    <ImageButton
+            android:id="@+id/returnHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_myplaces"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/blue"/>
+
 
 
 
