@@ -16,7 +16,7 @@
             android:theme="@style/Theme.SurfeillanceFrontEnd"
             tools:targetApi="31">
         <activity
-                android:name=".ui.trip.ratetrip.RateTripActivity"
+                android:name=".ui.trip.ratetrip.EditTripActivity"
                 android:exported="false"/>
         <activity
                 android:name=".ui.spot.spotchoice.SpotChoiceActivity"

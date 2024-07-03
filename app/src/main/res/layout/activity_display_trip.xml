@@ -6,6 +6,7 @@
     <data>
         <variable name="trip" type="com.example.surfeillancefrontend.model.data.Trip"/>
         <variable name="locationConditions" type="com.example.surfeillancefrontend.model.data.Location"/>
+        <variable name="displayTripActivity" type="com.example.surfeillancefrontend.ui.trip.displaytrip.DisplayTripActivity"/>
     </data>
 
 
@@ -159,6 +160,20 @@
                 app:layout_constraintBottom_toBottomOf="@id/ratingIcon"
                 android:layout_margin="5dp"
         />
+
+        <Button
+                android:text="Edit Trip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTripButton"
+            app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="50dp"
+                android:clickable="true"
+                android:onClick="onEditButtonClick"
+                android:focusable="true"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
