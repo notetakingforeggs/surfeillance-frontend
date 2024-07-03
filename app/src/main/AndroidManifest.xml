@@ -28,8 +28,13 @@
                 android:name=".ui.spot.displayspot.DisplaySpotActivity"
                 android:exported="false"/>
         <activity
+                android:name=".ui.spot.trip.tripchoice.TripChoiceActivity"
+                android:exported="false"/>
+      
+      <activity
                 android:name=".ui.login.LoginActivity"
-                android:exported="true">
+                android:exported="false"/>
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
