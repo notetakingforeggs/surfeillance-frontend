@@ -63,12 +63,14 @@
                 app:layout_constraintTop_toBottomOf="@id/spotTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 />
+
+
         <TextView
-                android:text="@{trip.locationConditions.waveHeight.toString()}"
+                android:text='@{"Wave Height: " + trip.locationConditions.waveHeight.toString() + "Meters" }'
                 android:id="@+id/chain1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tripImage"
+                app:layout_constraintTop_toBottomOf="@id/spotTitle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/chain2"
@@ -76,8 +78,9 @@
 
         />
         <ImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:id="@+id/windIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/weather"
                 app:layout_constraintBottom_toTopOf="@id/chain1"
                 app:layout_constraintStart_toStartOf="@id/chain1"
@@ -85,9 +88,18 @@
 
 
         />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wind"
+                app:layout_constraintStart_toEndOf="@id/windIcon"
+                app:layout_constraintTop_toTopOf="@id/windIcon"
+                app:layout_constraintBottom_toBottomOf="@id/windIcon"
+                android:layout_margin="5dp"
+        />
 
         <TextView
-                android:text="@{trip.locationConditions.windSpeed.toString()}"
+                android:text='@{"wind speed: " + trip.locationConditions.windSpeed.toString() + "mph"}'
                 android:id="@+id/chain2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,25 +108,56 @@
                 app:layout_constraintStart_toEndOf="@id/chain1"
                 app:layout_constraintEnd_toStartOf="@id/chain3"
         />
+
+        <ImageView
+                android:id="@+id/waveIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/wave"
+                app:layout_constraintBottom_toTopOf="@id/chain2"
+                app:layout_constraintStart_toStartOf="@id/chain2"
+                app:layout_constraintStart_toEndOf="@id/chain2"
+
+
+        />
         <TextView
-                android:text="@{trip.locationConditions.wavePeriod.toString()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Waves"
+                app:layout_constraintStart_toEndOf="@id/waveIcon"
+                app:layout_constraintTop_toTopOf="@id/waveIcon"
+                app:layout_constraintBottom_toBottomOf="@id/waveIcon"
+                android:layout_margin="5dp"
+        />
+        <TextView
+                android:text="not yet rated"
                 android:id="@+id/chain3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/spotTitle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/chain2"
-                app:layout_constraintEnd_toStartOf="@id/chain4"
+                app:layout_constraintEnd_toEndOf="parent"
+        />
+        <ImageView
+                android:id="@+id/ratingIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/star"
+                app:layout_constraintBottom_toTopOf="@id/chain3"
+                app:layout_constraintStart_toStartOf="@id/chain3"
+                app:layout_constraintStart_toEndOf="@id/chain3"
+
+
         />
         <TextView
-                android:text="your rating"
-                android:id="@+id/chain4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/spotTitle"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/chain3"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Rating"
+                app:layout_constraintStart_toEndOf="@id/ratingIcon"
+                app:layout_constraintTop_toTopOf="@id/ratingIcon"
+                app:layout_constraintBottom_toBottomOf="@id/ratingIcon"
+                android:layout_margin="5dp"
         />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
