@@ -35,14 +35,11 @@ public class DisplayTripActivity extends AppCompatActivity {
         } else {
             Log.i("null", "onCreate: ");
         }
-
     }
-
    public void onEditButtonClick(View v) {
        Log.i("TAG", "onEditButtonClick: ");
         Intent intent = new Intent(this, EditTripActivity.class);
       //  intent.putExtra("Trip", trip);
         startActivity(intent);
-
     }
 }
