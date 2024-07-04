@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import com.example.surfeillancefrontend.R;
 import com.example.surfeillancefrontend.databinding.ActivityDisplayTripBinding;
 import com.example.surfeillancefrontend.model.data.Trip;
-import com.example.surfeillancefrontend.ui.trip.ratetrip.EditTripActivity;
+import com.example.surfeillancefrontend.ui.trip.editTrip.EditTripActivity;
 
 public class DisplayTripActivity extends AppCompatActivity {
     ActivityDisplayTripBinding binding;

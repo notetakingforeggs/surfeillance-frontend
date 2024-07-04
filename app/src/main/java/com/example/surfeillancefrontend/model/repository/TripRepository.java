@@ -23,7 +23,6 @@ public class TripRepository {
     }
 
     public MutableLiveData<List<Trip>> getMutableLiveDate() {
-        Log.i("triprepo", "getMutableLiveDate: ");
         Call call = tripApiService.getTripsByUserId("3");
 
         call.enqueue(new Callback<List<Trip>>() {
@@ -31,7 +30,6 @@ public class TripRepository {
             public void onResponse(Call<List<Trip>> call, Response<List<Trip>> response) {
                 List<Trip> trips = response.body();
                 liveData.setValue(trips);
-                Log.d("!trips", "onResponse: ");
                 for (Trip trip : trips) {
                     Log.d(trip.getLocationConditions().getName(), "onResponse: ");
                 }
@@ -39,13 +37,16 @@ public class TripRepository {
 
             @Override
             public void onFailure(Call<List<Trip>> call, Throwable throwable) {
-                Log.i("fFFFFFFFFFFFFFFFFFFF ", "onFailure: ");
-
             }
 
         });
 
         return liveData;
+    }
+
+    public void editTripInfo(Trip editedTrip) {
+        Call call = tripApiService.editTripByTripId(editedTrip);
+
     }
 }
 
