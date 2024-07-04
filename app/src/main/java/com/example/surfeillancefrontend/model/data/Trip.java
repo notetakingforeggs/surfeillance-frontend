@@ -9,12 +9,12 @@ public class Trip implements Parcelable {
     Integer tripID;
     Integer userID;
     String dateTime;
-    Integer surfRating;
-    Integer infoRating;
+    Float surfRating;
+    Float infoRating;
     Location locationConditions;
 
 
-    public Trip(Integer tripID, Integer userID, String dateTime, int surfRating, int infoRating, Location locationConditions) {
+    public Trip(Integer tripID, Integer userID, String dateTime, Float surfRating, Float infoRating, Location locationConditions) {
         this.tripID = tripID;
         this.userID = userID;
         this.dateTime = dateTime;
@@ -76,19 +76,19 @@ public class Trip implements Parcelable {
         this.locationConditions = locationConditions;
     }
 
-    public Integer getInfoRating() {
+    public Float getInfoRating() {
         return infoRating;
     }
 
-    public void setInfoRating(Integer infoRating) {
+    public void setInfoRating(Float infoRating) {
         this.infoRating = infoRating;
     }
 
-    public Integer getSurfRating() {
+    public Float getSurfRating() {
         return surfRating;
     }
 
-    public void setSurfRating(Integer surfRating) {
+    public void setSurfRating(Float surfRating) {
         this.surfRating = surfRating;
     }
 
@@ -106,11 +106,11 @@ public class Trip implements Parcelable {
         if (in.readByte() == 0){
             infoRating = null;
         }else{
-            infoRating = in.readInt();
+            infoRating = in.readFloat();
         }if (in.readByte() == 0){
             surfRating = null;
         }else{
-            surfRating = in.readInt();
+            surfRating = in.readFloat();
         }
         dateTime = in.readString();
         locationConditions = in.readParcelable(Location.class.getClassLoader());
@@ -140,13 +140,13 @@ public class Trip implements Parcelable {
             dest.writeByte((byte)0);
         }else{
             dest.writeByte((byte) 1);
-            dest.writeInt(surfRating);
+            dest.writeFloat(surfRating);
         }
         if (infoRating == null){
             dest.writeByte((byte)0);
         }else{
             dest.writeByte((byte) 1);
-            dest.writeInt(infoRating);
+            dest.writeFloat(infoRating);
         }
 
         dest.writeString(dateTime);

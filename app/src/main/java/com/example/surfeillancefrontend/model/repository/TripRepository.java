@@ -39,6 +39,7 @@ public class TripRepository {
 
             @Override
             public void onFailure(Call<List<Trip>> call, Throwable throwable) {
+                Log.i("Get Trips Failing at apicall", "onFailure: ");
             }
 
         });

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.RatingBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import com.example.surfeillancefrontend.R;
@@ -22,7 +23,8 @@ public class DisplayTripActivity extends AppCompatActivity {
         // set up data binding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_display_trip);
         binding.setLifecycleOwner(this);
-
+        RatingBar surfRating = findViewById(R.id.surfRating);
+        RatingBar forecastRating = findViewById(R.id.forecastRating);
 
         // get trip from extra
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
@@ -35,6 +37,11 @@ public class DisplayTripActivity extends AppCompatActivity {
         } else {
             Log.i("null", "onCreate: ");
         }
+
+        // set rating displays to values from trips
+        surfRating.setRating(trip.getSurfRating());
+        forecastRating.setRating(trip.getInfoRating());
+
     }
    public void onEditButtonClick(View v) {
        Log.i("TAG", "onEditButtonClick: ");
