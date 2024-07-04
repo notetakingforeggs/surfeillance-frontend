@@ -14,8 +14,10 @@ import java.util.List;
 
 public class TripRepository {
     private final MutableLiveData<List<Trip>> liveData = new MutableLiveData<>();
+    private Trip returnedTrip;
     private Application app;
     private final TripApiService tripApiService;
+
 
     public TripRepository(Application app) {
         this.app = app;
@@ -44,9 +46,20 @@ public class TripRepository {
         return liveData;
     }
 
-    public void editTripInfo(Trip editedTrip) {
+    public Trip editTripInfo(Trip editedTrip) {
         Call call = tripApiService.editTripByTripId(editedTrip);
+         call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                returnedTrip = (Trip) response.body();
+            }
 
+            @Override
+            public void onFailure(Call call, Throwable throwable) {
+                Log.i("repo faill edit", "onFailure: ");
+            }
+        });
+         return returnedTrip;
     }
 }
 

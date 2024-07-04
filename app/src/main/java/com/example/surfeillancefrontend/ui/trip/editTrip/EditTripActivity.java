@@ -50,9 +50,10 @@ EditTripViewModel viewModel;
                     int forecastRating = tripRatingBar.getNumStars();
 
                     Trip editedTrip = trip;
-                    editedTrip.setTripRating(tripRating);
-                    editedTrip.setForecastRating(forecastRating);
+                    editedTrip.setSurfRating(tripRating);
+                    editedTrip.setInfoRating(forecastRating);
                     viewModel.editTripInfo(editedTrip);
+
                     Toast.makeText(getApplicationContext(), "Your update has been registered", Toast.LENGTH_LONG).show();
                 }
             });

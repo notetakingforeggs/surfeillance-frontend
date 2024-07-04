@@ -10,13 +10,10 @@ import retrofit2.http.Query;
 import java.util.List;
 
 public interface TripApiService {
-//    @GET("faketrips")
-//    Call<List<Trip>> getTrips();
-
 
     @GET("faketrips")
     Call<List<Trip>> getTripsByUserId(@Query("userid") String userid);
 
-    @PUT("edittrip")
+    @PUT("faketrips")
     Call<Trip> editTripByTripId(@Body Trip trip);
 }

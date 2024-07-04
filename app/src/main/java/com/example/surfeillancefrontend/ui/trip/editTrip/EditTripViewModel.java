@@ -12,7 +12,7 @@ public class EditTripViewModel extends AndroidViewModel {
     super(application);
     this.tripRepository = new TripRepository(application);
     }
-    public void editTripInfo(Trip editedTrip){
-        tripRepository.editTripInfo(editedTrip);
+    public Trip editTripInfo(Trip editedTrip){
+        return tripRepository.editTripInfo(editedTrip);
     }
 }
