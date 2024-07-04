@@ -26,6 +26,7 @@ public class SpotChoiceActivity extends AppCompatActivity implements RecyclerVie
     List<Location> spots;
     RecyclerView recyclerView;
     SpotApiService spotApiService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) { // You must implement this callback, which fires when the system creates your activity. Your implementation should initialize the essential components of your activity; for example, your app should create views and bind data to lists here.
         super.onCreate(savedInstanceState);
@@ -40,8 +41,9 @@ public class SpotChoiceActivity extends AppCompatActivity implements RecyclerVie
         // Instantiate a LinearLayoutManager class to allow the items to be displayed in a linear scrolling vertical list and assign this layout to the recyclerView variable
         LinearLayoutManager layoutManager = new LinearLayoutManager(this); // The context is this, referring to the current activity
         recyclerView.setLayoutManager(layoutManager);
+
         spotApiService = ApiClient.getInstance().create(SpotApiService.class);
-                spotApiService.getAllSpots().enqueue(new Callback<List<Location>>() {
+        spotApiService.getAllSpots().enqueue(new Callback<List<Location>>() {
             @Override
             public void onResponse(Call<List<Location>> call, Response<List<Location>> response) {
                 spots = response.body();
@@ -90,6 +92,7 @@ public class SpotChoiceActivity extends AppCompatActivity implements RecyclerVie
             }
         });
     }
+
     public void navigateToHomePage() {
         ImageButton goHomeButton = (ImageButton) findViewById(R.id.returnHome);
         goHomeButton.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +104,7 @@ public class SpotChoiceActivity extends AppCompatActivity implements RecyclerVie
             }
         });
     }
+
     @Override
     public void onClickItem(int position) {
         Intent intent = new Intent(SpotChoiceActivity.this, DisplaySpotActivity.class); // this code navigates from 1 Activity to another
