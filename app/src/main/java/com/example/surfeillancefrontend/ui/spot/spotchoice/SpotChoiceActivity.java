@@ -50,37 +50,12 @@ public class SpotChoiceActivity extends AppCompatActivity implements RecyclerVie
                 adapter = new SpotAdapter(spots, SpotChoiceActivity.this);
                 recyclerView.setAdapter(adapter);
             }
-
             @Override
             public void onFailure(Call<List<Location>> call, Throwable throwable) {
                 Log.d("test", "HTTP GET request NOT sent");
             }
         });
-
-        // Delete this and the following 18 lines after data can be pulled from API:
-//        spots = new ArrayList<>();
-//        String description = "Swell spot! Loved my trip! Great surf, showers, electric chargers, tuition, food shack - happy times were shared with friends old and new";
-//        Location location1 = new Location("Fistral North", description, "50.25", "-4.75", "GMT","SW");
-//        Location location2 = new Location("Fistral South", description, "51.25", "-3.75", "GTB","NE");
-//        Location location3 = new Location("Fistral East", description, "41.25", "-1.75", "UTC","NE");
-//        Location location4 = new Location("Fistral West", description, "41.25", "-1.75", "UTC","NE");
-//        Location location5 = new Location("East Fistral", description, "41.25", "-1.75", "UTC","NE");
-//        Location location6 = new Location("West Fistral", description, "41.25", "-1.75", "UTC","NE");
-//        Location location7 = new Location("North Fistral", description, "41.25", "-1.75", "UTC","NE");
-//        Location location8 = new Location("South Fistral", description, "41.25", "-1.75", "UTC","NE");
-//        spots.add(location1);
-//        spots.add(location2);
-//        spots.add(location3);
-//        spots.add(location4);
-//        spots.add(location5);
-//        spots.add(location6);
-//        spots.add(location7);
-//        spots.add(location8);
-//
-//        adapter = new SpotAdapter(spots, this);
-//        recyclerView.setAdapter(adapter); // sets adapter to the recyclerView
     } // When onCreate() finishes, the next callback is always onStart(). As onCreate() exits, the activity enters the Started state, and the activity becomes visible to the user. This callback contains what amounts to the activity’s final preparations for coming to the foreground and becoming interactive.
-
     public void navigateToPreviousActivity() {
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
