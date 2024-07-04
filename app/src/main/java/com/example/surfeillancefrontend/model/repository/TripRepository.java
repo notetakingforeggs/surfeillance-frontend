@@ -24,7 +24,7 @@ public class TripRepository {
 
     public MutableLiveData<List<Trip>> getMutableLiveDate() {
         Log.i("triprepo", "getMutableLiveDate: ");
-        Call call = tripApiService.getTrips();
+        Call call = tripApiService.getTripsByUserId("3");
 
         call.enqueue(new Callback<List<Trip>>() {
             @Override

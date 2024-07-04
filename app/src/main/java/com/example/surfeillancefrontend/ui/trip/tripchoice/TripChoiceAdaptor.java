@@ -1,4 +1,4 @@
-package com.example.surfeillancefrontend.ui.spot.trip.tripchoice;
+package com.example.surfeillancefrontend.ui.trip.tripchoice;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,6 +18,7 @@ public class TripChoiceAdaptor extends RecyclerView.Adapter<TripChoiceAdaptor.Tr
     private List<Trip> tripList;
     private Context context;
     private RecyclerViewInterface recyclerViewInterface;
+
 
     public TripChoiceAdaptor(List<Trip> tripList, Context context, RecyclerViewInterface recyclerViewInterface) {
         this.tripList = tripList;
@@ -48,13 +49,25 @@ public class TripChoiceAdaptor extends RecyclerView.Adapter<TripChoiceAdaptor.Tr
         return tripList.size();
     }
 
-    class TripViewHolder extends RecyclerView.ViewHolder{
+    class TripViewHolder extends RecyclerView.ViewHolder {
 
-  private final TripItemBinding binding;
+        private final TripItemBinding binding;
 
-        public TripViewHolder(TripItemBinding binding, RecyclerViewInterface recyclerViewInterface){
+        public TripViewHolder(TripItemBinding binding, RecyclerViewInterface recyclerViewInterface) {
             super(binding.getRoot());
             this.binding = binding;
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (recyclerViewInterface != null) {
+                        int pos = getAdapterPosition();
+                        if (pos != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onItemClick(pos);
+                        }
+                    }
+                }
+            });
         }
 
     }

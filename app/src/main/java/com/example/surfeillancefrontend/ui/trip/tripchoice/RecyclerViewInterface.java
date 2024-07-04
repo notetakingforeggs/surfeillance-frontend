@@ -1,4 +1,4 @@
-package com.example.surfeillancefrontend.ui.spot.trip.tripchoice;
+package com.example.surfeillancefrontend.ui.trip.tripchoice;
 
 public interface RecyclerViewInterface {
 

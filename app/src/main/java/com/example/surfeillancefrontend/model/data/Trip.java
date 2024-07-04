@@ -1,8 +1,12 @@
 package com.example.surfeillancefrontend.model.data;
 
-public class Trip {
+import android.os.Parcel;
+import android.os.Parcelable;
+import androidx.annotation.NonNull;
 
-    int tripID;
+public class Trip implements Parcelable {
+
+    Integer tripID;
     Integer userID;
     String dateTime;
     Location locationConditions;
@@ -14,6 +18,18 @@ public class Trip {
         this.dateTime = dateTime;
         this.locationConditions = locationConditions;
     }
+
+    public static final Creator<Trip> CREATOR = new Creator<Trip>() {
+        @Override
+        public Trip createFromParcel(Parcel in) {
+            return new Trip(in);
+        }
+
+        @Override
+        public Trip[] newArray(int size) {
+            return new Trip[size];
+        }
+    };
 
     public int getTripID() {
         return tripID;
@@ -47,5 +63,43 @@ public class Trip {
         this.locationConditions = locationConditions;
     }
 
-}
 
+    protected Trip(Parcel in) {
+        if (in.readByte() == 0) {
+            tripID = null;
+        } else {
+            tripID = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            userID = null;
+        } else {
+            userID = in.readInt();
+        }
+        dateTime = in.readString();
+        locationConditions = in.readParcelable(Location.class.getClassLoader());
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        if (tripID == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(tripID);
+        }
+        if (userID == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(userID);
+        }
+        dest.writeString(dateTime);
+        dest.writeParcelable(locationConditions, flags);
+    }
+}
