@@ -51,7 +51,7 @@
                 android:exported="false"/>
 
         <activity
-                android:name=".ui.trip.ratetrip.EditTripActivity"
+                android:name=".ui.trip.editTrip.EditTripActivity"
                 android:exported="false"/>
 
 

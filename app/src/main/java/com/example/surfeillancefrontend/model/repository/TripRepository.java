@@ -14,8 +14,10 @@ import java.util.List;
 
 public class TripRepository {
     private final MutableLiveData<List<Trip>> liveData = new MutableLiveData<>();
+    private Trip returnedTrip;
     private Application app;
     private final TripApiService tripApiService;
+
 
     public TripRepository(Application app) {
         this.app = app;
@@ -23,7 +25,6 @@ public class TripRepository {
     }
 
     public MutableLiveData<List<Trip>> getMutableLiveDate() {
-        Log.i("triprepo", "getMutableLiveDate: ");
         Call call = tripApiService.getTripsByUserId("3");
 
         call.enqueue(new Callback<List<Trip>>() {
@@ -31,7 +32,6 @@ public class TripRepository {
             public void onResponse(Call<List<Trip>> call, Response<List<Trip>> response) {
                 List<Trip> trips = response.body();
                 liveData.setValue(trips);
-                Log.d("!trips", "onResponse: ");
                 for (Trip trip : trips) {
                     Log.d(trip.getLocationConditions().getName(), "onResponse: ");
                 }
@@ -39,13 +39,28 @@ public class TripRepository {
 
             @Override
             public void onFailure(Call<List<Trip>> call, Throwable throwable) {
-                Log.i("fFFFFFFFFFFFFFFFFFFF ", "onFailure: ");
-
+                Log.i("Get Trips Failing at apicall", "onFailure: ");
             }
 
         });
 
         return liveData;
+    }
+
+    public Trip editTripInfo(Trip editedTrip) {
+        Call call = tripApiService.editTripByTripId(editedTrip);
+         call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                returnedTrip = (Trip) response.body();
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable throwable) {
+                Log.i("repo faill edit", "onFailure: ");
+            }
+        });
+         return returnedTrip;
     }
 }
 

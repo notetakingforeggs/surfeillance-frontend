@@ -9,12 +9,25 @@ public class Trip implements Parcelable {
     Integer tripID;
     Integer userID;
     String dateTime;
+    Float surfRating;
+    Float infoRating;
     Location locationConditions;
 
 
-    public Trip(int tripID, Integer userID, String dateTime, Location locationConditions) {
+    public Trip(Integer tripID, Integer userID, String dateTime, Float surfRating, Float infoRating, Location locationConditions) {
         this.tripID = tripID;
         this.userID = userID;
+        this.dateTime = dateTime;
+        this.surfRating = surfRating;
+        this.infoRating = infoRating;
+        this.locationConditions = locationConditions;
+    }
+
+    public Trip(Integer tripID, Integer userID, String dateTime, Location locationConditions) {
+        this.tripID = tripID;
+        this.userID = userID;
+        this.surfRating = null;
+        this.infoRating = null;
         this.dateTime = dateTime;
         this.locationConditions = locationConditions;
     }
@@ -63,6 +76,21 @@ public class Trip implements Parcelable {
         this.locationConditions = locationConditions;
     }
 
+    public Float getInfoRating() {
+        return infoRating;
+    }
+
+    public void setInfoRating(Float infoRating) {
+        this.infoRating = infoRating;
+    }
+
+    public Float getSurfRating() {
+        return surfRating;
+    }
+
+    public void setSurfRating(Float surfRating) {
+        this.surfRating = surfRating;
+    }
 
     protected Trip(Parcel in) {
         if (in.readByte() == 0) {
@@ -74,6 +102,15 @@ public class Trip implements Parcelable {
             userID = null;
         } else {
             userID = in.readInt();
+        }
+        if (in.readByte() == 0){
+            infoRating = null;
+        }else{
+            infoRating = in.readFloat();
+        }if (in.readByte() == 0){
+            surfRating = null;
+        }else{
+            surfRating = in.readFloat();
         }
         dateTime = in.readString();
         locationConditions = in.readParcelable(Location.class.getClassLoader());
@@ -99,6 +136,19 @@ public class Trip implements Parcelable {
             dest.writeByte((byte) 1);
             dest.writeInt(userID);
         }
+        if (surfRating == null){
+            dest.writeByte((byte)0);
+        }else{
+            dest.writeByte((byte) 1);
+            dest.writeFloat(surfRating);
+        }
+        if (infoRating == null){
+            dest.writeByte((byte)0);
+        }else{
+            dest.writeByte((byte) 1);
+            dest.writeFloat(infoRating);
+        }
+
         dest.writeString(dateTime);
         dest.writeParcelable(locationConditions, flags);
     }

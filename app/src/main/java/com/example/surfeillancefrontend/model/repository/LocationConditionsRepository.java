@@ -14,7 +14,4 @@ public class LocationConditionsRepository {
         this.application = application;
     }
 
-//    public MutableLiveData<List<Location>> getMutableLiveData() {
-//        // implement
-//    }
 }
