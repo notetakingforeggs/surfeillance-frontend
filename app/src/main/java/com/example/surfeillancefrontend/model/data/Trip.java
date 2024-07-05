@@ -12,6 +12,7 @@ public class Trip implements Parcelable {
     Float surfRating;
     Float infoRating;
 
+    String locationName;
     Double waveHeight;
     String waveDirection;
     Double wavePeriod;
@@ -20,7 +21,7 @@ public class Trip implements Parcelable {
     String gusts;
     String tideHeight;
 
-    public Trip(Integer tripID, Integer userID, String dateTime, Float surfRating, Float infoRating, Location locationConditions, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, String gusts, String tideHeight) {
+    public Trip(Integer tripID, Integer userID, String dateTime, Float surfRating, Float infoRating, String locationName, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, String gusts, String tideHeight) {
         this.tripID = tripID;
         this.userID = userID;
         this.dateTime = dateTime;
@@ -33,10 +34,11 @@ public class Trip implements Parcelable {
         this.windDirection = windDirection;
         this.gusts = gusts;
         this.tideHeight = tideHeight;
+        this.locationName = locationName;
 
     }
 
-    public Trip(Integer tripID, Integer userID, String dateTime, Location locationConditions, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, String gusts, String tideHeight) {
+    public Trip(Integer tripID, Integer userID, String dateTime, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, String gusts, String tideHeight) {
         this.tripID = tripID;
         this.userID = userID;
         this.dateTime = dateTime;
@@ -49,6 +51,7 @@ public class Trip implements Parcelable {
         this.tideHeight = tideHeight;
         this.infoRating = null;
         this.surfRating = null;
+        this.locationName = locationName;
     }
 
     public static final Creator<Trip> CREATOR = new Creator<Trip>() {
@@ -163,6 +166,14 @@ public class Trip implements Parcelable {
         this.tideHeight = tideHeight;
     }
 
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
     protected Trip(Parcel in) {
         if (in.readByte() == 0) {
             tripID = null;
@@ -206,6 +217,7 @@ public class Trip implements Parcelable {
         windDirection = in.readString();
         gusts = in.readString();
         tideHeight = in.readString();
+        locationName = in.readString();
     }
 
 
@@ -266,6 +278,7 @@ public class Trip implements Parcelable {
         dest.writeString(windDirection);
         dest.writeString(gusts);
         dest.writeString(tideHeight);
+        dest.writeString(locationName);
 
     }
 }

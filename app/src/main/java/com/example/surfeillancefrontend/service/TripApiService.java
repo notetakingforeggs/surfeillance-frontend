@@ -5,15 +5,15 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 
 import java.util.List;
 
 public interface TripApiService {
 
-    @GET("faketrips")
-    Call<List<Trip>> getTripsByUserId(@Query("userid") String userid);
+    @GET("users/trips/{userid}")
+    Call<List<Trip>> getTripsByUserId(@Path("userid") String userid);
 
-    @PUT("faketrips")
+    @PUT("")
     Call<Trip> editTripByTripId(@Body Trip trip);
 }

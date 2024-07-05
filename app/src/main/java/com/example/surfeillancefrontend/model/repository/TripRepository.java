@@ -25,16 +25,16 @@ public class TripRepository {
     }
 
     public MutableLiveData<List<Trip>> getMutableLiveDate() {
+        Log.i("making call", "getMutableLiveDate: ");
         Call call = tripApiService.getTripsByUserId("3");
+        Log.i("enqueing", "getMutableLiveDate: ");
 
         call.enqueue(new Callback<List<Trip>>() {
             @Override
             public void onResponse(Call<List<Trip>> call, Response<List<Trip>> response) {
                 List<Trip> trips = response.body();
                 liveData.setValue(trips);
-                for (Trip trip : trips) {
-                    Log.d(trip.getLocationConditions().getName(), "onResponse: ");
-                }
+                Log.i("0", "onResponse: ");
             }
 
             @Override

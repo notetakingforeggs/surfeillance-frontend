@@ -5,9 +5,8 @@
 
     <data>
         <variable name="trip" type="com.example.surfeillancefrontend.model.data.Trip"/>
-        <variable name="locationConditions" type="com.example.surfeillancefrontend.model.data.Location"/>
-        <variable name="displayTripActivity"
-                  type="com.example.surfeillancefrontend.ui.trip.displaytrip.DisplayTripActivity"/>
+<!--        <variable name="displayTripActivity"-->
+<!--                  type="com.example.surfeillancefrontend.ui.trip.displaytrip.DisplayTripActivity"/>-->
     </data>
 
 
@@ -47,7 +46,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tripDate"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@{trip.locationConditions.name}"
+                android:text="@{trip.locationName}"
                 android:textSize="32px"
                 app:layout_constraintDimensionRatio="1:0.5"
                 android:textAlignment="center"
@@ -66,7 +65,7 @@
 
 
         <TextView
-                android:text='@{"Wave Height: " + trip.locationConditions.waveHeight.toString() + "Meters" }'
+                android:text='@{"Wave Height: " + trip.waveHeight.toString() + "Meters" }'
                 android:id="@+id/chain1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +96,7 @@
         />
 
         <TextView
-                android:text='@{"wind speed: " + trip.locationConditions.windSpeed.toString() + "mph"}'
+                android:text='@{"wind speed: " + trip.windSpeed.toString() + "mph"}'
                 android:id="@+id/chain2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

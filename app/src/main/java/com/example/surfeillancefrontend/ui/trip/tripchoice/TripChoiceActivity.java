@@ -30,33 +30,29 @@ public class TripChoiceActivity extends AppCompatActivity implements RecyclerVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("0000000000", "onCreate: ");
         setContentView(R.layout.activity_trip_choice);
-        Log.i("hhhhhhhhhhhhhhh", "onCreate: ");
         binding = DataBindingUtil.setContentView(this, R.layout.activity_trip_choice);
-        Log.i("bbbbbbbbbbbb", "onCreate: ");
         TripChoiceViewModelFactory factory = new TripChoiceViewModelFactory(getApplication());
         viewModel = new ViewModelProvider(this, factory).get(TripChoiceViewModel.class);
         //viewModel = new ViewModelProvider(this).get(TripChoiceViewModel.class);
-        Log.i("hhhssssssssssss", "onCreate: ");
         binding.setLifecycleOwner(this);
-        Log.i("binding issue", "onCreate: ");
         getAllTrips();
 
     }
 
     private void getAllTrips() {
+        Log.i("getAllTrips activity", "getAllTrips: ");
         viewModel.getData().observe(this, new Observer<List<Trip>>() {
             @Override
             public void onChanged(List<Trip> trips) {
                 if (trips != null && !trips.isEmpty()) {
                     tripList = new ArrayList<>(trips);
                     for (Trip trip : tripList) {
-                        Log.i("?", "locations in list" + trip.getLocationConditions().getName());
+                        Log.i("?", "locations in list" + trip.getLocationName());
                     }
                     displayInRecyclerView(tripList);
                 } else {
-                    Log.i(trips.get(0).getLocationConditions().getName(), "XXXXXXXXXXXXXXXXXXx: ");
+                    Log.i(trips.get(0).getLocationName(), "XXXXXXXXXXXXXXXXXXx: ");
                 }
             }
         });
@@ -64,7 +60,6 @@ public class TripChoiceActivity extends AppCompatActivity implements RecyclerVie
 
     private void displayInRecyclerView(List<Trip> trips) {
         Log.i("weeeeeeeeee", "displayInRecyclerView: ");
-        Log.i("TAG", (trips.get(2).getLocationConditions().getName().toString()));
         recyclerView = binding.recyclerViewTrips;
         tripAdaptor = new TripChoiceAdaptor(trips, this, this);
         recyclerView.setAdapter(tripAdaptor);

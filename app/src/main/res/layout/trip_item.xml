@@ -46,7 +46,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tripDate"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="@{trip.locationConditions.name}"
+                    android:text="@{trip.locationName}"
                     android:textSize="32px"
                     app:layout_constraintDimensionRatio="1:0.1"
                     android:textAlignment="center"
@@ -55,7 +55,7 @@
             />
 
             <TextView
-                    android:text="@{trip.locationConditions.waveHeight.toString()}"
+                    android:text="@{trip.waveHeight.toString()}"
                     android:id="@+id/chain1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                     />
 
             <TextView
-                    android:text="@{trip.locationConditions.windSpeed.toString()}"
+                    android:text="@{trip.windSpeed.toString()}"
                     android:id="@+id/chain2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                     app:layout_constraintEnd_toStartOf="@id/chain3"
             />
             <TextView
-                    android:text="@{trip.locationConditions.wavePeriod.toString()}"
+                    android:text="@{trip.wavePeriod.toString()}"
                     android:id="@+id/chain3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

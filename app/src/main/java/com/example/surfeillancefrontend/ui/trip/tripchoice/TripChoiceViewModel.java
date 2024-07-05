@@ -1,6 +1,7 @@
 package com.example.surfeillancefrontend.ui.trip.tripchoice;
 
 import android.app.Application;
+import android.util.Log;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import com.example.surfeillancefrontend.model.data.Trip;
@@ -16,6 +17,7 @@ public class TripChoiceViewModel extends AndroidViewModel {
         this.tripRepository = new TripRepository(application);
     }
     public MutableLiveData<List<Trip>> getData() {
+        Log.i("get data in view model", "getData: ");
         return tripRepository.getMutableLiveDate();
     }
 }
