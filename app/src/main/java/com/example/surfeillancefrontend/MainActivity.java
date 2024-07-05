@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         chooseTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the new activity
                 Intent intent = new Intent(MainActivity.this, SpotChoiceActivity.class);
                 startActivity(intent);
             }
@@ -38,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
         chooseTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the new activity
                 Intent intent = new Intent(MainActivity.this, TripChoiceActivity.class);
-                Log.i("0000000000000", "onClick: ");
                 startActivity(intent);
             }
         });
@@ -50,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         userAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the new activity
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }

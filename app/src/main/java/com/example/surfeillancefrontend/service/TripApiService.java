@@ -14,6 +14,6 @@ public interface TripApiService {
     @GET("users/trips/{userid}")
     Call<List<Trip>> getTripsByUserId(@Path("userid") String userid);
 
-    @PUT("")
+    @PUT("users/trips{userid}")
     Call<Trip> editTripByTripId(@Body Trip trip);
 }

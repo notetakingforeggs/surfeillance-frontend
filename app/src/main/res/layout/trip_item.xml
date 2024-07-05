@@ -23,7 +23,7 @@
                 android:layout_margin="20dp"
         >
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tripDate"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -31,7 +31,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/spotTitle"
                     android:text="@{trip.dateTime}"
-                    android:textSize="32px"
+                    android:textSize="32sp"
                     app:layout_constraintDimensionRatio="1:0.1"
                     android:textAlignment="center"
                     android:gravity="center"
