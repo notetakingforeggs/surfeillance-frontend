@@ -1,4 +1,4 @@
 package com.example.surfeillancefrontend.model.data;
 
-public class UserProfile {
+public class AppUser {
 }

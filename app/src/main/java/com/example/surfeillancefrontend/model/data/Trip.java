@@ -11,25 +11,44 @@ public class Trip implements Parcelable {
     String dateTime;
     Float surfRating;
     Float infoRating;
-    Location locationConditions;
 
+    Double waveHeight;
+    String waveDirection;
+    Double wavePeriod;
+    Double windSpeed;
+    String windDirection;
+    String gusts;
+    String tideHeight;
 
-    public Trip(Integer tripID, Integer userID, String dateTime, Float surfRating, Float infoRating, Location locationConditions) {
+    public Trip(Integer tripID, Integer userID, String dateTime, Float surfRating, Float infoRating, Location locationConditions, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, String gusts, String tideHeight) {
         this.tripID = tripID;
         this.userID = userID;
         this.dateTime = dateTime;
         this.surfRating = surfRating;
         this.infoRating = infoRating;
-        this.locationConditions = locationConditions;
+        this.waveHeight = waveHeight;
+        this.waveDirection = waveDirection;
+        this.wavePeriod = wavePeriod;
+        this.windSpeed = windSpeed;
+        this.windDirection = windDirection;
+        this.gusts = gusts;
+        this.tideHeight = tideHeight;
+
     }
 
-    public Trip(Integer tripID, Integer userID, String dateTime, Location locationConditions) {
+    public Trip(Integer tripID, Integer userID, String dateTime, Location locationConditions, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, String gusts, String tideHeight) {
         this.tripID = tripID;
         this.userID = userID;
-        this.surfRating = null;
-        this.infoRating = null;
         this.dateTime = dateTime;
-        this.locationConditions = locationConditions;
+        this.waveHeight = waveHeight;
+        this.waveDirection = waveDirection;
+        this.wavePeriod = wavePeriod;
+        this.windSpeed = windSpeed;
+        this.windDirection = windDirection;
+        this.gusts = gusts;
+        this.tideHeight = tideHeight;
+        this.infoRating = null;
+        this.surfRating = null;
     }
 
     public static final Creator<Trip> CREATOR = new Creator<Trip>() {
@@ -68,14 +87,6 @@ public class Trip implements Parcelable {
         this.dateTime = dateTime;
     }
 
-    public Location getLocationConditions() {
-        return locationConditions;
-    }
-
-    public void setLocationConditions(Location locationConditions) {
-        this.locationConditions = locationConditions;
-    }
-
     public Float getInfoRating() {
         return infoRating;
     }
@@ -92,6 +103,66 @@ public class Trip implements Parcelable {
         this.surfRating = surfRating;
     }
 
+    public void setTripID(Integer tripID) {
+        this.tripID = tripID;
+    }
+
+    public Double getWaveHeight() {
+        return waveHeight;
+    }
+
+    public void setWaveHeight(Double waveHeight) {
+        this.waveHeight = waveHeight;
+    }
+
+    public String getWaveDirection() {
+        return waveDirection;
+    }
+
+    public void setWaveDirection(String waveDirection) {
+        this.waveDirection = waveDirection;
+    }
+
+    public Double getWavePeriod() {
+        return wavePeriod;
+    }
+
+    public void setWavePeriod(Double wavePeriod) {
+        this.wavePeriod = wavePeriod;
+    }
+
+    public Double getWindSpeed() {
+        return windSpeed;
+    }
+
+    public void setWindSpeed(Double windSpeed) {
+        this.windSpeed = windSpeed;
+    }
+
+    public String getWindDirection() {
+        return windDirection;
+    }
+
+    public void setWindDirection(String windDirection) {
+        this.windDirection = windDirection;
+    }
+
+    public String getGusts() {
+        return gusts;
+    }
+
+    public void setGusts(String gusts) {
+        this.gusts = gusts;
+    }
+
+    public String getTideHeight() {
+        return tideHeight;
+    }
+
+    public void setTideHeight(String tideHeight) {
+        this.tideHeight = tideHeight;
+    }
+
     protected Trip(Parcel in) {
         if (in.readByte() == 0) {
             tripID = null;
@@ -103,17 +174,38 @@ public class Trip implements Parcelable {
         } else {
             userID = in.readInt();
         }
-        if (in.readByte() == 0){
+        if (in.readByte() == 0) {
             infoRating = null;
-        }else{
+        } else {
             infoRating = in.readFloat();
-        }if (in.readByte() == 0){
+        }
+        if (in.readByte() == 0) {
             surfRating = null;
-        }else{
+        } else {
             surfRating = in.readFloat();
         }
+        if (in.readByte() == 0) {
+            waveHeight = null;
+        } else {
+            waveHeight = in.readDouble();
+        }
+
+        if (in.readByte() == 0) {
+            wavePeriod = null;
+        } else {
+            wavePeriod = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            windSpeed = null;
+        } else {
+            windSpeed = in.readDouble();
+        }
+
         dateTime = in.readString();
-        locationConditions = in.readParcelable(Location.class.getClassLoader());
+        waveDirection = in.readString();
+        windDirection = in.readString();
+        gusts = in.readString();
+        tideHeight = in.readString();
     }
 
 
@@ -136,20 +228,44 @@ public class Trip implements Parcelable {
             dest.writeByte((byte) 1);
             dest.writeInt(userID);
         }
-        if (surfRating == null){
-            dest.writeByte((byte)0);
-        }else{
+        if (surfRating == null) {
+            dest.writeByte((byte) 0);
+        } else {
             dest.writeByte((byte) 1);
             dest.writeFloat(surfRating);
         }
-        if (infoRating == null){
-            dest.writeByte((byte)0);
-        }else{
+        if (infoRating == null) {
+            dest.writeByte((byte) 0);
+        } else {
             dest.writeByte((byte) 1);
             dest.writeFloat(infoRating);
         }
+        if (waveHeight == null) {
+            dest.writeByte((byte) 0); // indicates null
+        } else {
+            dest.writeByte((byte) 1); // indicates non-null
+            dest.writeDouble(waveHeight);
+        }
+        dest.writeString(waveDirection);
+
+        if (wavePeriod == null) {
+            dest.writeByte((byte) 0); // indicates null
+        } else {
+            dest.writeByte((byte) 1); // indicates non-null
+            dest.writeDouble(wavePeriod);
+        }
+
+        if (windSpeed == null) {
+            dest.writeByte((byte) 0); // indicates null
+        } else {
+            dest.writeByte((byte) 1); // indicates non-null
+            dest.writeDouble(windSpeed);
+        }
 
         dest.writeString(dateTime);
-        dest.writeParcelable(locationConditions, flags);
+        dest.writeString(windDirection);
+        dest.writeString(gusts);
+        dest.writeString(tideHeight);
+
     }
 }
