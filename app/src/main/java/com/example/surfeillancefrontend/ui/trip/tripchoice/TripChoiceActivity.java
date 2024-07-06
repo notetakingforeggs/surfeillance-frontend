@@ -41,25 +41,20 @@ public class TripChoiceActivity extends AppCompatActivity implements RecyclerVie
     }
 
     private void getAllTrips() {
-        Log.i("getAllTrips activity", "getAllTrips: ");
         viewModel.getData().observe(this, new Observer<List<Trip>>() {
             @Override
             public void onChanged(List<Trip> trips) {
                 if (trips != null && !trips.isEmpty()) {
                     tripList = new ArrayList<>(trips);
-                    for (Trip trip : tripList) {
-                        Log.i("Locations listing", "getlocationname: " + trip.getLocationName());
-                    }
                     displayInRecyclerView(tripList);
                 } else {
-                    Log.i(trips.get(0).getLocationName(), "XXXXXXXXXXXXXXXXXXx: ");
+                    Log.i("object is null", "XXXXXXXXXXXXXXXXXXx: ");
                 }
             }
         });
     }
 
     private void displayInRecyclerView(List<Trip> trips) {
-        Log.i(trips.get(3).toString(), "displayInRecyclerView: ");
         recyclerView = binding.recyclerViewTrips;
         tripAdaptor = new TripChoiceAdaptor(trips, this, this);
         recyclerView.setAdapter(tripAdaptor);

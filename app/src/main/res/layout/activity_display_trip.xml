@@ -29,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/spotTitle"
-                android:text="@{trip.dateTime}"
+                android:text="@{trip.date}"
                 android:textSize="32px"
                 app:layout_constraintDimensionRatio="1:0.5"
                 android:textAlignment="center"
@@ -46,7 +46,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tripDate"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@{trip.locationName}"
+                android:text="@{trip.spot.locationName}"
                 android:textSize="32px"
                 app:layout_constraintDimensionRatio="1:0.5"
                 android:textAlignment="center"
@@ -65,7 +65,7 @@
 
 
         <TextView
-                android:text='@{"Wave Height: " + trip.waveHeight.toString() + "Meters" }'
+                android:text='@{"Wave Height: " + trip.waveHeight + "" + "Meters" }'
                 android:id="@+id/chain1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
         />
 
         <TextView
-                android:text='@{"wind speed: " + trip.windSpeed.toString() + "mph"}'
+                android:text='@{"wind speed: " + trip.windSpeed + "mph"}'
                 android:id="@+id/chain2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

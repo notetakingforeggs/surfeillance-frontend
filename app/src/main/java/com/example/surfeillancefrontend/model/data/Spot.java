@@ -1,24 +1,18 @@
 package com.example.surfeillancefrontend.model.data;
 
-import com.example.surfeillancefrontend.model.data.Conditions.CurrentMarineData;
-import com.example.surfeillancefrontend.model.data.Conditions.CurrentWeatherData;
-import com.example.surfeillancefrontend.model.data.Conditions.LocationCoordinate;
-import com.example.surfeillancefrontend.model.data.Conditions.TidalEvent;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Spot {
-    Integer spotId;
-    String locationName;
-    LocationCoordinate coordinate;
-    CurrentMarineData currentMarineData;
-    CurrentWeatherData currentWeatherData;
+public class Spot implements Parcelable {
+    private int spotId;
+    private String locationName;
+    private String tideStationId;
 
-  TidalEvent tidalEvent;
-
-    public Integer getSpotId() {
+    public int getSpotId() {
         return spotId;
     }
 
-    public void setSpotId(Integer spotId) {
+    public void setSpotId(int spotId) {
         this.spotId = spotId;
     }
 
@@ -30,35 +24,42 @@ public class Spot {
         this.locationName = locationName;
     }
 
-    public LocationCoordinate getCoordinate() {
-        return coordinate;
+    public String getTideStationId() {
+        return tideStationId;
     }
 
-    public void setCoordinate(LocationCoordinate coordinate) {
-        this.coordinate = coordinate;
+    public void setTideStationId(String tideStationId) {
+        this.tideStationId = tideStationId;
     }
 
-    public CurrentMarineData getCurrentMarineData() {
-        return currentMarineData;
+    protected Spot(Parcel in) {
+        spotId = in.readInt();
+        locationName = in.readString();
+        tideStationId = in.readString();
     }
 
-    public void setCurrentMarineData(CurrentMarineData currentMarineData) {
-        this.currentMarineData = currentMarineData;
+    public static final Creator<Spot> CREATOR = new Creator<Spot>() {
+        @Override
+        public Spot createFromParcel(Parcel in) {
+            return new Spot(in);
+        }
+
+        @Override
+        public Spot[] newArray(int size) {
+            return new Spot[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(spotId);
+        dest.writeString(locationName);
+        dest.writeString(tideStationId);
     }
 
-    public CurrentWeatherData getCurrentWeatherData() {
-        return currentWeatherData;
-    }
-
-    public void setCurrentWeatherData(CurrentWeatherData currentWeatherData) {
-        this.currentWeatherData = currentWeatherData;
-    }
-
-    public TidalEvent getTidalEvent() {
-        return tidalEvent;
-    }
-
-    public void setTidalEvent(TidalEvent tidalEvent) {
-        this.tidalEvent = tidalEvent;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }
+

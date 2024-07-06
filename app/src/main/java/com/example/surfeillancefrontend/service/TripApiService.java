@@ -19,6 +19,6 @@ public interface TripApiService {
 
 
     @PUT("users/trips/{tripid}")
-    Call<Trip> editTripByTripId(@Path("tripid") Long tripid, @Body UpdateRatingDTO ratings);
+    Call<Trip> editTripByTripId(@Path("tripid") int tripid, @Body UpdateRatingDTO ratings);
 
 }

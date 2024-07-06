@@ -17,7 +17,6 @@ public class TripChoiceViewModel extends AndroidViewModel {
         this.tripRepository = new TripRepository(application);
     }
     public MutableLiveData<List<Trip>> getData() {
-        Log.i("get data in view model", "getData: ");
         return tripRepository.getMutableLiveDate();
     }
 }

@@ -3,12 +3,12 @@ package com.example.surfeillancefrontend.model.data.DTO;
 public class UpdateRatingDTO {
 
 
-    private Integer surfRating;
-    private Integer infoRating;
+    private int surfRating;
+    private int infoRating;
 
-    public UpdateRatingDTO(Float surfRating, Float infoRating) {
-        this.surfRating = Math.round(surfRating);
-        this.infoRating = Math.round(infoRating);
+    public UpdateRatingDTO(int surfRating, int infoRating) {
+        this.surfRating = surfRating;
+        this.infoRating = infoRating;
     }
 
     public Integer getSurfRating() {
@@ -25,5 +25,13 @@ public class UpdateRatingDTO {
 
     public void setInfoRating(Integer infoRating) {
         this.infoRating = infoRating;
+    }
+
+    @Override
+    public String toString() {
+        return "UpdateRatingDTO{" +
+                "surfRating=" + surfRating +
+                ", infoRating=" + infoRating +
+                '}';
     }
 }
