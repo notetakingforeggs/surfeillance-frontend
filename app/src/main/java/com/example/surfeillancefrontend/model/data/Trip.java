@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 public class Trip implements Parcelable {
 
-    Integer tripID;
+    Long tripId;
     Integer userID;
     String dateTime;
     Float surfRating;
@@ -21,8 +21,8 @@ public class Trip implements Parcelable {
     String gusts;
     String tideHeight;
 
-    public Trip(Integer tripID, Integer userID, String dateTime, Float surfRating, Float infoRating, String locationName, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, String gusts, String tideHeight) {
-        this.tripID = tripID;
+    public Trip(Long tripId, Integer userID, String dateTime, Float surfRating, Float infoRating, String locationName, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, String gusts, String tideHeight) {
+        this.tripId = tripId;
         this.userID = userID;
         this.dateTime = dateTime;
         this.surfRating = surfRating;
@@ -38,8 +38,8 @@ public class Trip implements Parcelable {
 
     }
 
-    public Trip(Integer tripID, Integer userID, String dateTime, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, String gusts, String tideHeight) {
-        this.tripID = tripID;
+    public Trip(Long tripId, Integer userID, String dateTime, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, String gusts, String tideHeight) {
+        this.tripId = tripId;
         this.userID = userID;
         this.dateTime = dateTime;
         this.waveHeight = waveHeight;
@@ -54,6 +54,9 @@ public class Trip implements Parcelable {
         this.locationName = locationName;
     }
 
+    public Trip() {
+    }
+
     public static final Creator<Trip> CREATOR = new Creator<Trip>() {
         @Override
         public Trip createFromParcel(Parcel in) {
@@ -66,12 +69,12 @@ public class Trip implements Parcelable {
         }
     };
 
-    public int getTripID() {
-        return tripID;
+    public Long getTripId() {
+        return tripId;
     }
 
-    public void setTripID(int tripID) {
-        this.tripID = tripID;
+    public void setTripId(Long tripId) {
+        this.tripId = tripId;
     }
 
     public Integer getUserID() {
@@ -106,8 +109,8 @@ public class Trip implements Parcelable {
         this.surfRating = surfRating;
     }
 
-    public void setTripID(Integer tripID) {
-        this.tripID = tripID;
+    public void setTripID(Long tripId) {
+        this.tripId = tripId;
     }
 
     public Double getWaveHeight() {
@@ -176,9 +179,9 @@ public class Trip implements Parcelable {
 
     protected Trip(Parcel in) {
         if (in.readByte() == 0) {
-            tripID = null;
+            tripId = null;
         } else {
-            tripID = in.readInt();
+            tripId = in.readLong();
         }
         if (in.readByte() == 0) {
             userID = null;
@@ -228,11 +231,11 @@ public class Trip implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        if (tripID == null) {
+        if (tripId == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeInt(tripID);
+            dest.writeLong(tripId);
         }
         if (userID == null) {
             dest.writeByte((byte) 0);
@@ -240,17 +243,18 @@ public class Trip implements Parcelable {
             dest.writeByte((byte) 1);
             dest.writeInt(userID);
         }
-        if (surfRating == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeFloat(surfRating);
-        }
+
         if (infoRating == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
             dest.writeFloat(infoRating);
+        }
+        if (surfRating == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(surfRating);
         }
         if (waveHeight == null) {
             dest.writeByte((byte) 0); // indicates null
@@ -258,8 +262,6 @@ public class Trip implements Parcelable {
             dest.writeByte((byte) 1); // indicates non-null
             dest.writeDouble(waveHeight);
         }
-        dest.writeString(waveDirection);
-
         if (wavePeriod == null) {
             dest.writeByte((byte) 0); // indicates null
         } else {
@@ -273,12 +275,34 @@ public class Trip implements Parcelable {
             dest.writeByte((byte) 1); // indicates non-null
             dest.writeDouble(windSpeed);
         }
-
         dest.writeString(dateTime);
+        dest.writeString(waveDirection);
         dest.writeString(windDirection);
         dest.writeString(gusts);
         dest.writeString(tideHeight);
         dest.writeString(locationName);
 
+
+
     }
+
+    @Override
+    public String toString() {
+        return "Trip{" +
+                "tripID=" + tripId +
+                ", userID=" + userID +
+                ", dateTime='" + dateTime + '\'' +
+                ", surfRating=" + surfRating +
+                ", infoRating=" + infoRating +
+                ", locationName='" + locationName + '\'' +
+                ", waveHeight=" + waveHeight +
+                ", waveDirection='" + waveDirection + '\'' +
+                ", wavePeriod=" + wavePeriod +
+                ", windSpeed=" + windSpeed +
+                ", windDirection='" + windDirection + '\'' +
+                ", gusts='" + gusts + '\'' +
+                ", tideHeight='" + tideHeight + '\'' +
+                '}';
+    }
+
 }

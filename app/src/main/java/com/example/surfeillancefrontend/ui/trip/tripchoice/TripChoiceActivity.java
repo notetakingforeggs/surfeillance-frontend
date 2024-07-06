@@ -48,7 +48,7 @@ public class TripChoiceActivity extends AppCompatActivity implements RecyclerVie
                 if (trips != null && !trips.isEmpty()) {
                     tripList = new ArrayList<>(trips);
                     for (Trip trip : tripList) {
-                        Log.i("?", "locations in list" + trip.getLocationName());
+                        Log.i("Locations listing", "getlocationname: " + trip.getLocationName());
                     }
                     displayInRecyclerView(tripList);
                 } else {
@@ -59,7 +59,7 @@ public class TripChoiceActivity extends AppCompatActivity implements RecyclerVie
     }
 
     private void displayInRecyclerView(List<Trip> trips) {
-        Log.i("weeeeeeeeee", "displayInRecyclerView: ");
+        Log.i(trips.get(3).toString(), "displayInRecyclerView: ");
         recyclerView = binding.recyclerViewTrips;
         tripAdaptor = new TripChoiceAdaptor(trips, this, this);
         recyclerView.setAdapter(tripAdaptor);

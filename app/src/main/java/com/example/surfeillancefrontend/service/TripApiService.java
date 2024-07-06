@@ -1,5 +1,6 @@
 package com.example.surfeillancefrontend.service;
 
+import com.example.surfeillancefrontend.model.data.DTO.UpdateRatingDTO;
 import com.example.surfeillancefrontend.model.data.Trip;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -11,9 +12,13 @@ import java.util.List;
 
 public interface TripApiService {
 
+
     @GET("users/trips/{userid}")
     Call<List<Trip>> getTripsByUserId(@Path("userid") String userid);
 
-    @PUT("users/trips{userid}")
-    Call<Trip> editTripByTripId(@Body Trip trip);
+
+
+    @PUT("users/trips/{tripid}")
+    Call<Trip> editTripByTripId(@Path("tripid") Long tripid, @Body UpdateRatingDTO ratings);
+
 }

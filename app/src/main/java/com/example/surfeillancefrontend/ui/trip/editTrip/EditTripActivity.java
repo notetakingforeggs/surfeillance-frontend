@@ -2,6 +2,7 @@ package com.example.surfeillancefrontend.ui.trip.editTrip;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
@@ -34,6 +35,7 @@ EditTripViewModel viewModel;
         } else {
             trip = getIntent().getParcelableExtra("Trip");
         }
+        Log.i(trip.toString(), "onCreate: ");
         addListenerOnButtonClick();
 
     }
@@ -47,13 +49,15 @@ EditTripViewModel viewModel;
 
                 @Override
                 public void onClick(View arg0) {
+                    Log.i("000000000000", "onClick: ");
                     //Getting the rating and displaying it on the toast
                     Float tripRating = tripRatingBar.getRating();
                     Float forecastRating = tripRatingBar.getRating();
-
+                    Log.i(trip.toString(), "before edit: ");
                     Trip editedTrip = trip;
                     editedTrip.setSurfRating(tripRating);
                     editedTrip.setInfoRating(forecastRating);
+                    Log.i(editedTrip.toString(), "after: ");
                     viewModel.editTripInfo(editedTrip);
 
                     Toast.makeText(getApplicationContext(), "Your update has been registered", Toast.LENGTH_LONG).show();
