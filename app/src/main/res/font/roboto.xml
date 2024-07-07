@@ -4,6 +4,5 @@
                  android:fontProviderPackage="com.google.android.gms"
                  android:fontProviderQuery="name=Roboto"
                  android:fontProviderCerts="@array/com_google_android_gms_fonts_certs">
-
 >
     </font-family>
