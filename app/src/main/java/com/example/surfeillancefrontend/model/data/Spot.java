@@ -8,6 +8,11 @@ public class Spot implements Parcelable {
     private String locationName;
     private String tideStationId;
 
+    public Spot(int spotId, String locationName) {
+        this.spotId = spotId;
+        this.locationName = locationName;
+    }
+
     public int getSpotId() {
         return spotId;
     }

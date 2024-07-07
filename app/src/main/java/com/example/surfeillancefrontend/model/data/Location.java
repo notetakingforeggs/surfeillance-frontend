@@ -295,4 +295,25 @@ public class Location /*extends BaseObservable*/ implements Parcelable {
         }
         dest.writeString(lowTideTime);
     }
+
+    @Override
+    public String toString() {
+        return "YourClassName{" +
+                "name='" + name + '\'' +
+                ", details='" + details + '\'' +
+                ", requestTime='" + requestTime + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", timezone='" + timezone + '\'' +
+                ", waveHeight=" + waveHeight +
+                ", waveDirection='" + waveDirection + '\'' +
+                ", wavePeriod=" + wavePeriod +
+                ", windSpeed=" + windSpeed +
+                ", gusts=" + gusts +
+                ", highTideHeight=" + highTideHeight +
+                ", highTideTime='" + highTideTime + '\'' +
+                ", lowTideHeight=" + lowTideHeight +
+                ", lowTideTime='" + lowTideTime + '\'' +
+                '}';
+    }
 }

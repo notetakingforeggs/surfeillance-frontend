@@ -7,17 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.surfeillancefrontend.MainActivity;
 import com.example.surfeillancefrontend.R;
 import com.example.surfeillancefrontend.model.data.Location;
-import com.example.surfeillancefrontend.service.ApiClient;
+import com.example.surfeillancefrontend.model.repository.TripRepository;
 import com.example.surfeillancefrontend.service.SpotApiService;
 import com.example.surfeillancefrontend.ui.spot.spotchoice.SpotChoiceActivity;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DisplaySpotActivity extends AppCompatActivity {
     SpotApiService spotApiService;
@@ -100,7 +96,10 @@ public class DisplaySpotActivity extends AppCompatActivity {
         addTripAndReturnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApiClient.getInstance().create(SpotApiService.class).postSpot(spot).enqueue(new Callback<Location>() {
+                TripRepository tripRepository = new TripRepository(getApplication());
+                tripRepository.addTrip(spot);
+
+              /*  ApiClient.getInstance().create(SpotApiService.class).postSpot(spot).enqueue(new Callback<Location>() {
                     @Override
                     public void onResponse(Call<Location> call, Response<Location> response) {
                         if (response.isSuccessful()) {
@@ -123,7 +122,7 @@ public class DisplaySpotActivity extends AppCompatActivity {
                         Log.e("API CALL", "Failure: ", throwable);
                     }
 
-                });
+                });*/
 
 
                 // Start the new activity i.e. return to homepage after posting trip to DB

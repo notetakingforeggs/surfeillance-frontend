@@ -78,6 +78,21 @@ public class AppUserDTO implements Parcelable {
         this.token = token;
     }
 
+    public AppUserDTO(int id, String userName, String profileText, String location, String skillLevel, String imageUrl, String email, String token) {
+        this.id = id;
+        this.userName = userName;
+        this.profileText = profileText;
+        this.location = location;
+        this.skillLevel = skillLevel;
+        this.imageUrl = imageUrl;
+        this.email = email;
+        this.token = token;
+    }
+
+    public AppUserDTO(int id) {
+        this.id = id;
+    }
+
     protected AppUserDTO(Parcel in) {
         id = in.readInt();
         userName = in.readString();

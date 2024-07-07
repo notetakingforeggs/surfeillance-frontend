@@ -68,6 +68,7 @@ public class TripChoiceActivity extends AppCompatActivity implements RecyclerVie
         Intent intent = new Intent(this, DisplayTripActivity.class);
         Trip trip = tripList.get(position);
         intent.putExtra("Trip", trip);
+        Log.i("pre display trip", trip.toString());
         startActivity(intent);
     }
 
