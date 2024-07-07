@@ -7,42 +7,48 @@
         android:layout_height="match_parent"
         tools:context=".ui.trip.editTrip.EditTripActivity">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
             android:id="@+id/personalNotes"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/edit_trip_details"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/editNotes"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="16dp"
+
     />
-    <EditText
-            android:id="@+id/editNotes"
-            android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+
+            android:id="@+id/editNotesLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/hint_details"
             app:layout_constraintTop_toBottomOf="@id/personalNotes"
-            app:layout_constraintBottom_toTopOf="@+id/rating1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="16dp">
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:minHeight="56dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-            />
 
-
-
-
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
             android:id="@+id/rating1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintWidth_percent="0.75"
             android:text="@string/tripQuality"
-            app:layout_constraintTop_toBottomOf="@+id/editNotes"
-            app:layout_constraintBottom_toTopOf="@id/ratingBar1"
+            app:layout_constraintTop_toBottomOf="@+id/editNotesLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            android:layout_margin="16dp"
+    />
     <RatingBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,9 +57,10 @@
             app:layout_constraintBottom_toTopOf="@id/rating2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:stepSize="1"
     />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
             android:id="@+id/rating2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -63,7 +70,7 @@
             app:layout_constraintBottom_toTopOf="@id/ratingBar2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+    />
     <RatingBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,10 +79,11 @@
             app:layout_constraintBottom_toTopOf="@id/submitEditedTripButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:stepSize="1"
 
     />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
             android:text="Submit Edits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

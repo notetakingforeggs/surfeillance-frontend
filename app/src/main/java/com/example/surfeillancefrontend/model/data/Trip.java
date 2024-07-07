@@ -8,8 +8,8 @@ public class Trip implements Parcelable {
     private int tripId;
     private AppUserDTO appUserDTO;
     private Spot spot;
-    private int surfRating;
-    private int infoRating;
+    private Integer surfRating;
+    private Integer infoRating;
     private String date;
     private double waveHeight;
     private String waveDirection;
@@ -44,19 +44,19 @@ public class Trip implements Parcelable {
         this.spot = spot;
     }
 
-    public int getSurfRating() {
+    public Integer getSurfRating() {
         return surfRating;
     }
 
-    public void setSurfRating(int surfRating) {
+    public void setSurfRating(Integer surfRating) {
         this.surfRating = surfRating;
     }
 
-    public int getInfoRating() {
+    public Integer getInfoRating() {
         return infoRating;
     }
 
-    public void setInfoRating(int infoRating) {
+    public void setInfoRating(Integer infoRating) {
         this.infoRating = infoRating;
     }
 
