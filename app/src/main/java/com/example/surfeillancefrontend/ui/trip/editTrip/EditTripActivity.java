@@ -2,6 +2,7 @@ package com.example.surfeillancefrontend.ui.trip.editTrip;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
@@ -14,12 +15,13 @@ import com.example.surfeillancefrontend.model.data.Trip;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class EditTripActivity extends AppCompatActivity {
-RatingBar tripRatingBar;
-RatingBar forecastRatingBar;
-TextInputEditText editText;
-Button button;
-Trip trip;
-EditTripViewModel viewModel;
+    RatingBar tripRatingBar;
+    RatingBar forecastRatingBar;
+    TextInputEditText editText;
+    Button button;
+    Trip trip;
+    EditTripViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,32 +36,32 @@ EditTripViewModel viewModel;
         } else {
             trip = getIntent().getParcelableExtra("Trip");
         }
+
+        Log.i("unparceled in edit", trip.toString());
         addListenerOnButtonClick();
 
     }
-        public void addListenerOnButtonClick() {
-            tripRatingBar = findViewById(R.id.ratingBar1);
-            forecastRatingBar = findViewById(R.id.ratingBar2);
-            button = (Button) findViewById(R.id.submitEditedTripButton);
 
-            //Performing action on Button Click
-            button.setOnClickListener(new View.OnClickListener() {
+    public void addListenerOnButtonClick() {
+        tripRatingBar = findViewById(R.id.ratingBar1);
+        forecastRatingBar = findViewById(R.id.ratingBar2);
+        button = (Button) findViewById(R.id.submitEditedTripButton);
 
-                @Override
-                public void onClick(View arg0) {
-                    //Getting the rating and displaying it on the toast
-                    Float tripRating = tripRatingBar.getRating();
-                    Float forecastRating = tripRatingBar.getRating();
+        //Performing action on Button Click
+        button.setOnClickListener(new View.OnClickListener() {
 
-                    Trip editedTrip = trip;
-                    editedTrip.setSurfRating(tripRating);
-                    editedTrip.setInfoRating(forecastRating);
-                    viewModel.editTripInfo(editedTrip);
-
-                    Toast.makeText(getApplicationContext(), "Your update has been registered", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(EditTripActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
-        }
+            @Override
+            public void onClick(View arg0) {
+                int tripRating = (int) tripRatingBar.getRating();
+                int forecastRating = (int) tripRatingBar.getRating();
+                Trip editedTrip = trip;
+                editedTrip.setSurfRating(tripRating);
+                editedTrip.setInfoRating(forecastRating);
+                viewModel.tripRepository.editTripInfo(editedTrip);
+                Toast.makeText(getApplicationContext(), "Your update has been registered", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(EditTripActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+}

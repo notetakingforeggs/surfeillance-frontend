@@ -2,34 +2,142 @@ package com.example.surfeillancefrontend.model.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
+import com.example.surfeillancefrontend.model.data.DTO.AppUserDTO;
 
 public class Trip implements Parcelable {
+    private int tripId;
+    private AppUserDTO appUserDTO;
+    private Spot spot;
+    private int surfRating;
+    private int infoRating;
+    private String date;
+    private double waveHeight;
+    private String waveDirection;
+    private double wavePeriod;
+    private double windSpeed;
+    private String windDirection;
+    private int gusts;
+    private double tideHeight;
 
-    Integer tripID;
-    Integer userID;
-    String dateTime;
-    Float surfRating;
-    Float infoRating;
-    Location locationConditions;
 
-
-    public Trip(Integer tripID, Integer userID, String dateTime, Float surfRating, Float infoRating, Location locationConditions) {
-        this.tripID = tripID;
-        this.userID = userID;
-        this.dateTime = dateTime;
-        this.surfRating = surfRating;
-        this.infoRating = infoRating;
-        this.locationConditions = locationConditions;
+    public int getTripId() {
+        return tripId;
     }
 
-    public Trip(Integer tripID, Integer userID, String dateTime, Location locationConditions) {
-        this.tripID = tripID;
-        this.userID = userID;
-        this.surfRating = null;
-        this.infoRating = null;
-        this.dateTime = dateTime;
-        this.locationConditions = locationConditions;
+    public void setTripId(int tripId) {
+        this.tripId = tripId;
+    }
+
+    public AppUserDTO getAppUserDTO() {
+        return appUserDTO;
+    }
+
+    public void setAppUserDTO(AppUserDTO appUserDTO) {
+        this.appUserDTO = appUserDTO;
+    }
+
+    public Spot getSpot() {
+        return spot;
+    }
+
+    public void setSpot(Spot spot) {
+        this.spot = spot;
+    }
+
+    public int getSurfRating() {
+        return surfRating;
+    }
+
+    public void setSurfRating(int surfRating) {
+        this.surfRating = surfRating;
+    }
+
+    public int getInfoRating() {
+        return infoRating;
+    }
+
+    public void setInfoRating(int infoRating) {
+        this.infoRating = infoRating;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public double getWaveHeight() {
+        return waveHeight;
+    }
+
+    public void setWaveHeight(double waveHeight) {
+        this.waveHeight = waveHeight;
+    }
+
+    public String getWaveDirection() {
+        return waveDirection;
+    }
+
+    public void setWaveDirection(String waveDirection) {
+        this.waveDirection = waveDirection;
+    }
+
+    public double getWavePeriod() {
+        return wavePeriod;
+    }
+
+    public void setWavePeriod(double wavePeriod) {
+        this.wavePeriod = wavePeriod;
+    }
+
+    public double getWindSpeed() {
+        return windSpeed;
+    }
+
+    public void setWindSpeed(double windSpeed) {
+        this.windSpeed = windSpeed;
+    }
+
+    public String getWindDirection() {
+        return windDirection;
+    }
+
+    public void setWindDirection(String windDirection) {
+        this.windDirection = windDirection;
+    }
+
+    public int getGusts() {
+        return gusts;
+    }
+
+    public void setGusts(int gusts) {
+        this.gusts = gusts;
+    }
+
+    public double getTideHeight() {
+        return tideHeight;
+    }
+
+    public void setTideHeight(double tideHeight) {
+        this.tideHeight = tideHeight;
+    }
+
+    protected Trip(Parcel in) {
+        tripId = in.readInt();
+        appUserDTO = in.readParcelable(AppUserDTO.class.getClassLoader());
+        spot = in.readParcelable(Spot.class.getClassLoader());
+        surfRating = in.readInt();
+        infoRating = in.readInt();
+        date = in.readString();
+        waveHeight = in.readDouble();
+        waveDirection = in.readString();
+        wavePeriod = in.readDouble();
+        windSpeed = in.readDouble();
+        windDirection = in.readString();
+        gusts = in.readInt();
+        tideHeight = in.readDouble();
     }
 
     public static final Creator<Trip> CREATOR = new Creator<Trip>() {
@@ -44,78 +152,22 @@ public class Trip implements Parcelable {
         }
     };
 
-    public int getTripID() {
-        return tripID;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(tripId);
+        dest.writeParcelable(appUserDTO, flags);
+        dest.writeParcelable(spot, flags);
+        dest.writeInt(surfRating);
+        dest.writeInt(infoRating);
+        dest.writeString(date);
+        dest.writeDouble(waveHeight);
+        dest.writeString(waveDirection);
+        dest.writeDouble(wavePeriod);
+        dest.writeDouble(windSpeed);
+        dest.writeString(windDirection);
+        dest.writeInt(gusts);
+        dest.writeDouble(tideHeight);
     }
-
-    public void setTripID(int tripID) {
-        this.tripID = tripID;
-    }
-
-    public Integer getUserID() {
-        return userID;
-    }
-
-    public void setUserID(Integer userID) {
-        this.userID = userID;
-    }
-
-    public String getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public Location getLocationConditions() {
-        return locationConditions;
-    }
-
-    public void setLocationConditions(Location locationConditions) {
-        this.locationConditions = locationConditions;
-    }
-
-    public Float getInfoRating() {
-        return infoRating;
-    }
-
-    public void setInfoRating(Float infoRating) {
-        this.infoRating = infoRating;
-    }
-
-    public Float getSurfRating() {
-        return surfRating;
-    }
-
-    public void setSurfRating(Float surfRating) {
-        this.surfRating = surfRating;
-    }
-
-    protected Trip(Parcel in) {
-        if (in.readByte() == 0) {
-            tripID = null;
-        } else {
-            tripID = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            userID = null;
-        } else {
-            userID = in.readInt();
-        }
-        if (in.readByte() == 0){
-            infoRating = null;
-        }else{
-            infoRating = in.readFloat();
-        }if (in.readByte() == 0){
-            surfRating = null;
-        }else{
-            surfRating = in.readFloat();
-        }
-        dateTime = in.readString();
-        locationConditions = in.readParcelable(Location.class.getClassLoader());
-    }
-
 
     @Override
     public int describeContents() {
@@ -123,33 +175,21 @@ public class Trip implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        if (tripID == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(tripID);
-        }
-        if (userID == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(userID);
-        }
-        if (surfRating == null){
-            dest.writeByte((byte)0);
-        }else{
-            dest.writeByte((byte) 1);
-            dest.writeFloat(surfRating);
-        }
-        if (infoRating == null){
-            dest.writeByte((byte)0);
-        }else{
-            dest.writeByte((byte) 1);
-            dest.writeFloat(infoRating);
-        }
-
-        dest.writeString(dateTime);
-        dest.writeParcelable(locationConditions, flags);
+    public String toString() {
+        return "Trip{" +
+                "tripId=" + tripId +
+                ", appUserDTO=" + appUserDTO +
+                ", spot=" + spot +
+                ", surfRating=" + surfRating +
+                ", infoRating=" + infoRating +
+                ", date='" + date + '\'' +
+                ", waveHeight=" + waveHeight +
+                ", waveDirection='" + waveDirection + '\'' +
+                ", wavePeriod=" + wavePeriod +
+                ", windSpeed=" + windSpeed +
+                ", windDirection='" + windDirection + '\'' +
+                ", gusts=" + gusts +
+                ", tideHeight=" + tideHeight +
+                '}';
     }
 }

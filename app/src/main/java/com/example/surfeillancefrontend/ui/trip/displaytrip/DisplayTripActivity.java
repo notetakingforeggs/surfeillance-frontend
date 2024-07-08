@@ -34,9 +34,11 @@ public class DisplayTripActivity extends AppCompatActivity {
         }
         if (trip != null) {
             binding.setTrip(trip);
+
         } else {
             Log.i("null", "onCreate: ");
         }
+        Log.i("unparceled in display", trip.toString());
 
         // set rating displays to values from trips
         surfRating.setRating(trip.getSurfRating());

@@ -30,17 +30,12 @@ public class TripChoiceActivity extends AppCompatActivity implements RecyclerVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("0000000000", "onCreate: ");
         setContentView(R.layout.activity_trip_choice);
-        Log.i("hhhhhhhhhhhhhhh", "onCreate: ");
         binding = DataBindingUtil.setContentView(this, R.layout.activity_trip_choice);
-        Log.i("bbbbbbbbbbbb", "onCreate: ");
         TripChoiceViewModelFactory factory = new TripChoiceViewModelFactory(getApplication());
         viewModel = new ViewModelProvider(this, factory).get(TripChoiceViewModel.class);
         //viewModel = new ViewModelProvider(this).get(TripChoiceViewModel.class);
-        Log.i("hhhssssssssssss", "onCreate: ");
         binding.setLifecycleOwner(this);
-        Log.i("binding issue", "onCreate: ");
         getAllTrips();
 
     }
@@ -51,20 +46,15 @@ public class TripChoiceActivity extends AppCompatActivity implements RecyclerVie
             public void onChanged(List<Trip> trips) {
                 if (trips != null && !trips.isEmpty()) {
                     tripList = new ArrayList<>(trips);
-                    for (Trip trip : tripList) {
-                        Log.i("?", "locations in list" + trip.getLocationConditions().getName());
-                    }
                     displayInRecyclerView(tripList);
                 } else {
-                    Log.i(trips.get(0).getLocationConditions().getName(), "XXXXXXXXXXXXXXXXXXx: ");
+                    Log.i("object is null", "XXXXXXXXXXXXXXXXXXx: ");
                 }
             }
         });
     }
 
     private void displayInRecyclerView(List<Trip> trips) {
-        Log.i("weeeeeeeeee", "displayInRecyclerView: ");
-        Log.i("TAG", (trips.get(2).getLocationConditions().getName().toString()));
         recyclerView = binding.recyclerViewTrips;
         tripAdaptor = new TripChoiceAdaptor(trips, this, this);
         recyclerView.setAdapter(tripAdaptor);
