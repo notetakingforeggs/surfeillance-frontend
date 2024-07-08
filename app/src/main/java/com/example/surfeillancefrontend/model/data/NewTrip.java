@@ -2,11 +2,12 @@ package com.example.surfeillancefrontend.model.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import com.example.surfeillancefrontend.model.data.DTO.AppUser;
 import com.example.surfeillancefrontend.model.data.DTO.AppUserDTO;
 
-public class Trip implements Parcelable {
-    private int tripId;
-    private AppUserDTO appUserDTO;
+public class NewTrip implements Parcelable {
+    private Integer tripId;
+    private AppUser appUser;
     private Spot spot;
     private Integer surfRating;
     private Integer infoRating;
@@ -20,8 +21,8 @@ public class Trip implements Parcelable {
     private double tideHeight;
 
 
-    public Trip(AppUserDTO appUserDTO, Spot spot, Integer surfRating, Integer infoRating, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, double tideHeight) {
-        this.appUserDTO = appUserDTO;
+    public NewTrip(AppUser appUser, Spot spot, Integer surfRating, Integer infoRating, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, double tideHeight) {
+        this.appUser = appUser;
         this.spot = spot;
         this.surfRating = surfRating;
         this.infoRating = infoRating;
@@ -35,9 +36,9 @@ public class Trip implements Parcelable {
         this.tideHeight = tideHeight;
     }
 
-    public Trip(AppUserDTO appUserDTO, Spot spot, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, double tideHeight) {
+    public NewTrip( AppUser appUser, Spot spot, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, double tideHeight) {
 
-        this.appUserDTO = appUserDTO;
+        this.appUser = appUser;
         this.spot = spot;
         this.date = date;
         this.waveHeight = waveHeight;
@@ -57,12 +58,12 @@ public class Trip implements Parcelable {
         this.tripId = tripId;
     }
 
-    public AppUserDTO getAppUserDTO() {
-        return appUserDTO;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public void setAppUserDTO(AppUserDTO appUserDTO) {
-        this.appUserDTO = appUserDTO;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     public Spot getSpot() {
@@ -153,20 +154,12 @@ public class Trip implements Parcelable {
         this.tideHeight = tideHeight;
     }
 
-    protected Trip(Parcel in) {
+    protected NewTrip(Parcel in) {
         tripId = in.readInt();
-        appUserDTO = in.readParcelable(AppUserDTO.class.getClassLoader());
+        appUser = in.readParcelable(AppUserDTO.class.getClassLoader());
         spot = in.readParcelable(Spot.class.getClassLoader());
-        if (in.readByte() == 0) {
-            surfRating = null;
-        } else {
-            surfRating = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            infoRating = null;
-        } else {
-            infoRating = in.readInt();
-        }
+        surfRating = in.readInt();
+        infoRating = in.readInt();
         date = in.readString();
         waveHeight = in.readDouble();
         waveDirection = in.readString();
@@ -192,20 +185,10 @@ public class Trip implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(tripId);
-        dest.writeParcelable(appUserDTO, flags);
+        dest.writeParcelable(appUser, flags);
         dest.writeParcelable(spot, flags);
-        if (surfRating == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(surfRating);
-        }
-        if (infoRating == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(infoRating);
-        }
+        dest.writeInt(surfRating);
+        dest.writeInt(infoRating);
         dest.writeString(date);
         dest.writeDouble(waveHeight);
         dest.writeString(waveDirection);
@@ -225,7 +208,7 @@ public class Trip implements Parcelable {
     public String toString() {
         return "Trip{" +
                 "tripId=" + tripId +
-                ", appUserDTO=" + appUserDTO +
+                ", appUserDTO=" + appUser +
                 ", spot=" + spot +
                 ", surfRating=" + surfRating +
                 ", infoRating=" + infoRating +

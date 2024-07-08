@@ -41,8 +41,12 @@ public class DisplayTripActivity extends AppCompatActivity {
         Log.i("unparceled in display", trip.toString());
 
         // set rating displays to values from trips
-        surfRating.setRating(trip.getSurfRating());
-        forecastRating.setRating(trip.getInfoRating());
+        if(trip.getSurfRating()!=null) {
+            surfRating.setRating(trip.getSurfRating());
+        }
+        if(trip.getInfoRating()!=null) {
+            forecastRating.setRating(trip.getInfoRating());
+        }
 
     }
    public void onEditButtonClick(View v) {

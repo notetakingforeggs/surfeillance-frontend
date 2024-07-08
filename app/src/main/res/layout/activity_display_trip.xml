@@ -5,8 +5,6 @@
 
     <data>
         <variable name="trip" type="com.example.surfeillancefrontend.model.data.Trip"/>
-<!--        <variable name="displayTripActivity"-->
-<!--                  type="com.example.surfeillancefrontend.ui.trip.displaytrip.DisplayTripActivity"/>-->
     </data>
 
 
@@ -14,53 +12,61 @@
             android:id="@+id/innerConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/holo_blue_light"
+            android:background="@drawable/defaultbackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_margin="20dp"
+            android:layout_margin="0dp"
     >
+        <ImageView
+                android:id="@+id/logoImage"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/logo"
+                android:background="@android:color/transparent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+        />
 
-        <TextView
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintStart_toEndOf="@id/logoImage"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintBottom_toBottomOf="@id/logoImage"
+                  android:text=""
+                  android:letterSpacing="0.4"
+                  android:textAlignment="center"
+                  android:gravity="center"
+                  android:textSize="38dp"
+        />
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/spotTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/logoImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                android:text="@{trip.spot.locationName}"
+                android:textSize="46px"
+                android:textAlignment="textStart"
+                android:gravity="start"
+        />
+        <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tripDate"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/spotTitle"
-                android:text="@{trip.date}"
-                android:textSize="32px"
-                app:layout_constraintDimensionRatio="1:0.5"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:background="@color/material_dynamic_neutral50"
-
-        />
-
-
-        <TextView
-                android:id="@+id/spotTitle"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tripDate"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="@{trip.spot.locationName}"
-                android:textSize="32px"
-                app:layout_constraintDimensionRatio="1:0.5"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:background="@color/material_dynamic_neutral50"
-        />
-
-        <ImageView
-                android:id="@+id/tripImage"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/weather"
                 app:layout_constraintTop_toBottomOf="@id/spotTitle"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@{trip.date}"
+                android:textSize="28px"
+                android:textAlignment="center"
+                android:gravity="center"
+
         />
 
 
@@ -69,22 +75,22 @@
                 android:id="@+id/chain1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/spotTitle"
+                app:layout_constraintTop_toBottomOf="@id/windIcon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/chain2"
 
 
-        />
+                app:layout_constraintVertical_bias="0.168"/>
         <ImageView
                 android:id="@+id/windIcon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/weather"
-                app:layout_constraintBottom_toTopOf="@id/chain1"
+                app:layout_constraintTop_toBottomOf="@id/tripDate"
                 app:layout_constraintEnd_toStartOf="@id/chain1"
 
-        />
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.147"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,22 +106,21 @@
                 android:id="@+id/chain2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/spotTitle"
+                app:layout_constraintTop_toBottomOf="@+id/waveIcon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/chain1"
                 app:layout_constraintEnd_toEndOf="parent"
-        />
-
+                app:layout_constraintVertical_bias="0.159"/>
         <ImageView
                 android:id="@+id/waveIcon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/wave"
-                app:layout_constraintBottom_toTopOf="@id/chain2"
+                app:layout_constraintTop_toBottomOf="@id/tripDate"
                 app:layout_constraintEnd_toStartOf="@id/chain2"
 
 
-        />
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.156"/>
         <TextView
                 android:id="@+id/waveText"
                 android:layout_width="wrap_content"
@@ -135,8 +140,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="Surf Conditions Rating"
-        />
-
+                android:layout_marginTop="148dp" app:layout_constraintHorizontal_bias="0.523"/>
         <RatingBar android:id="@+id/surfRating"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"

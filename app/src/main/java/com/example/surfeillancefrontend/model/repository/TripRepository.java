@@ -3,9 +3,14 @@ package com.example.surfeillancefrontend.model.repository;
 import android.app.Application;
 import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
+import com.example.surfeillancefrontend.model.data.DTO.AppUser;
 import com.example.surfeillancefrontend.model.data.DTO.UpdateRatingDTO;
+import com.example.surfeillancefrontend.model.data.Location;
+import com.example.surfeillancefrontend.model.data.NewTrip;
+import com.example.surfeillancefrontend.model.data.Spot;
 import com.example.surfeillancefrontend.model.data.Trip;
 import com.example.surfeillancefrontend.service.ApiClient;
+import com.example.surfeillancefrontend.service.NewTripBuilder;
 import com.example.surfeillancefrontend.service.TripApiService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,21 +20,16 @@ import java.util.List;
 
 public class TripRepository {
     private final MutableLiveData<List<Trip>> liveData = new MutableLiveData<>();
-//    private TripDTO returnedTripDTO;
-    private Trip returnedTrip;
+    private Trip returnedTripAfterPut;
+    private Trip returnedTripAfterPost;
     private Application app;
     private final TripApiService tripApiService;
-  //  private final TripApiService tripApiServiceCustom;
-//    private TripDeserialiser customGson;
-
+    private NewTripBuilder newTripBuilder;
 
     public TripRepository(Application app) {
         this.app = app;
         tripApiService = ApiClient.getInstance().create(TripApiService.class);
-//        customGson = new TripDeserialiser();
-//
-//        Gson gson = new GsonBuilder().registerTypeAdapter(Trip.class, new TripDeserialiser()).create();
-//        tripApiServiceCustom = ApiClient.getInstance(gson).create(TripApiService.class);
+
     }
 
     public MutableLiveData<List<Trip>> getMutableLiveDate() {
@@ -58,7 +58,7 @@ public class TripRepository {
          call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                returnedTrip = (Trip) response.body();
+                returnedTripAfterPut = (Trip) response.body();
             }
 
             @Override
@@ -67,7 +67,35 @@ public class TripRepository {
                         "repo faill edit", "onFailure: ");
             }
         });
-         return returnedTrip;
+         return returnedTripAfterPut;
+    }
+    public Trip addTrip(Location location) {
+
+        newTripBuilder = new NewTripBuilder();
+        Log.i("in trip repo", location.getName());
+        Log.i("deets", location.toString());
+        NewTrip tripToAdd = newTripBuilder
+                // spot ID to be collected from backend pls
+                .withSpot(new Spot(1, location.getName()))
+                // userid also to come in from backend/session info
+                .withUser(new AppUser(1))
+                .withLocation(location)
+                .build();
+        Log.i("pre call", tripToAdd.toString());
+        Call call = tripApiService.addTrip(tripToAdd);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                returnedTripAfterPost = (Trip) response.body();
+                Log.i("trip added", returnedTripAfterPost.toString());
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable throwable) {
+                Log.i("badd add", "onFailure: ");
+            }
+        });
+        return returnedTripAfterPost;
     }
 }
 
