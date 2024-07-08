@@ -31,6 +31,15 @@
                 android:name=".ui.spot.displayspot.DisplaySpotActivity"
                 android:exported="false"/>
 
+      <activity
+                android:name=".ui.trip.tripchoice.TripChoiceActivity"
+                android:exported="false"/>
+
+        <activity android:name=".ui.trip.displaytrip.DisplayTripActivity"
+                  android:exported="false"/>
+
+        <activity android:name=".ui.trip.editTrip.EditTripActivity"
+                  android:exported="false"/>
       
       <activity
                 android:name=".ui.login.LoginActivity"

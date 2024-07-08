@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.surfeillancefrontend.MainActivity;
 import com.example.surfeillancefrontend.R;
-import com.example.surfeillancefrontend.service.ApiClient;
+import com.example.surfeillancefrontend.model.data.DTO.TokenHolder;
+import com.example.surfeillancefrontend.service.ApiClientLogin;
 import com.example.surfeillancefrontend.service.AuthService;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -40,6 +43,8 @@ public class LoginActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_login);
 
         Button loginButton = findViewById(R.id.sign_in_button);
+        navigateToHomePage();
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +63,7 @@ public class LoginActivity extends AppCompatActivity  {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         mAuth = FirebaseAuth.getInstance();
-        authService = ApiClient.getInstance().create(AuthService.class);
+        authService = ApiClientLogin.getInstance().create(AuthService.class);
         if (mAuth.getCurrentUser() == null) {
             //setLoggedOutUi();
         } else {
@@ -88,7 +93,10 @@ public class LoginActivity extends AppCompatActivity  {
                                 .addOnCompleteListener(getIdTokenTask -> {
                                     if (getIdTokenTask.isSuccessful()) {
                                         String token = getIdTokenTask.getResult().getToken();
+
+
                                         authenticateWithBackend(token);
+
                                     } else {
                                         Log.w(TAG, "Fetching ID token failed", getIdTokenTask.getException());
                                         Snackbar.make(findViewById(android.R.id.content),
@@ -106,6 +114,13 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
     private void authenticateWithBackend(String idToken) {
+        Log.d(TAG, idToken);
+
+        // trying to store token in a singleton
+        TokenHolder tokenHolder = TokenHolder.getInstance();
+        tokenHolder.setToken(idToken);
+        Log.d("0000000000000000", idToken);
+
         String authHeader = "Bearer " + idToken;
         Call<String> call = authService.authenticate(authHeader);
         call.enqueue(new Callback<String>() {
@@ -114,9 +129,7 @@ public class LoginActivity extends AppCompatActivity  {
                 if (response.isSuccessful()) {
                     Log.d("SUCCESS", "Login successful: " + response.body());
 
-                    // Proceed to next activity
-                    // startActivity(new Intent(LoginActivity.this, NextActivity.class));
-                    // finish();
+                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 } else {
                     Log.e("ERROR", "Login failed: " + response.errorBody());
             }
@@ -173,6 +186,18 @@ public class LoginActivity extends AppCompatActivity  {
                         "Login failed", Snackbar.LENGTH_LONG).show();
             }
         }
+    }
+
+    public void navigateToHomePage() {
+        ImageButton goHomeButton = (ImageButton) findViewById(R.id.returnHome);
+        goHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the new activity i.e. return to previous screen
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }
