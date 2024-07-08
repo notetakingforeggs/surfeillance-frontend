@@ -17,16 +17,7 @@ public class ApiClient {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-//            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-//                @Override
-//                public Response intercept(Chain chain) throws IOException {
-//                    Request newRequest  = chain.request().newBuilder()
-//                            .addHeader("Authorization", "Bearer " + token)
-//                            .build();
-//                    return chain.proceed(newRequest);
-//                }
-//            }).build();
-
+//
             OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                     .addInterceptor(loggingInterceptor)
                     .connectTimeout(30, TimeUnit.SECONDS)
@@ -35,8 +26,7 @@ public class ApiClient {
                     .build();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://172.23.223.86:8080/oauth/")
-                    .client(okHttpClient)
+                    .baseUrl("http://10.0.2.2:8080/api/v1/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

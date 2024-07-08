@@ -3,8 +3,8 @@
     <style name="Base.Theme.SurfeillanceFrontEnd" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor"
-              tools:targetApi="l">@color/blue</item>
+<!--        <item name="android:statusBarColor"-->
+<!--              tools:targetApi="l">@color/blue</item>-->
     </style>
 
     <style name="Theme.SurfeillanceFrontEnd" parent="Base.Theme.SurfeillanceFrontEnd"/>

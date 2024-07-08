@@ -2,12 +2,14 @@ package com.example.surfeillancefrontend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.surfeillancefrontend.ui.profile.ProfileActivity;
 import com.example.surfeillancefrontend.ui.spot.spotchoice.SpotChoiceActivity;
-import com.example.surfeillancefrontend.ui.spot.trip.tripchoice.TripChoiceActivity;
+import com.example.surfeillancefrontend.ui.trip.tripchoice.TripChoiceActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         navigateToSpotChoiceActivity();
         navigateToUserAccount();
         navigateToUsersTrips();
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         chooseTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the new activity
                 Intent intent = new Intent(MainActivity.this, SpotChoiceActivity.class);
                 startActivity(intent);
             }
@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         chooseTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the new activity
                 Intent intent = new Intent(MainActivity.this, TripChoiceActivity.class);
                 startActivity(intent);
             }
@@ -48,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
         userAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the new activity
-                Intent intent = new Intent(MainActivity.this, SpotChoiceActivity.class);
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });

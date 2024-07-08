@@ -3,4 +3,33 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#0066ff</color>
+
+
+
+    <!-- Primary and Secondary Colors -->
+    <color name="my_app_primary">#9898db</color>
+    <color name="my_app_primary_dark">#357ABD</color>
+    <color name="my_app_secondary">#762957</color>
+
+    <!-- Background and Error Colors -->
+    <color name="my_app_background">#B7B8B3</color>
+    <color name="my_app_background_secondary">#FFE8A8</color>
+    <color name="my_app_background_dark">#070915</color>
+    <color name="my_app_error">#D32F2F</color>
+
+    <!-- Material Components Attributes -->
+    <color name="my_app_primary_variant">#2E7DCD</color>
+    <color name="my_app_secondary_variant">#FFB74D</color>
+
+    <!-- Surface and On-Surface Colors -->
+    <color name="my_app_surface">#F5F5F5</color>
+    <color name="my_app_on_primary">#FFFFFF</color>
+    <color name="my_app_on_secondary">#FFFFFF</color>
+    <color name="my_app_on_background">#000000</color>
+    <color name="my_app_on_error">#FFFFFF</color>
+    <color name="my_app_on_surface">#000000</color>
+
+    <!-- Scrim Background Color -->
+    <color name="mtrl_scrim">#B3FFFFFF</color>
+
 </resources>
