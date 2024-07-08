@@ -6,6 +6,7 @@ import com.example.surfeillancefrontend.model.data.Location;
 
 import java.util.List;
 
+// shall we delete this class?
 public class LocationConditionsRepository {
     MutableLiveData<List<Location>> mutableLiveDataSpotList = new MutableLiveData<>();
     Application application;
