@@ -94,10 +94,7 @@ public class LoginActivity extends AppCompatActivity  {
                                     if (getIdTokenTask.isSuccessful()) {
                                         String token = getIdTokenTask.getResult().getToken();
 
-                                        // trying to store token in a singleton
-                                        UserInfoHolder userInfoHolder = UserInfoHolder.getInstance();
-                                        Log.i(TAG, "Setting TOKEN here: " + token);
-                                        userInfoHolder.setToken(idToken);
+
 
                                         authenticateWithBackend(token);
 
@@ -118,7 +115,10 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
     private void authenticateWithBackend(String idToken) {
-
+        // trying to store token in a singleton
+        UserInfoHolder userInfoHolder = UserInfoHolder.getInstance();
+        Log.i(TAG, "Setting TOKEN here: " + idToken);
+        userInfoHolder.setToken(idToken);
 
 
         String authHeader = "Bearer " + idToken;
