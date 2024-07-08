@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.surfeillancefrontend.MainActivity;
 import com.example.surfeillancefrontend.R;
-import com.example.surfeillancefrontend.model.data.DTO.TokenHolder;
+import com.example.surfeillancefrontend.model.data.DTO.UserInfoHolder;
 import com.example.surfeillancefrontend.service.ApiClientLogin;
 import com.example.surfeillancefrontend.service.AuthService;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -94,6 +94,10 @@ public class LoginActivity extends AppCompatActivity  {
                                     if (getIdTokenTask.isSuccessful()) {
                                         String token = getIdTokenTask.getResult().getToken();
 
+                                        // trying to store token in a singleton
+                                        UserInfoHolder userInfoHolder = UserInfoHolder.getInstance();
+                                        Log.i(TAG, "Setting TOKEN here: " + token);
+                                        userInfoHolder.setToken(idToken);
 
                                         authenticateWithBackend(token);
 
@@ -114,12 +118,8 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
     private void authenticateWithBackend(String idToken) {
-        Log.d(TAG, idToken);
 
-        // trying to store token in a singleton
-        TokenHolder tokenHolder = TokenHolder.getInstance();
-        tokenHolder.setToken(idToken);
-        Log.d("0000000000000000", idToken);
+
 
         String authHeader = "Bearer " + idToken;
         Call<String> call = authService.authenticate(authHeader);
@@ -177,6 +177,10 @@ public class LoginActivity extends AppCompatActivity  {
                     throw new ApiException(Status.RESULT_INTERNAL_ERROR);
                 }
                 Log.i(TAG, "firebaseAuthWithGoogle:" + account.getId());
+
+                // Adding account id to UserInfoHolder
+                UserInfoHolder.getInstance().setUserID(account.getId());
+
                 firebaseAuthWithGoogle(account.getIdToken());
 
             } catch (ApiException e) {

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.surfeillancefrontend.MainActivity;
 import com.example.surfeillancefrontend.R;
+import com.example.surfeillancefrontend.model.data.DTO.UserInfoHolder;
 import com.example.surfeillancefrontend.model.data.Trip;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -59,6 +60,7 @@ public class EditTripActivity extends AppCompatActivity {
                 editedTrip.setInfoRating(forecastRating);
                 viewModel.tripRepository.editTripInfo(editedTrip);
                 Toast.makeText(getApplicationContext(), "Your update has been registered", Toast.LENGTH_LONG).show();
+                Log.i("UserID in edit", UserInfoHolder.getInstance().getUserID());
                 Intent intent = new Intent(EditTripActivity.this, MainActivity.class);
                 startActivity(intent);
             }
