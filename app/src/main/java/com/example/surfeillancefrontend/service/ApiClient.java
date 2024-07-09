@@ -1,11 +1,13 @@
 
 package com.example.surfeillancefrontend.service;
 
+import com.example.surfeillancefrontend.model.data.dto.UserInfoHolder;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
+import org.jetbrains.annotations.NotNull;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -13,54 +15,43 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class ApiClient {
-
     private static Retrofit retrofit;
-    private static String authToken;
+    private static String token;
+
 
     private ApiClient() {
     }
 
     public static Retrofit getInstance() {
         if (retrofit == null) {
-            synchronized (ApiClient.class) {
-                if (retrofit == null) {
-                    HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-                    loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            String token = UserInfoHolder.getInstance().getToken();
 
-                    Interceptor tokenInterceptor = new Interceptor() {
+
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .addInterceptor(new Interceptor() {
+                        @NotNull
                         @Override
-                        public Response intercept(Chain chain) throws IOException {
-                            Request originalRequest = chain.request();
-                            Request.Builder builder = originalRequest.newBuilder();
-                            if (authToken != null) {
-                                builder.header("Authorization", "Bearer " + authToken);
-                            }
-
-                            Request newRequest = builder.build();
+                        public Response intercept(@NotNull Interceptor.Chain chain) throws IOException {
+                            Request newRequest = chain.request().newBuilder()
+                                    .addHeader("Authorization", "Bearer " + token )
+                                    .build();
                             return chain.proceed(newRequest);
-                        }
-                    };
+                        }})
+                    .addInterceptor(loggingInterceptor)
+                    .connectTimeout(300, TimeUnit.SECONDS)
+                    .writeTimeout(300, TimeUnit.SECONDS)
+                    .readTimeout(300, TimeUnit.SECONDS)
+                    .build();
 
-                    OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                            .addInterceptor(loggingInterceptor)
-                            .addInterceptor(tokenInterceptor)  // Add the token interceptor here
-                            .connectTimeout(30, TimeUnit.SECONDS)
-                            .writeTimeout(30, TimeUnit.SECONDS)
-                            .readTimeout(30, TimeUnit.SECONDS)
-                            .build();
-
-                    retrofit = new Retrofit.Builder()
-                            .baseUrl("http://172.23.223.86:8080/api/v1/")
-                            .client(okHttpClient)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                }
-            }
+            retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl("http://10.0.2.2:8080/api/v1/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
         }
         return retrofit;
-    }
-
-    public static void setAuthToken(String token) {
-        authToken = token;
     }
 }

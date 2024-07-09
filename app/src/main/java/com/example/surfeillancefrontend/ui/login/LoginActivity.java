@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.surfeillancefrontend.R;
 import com.example.surfeillancefrontend.model.data.dto.AppUser;
 import com.example.surfeillancefrontend.model.data.dto.AppUserDTO;
+import com.example.surfeillancefrontend.model.data.dto.UserInfoHolder;
 import com.example.surfeillancefrontend.service.ApiClient;
 import com.example.surfeillancefrontend.service.AuthService;
 import com.example.surfeillancefrontend.service.UserApiService;
@@ -37,7 +38,9 @@ public class LoginActivity extends AppCompatActivity  {
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     private AuthService authService;
-    private UserApiService userApiService;
+
+    //private UserApiService userApiService;
+    //private UserApiService userApiServiceLogin;
     private GoogleSignInAccount account;
 
     @Override
@@ -64,8 +67,7 @@ public class LoginActivity extends AppCompatActivity  {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         mAuth = FirebaseAuth.getInstance();
-        authService = ApiClient.getInstance().create(AuthService.class);
-        userApiService = ApiClient.getInstance().create(UserApiService.class);
+
 
         if (mAuth.getCurrentUser() == null) {
             //setLoggedOutUi();
@@ -88,6 +90,12 @@ public class LoginActivity extends AppCompatActivity  {
                         Snackbar.make(findViewById(android.R.id.content),
                                 "Login successful", Snackbar.LENGTH_LONG).show();
                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+                        // and then you are logged in so go to homepage?
+                        // Start the new activity
+//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                        startActivity(intent);
+
                         if (firebaseUser == null) {
                             Toast.makeText(this, "Google Login failed", Toast.LENGTH_SHORT).show();
                             return;
@@ -96,8 +104,6 @@ public class LoginActivity extends AppCompatActivity  {
                                 .addOnCompleteListener(getIdTokenTask -> {
                                     if (getIdTokenTask.isSuccessful()) {
                                         String token = getIdTokenTask.getResult().getToken();
-                                        ApiClient.setAuthToken(token);
-
                                         authenticateWithBackend(token);
                                     } else {
                                         Log.w(TAG, "Fetching ID token failed", getIdTokenTask.getException());
@@ -116,12 +122,23 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
     private void authenticateWithBackend(String idToken) {
+        // trying to store token in a singleton
+        UserInfoHolder userInfoHolder = UserInfoHolder.getInstance();
+        Log.i(TAG, "Setting TOKEN here: " + idToken);
+
+        userInfoHolder.setToken(idToken);
+        String authHeader = "Bearer " + idToken;
+
 
         AppUserDTO appUser = new AppUserDTO(account.getId(),
                 account.getDisplayName(), "","",
-                "BEGINNER",account.getPhotoUrl().toString(), account.getEmail(),account.getIdToken());
+                "BEGINNER",account.getPhotoUrl().toString(), account.getEmail(),null);
 
+        //authService = ApiClientLogin.getInstance().create(AuthService.class);
+
+        UserApiService userApiService = ApiClient.getInstance().create(UserApiService.class);
         Call<AppUser> addUserCall = userApiService.addUser(appUser);
+        Log.d(TAG, appUser.getUserName());
         addUserCall.enqueue(new Callback<AppUser>() {
             @Override
             public void onResponse(Call<AppUser> call, Response<AppUser> response) {
@@ -132,21 +149,26 @@ public class LoginActivity extends AppCompatActivity  {
                     intent.putExtra("User", appUser);
                     startActivity(intent);
 
-                    //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                } else {
+                    Log.e("ERROR", "Login failed: " + response.errorBody());
+            }
 
                 }
-            }
+
 
             @Override
             public void onFailure(Call<AppUser> call, Throwable throwable) {
 
                 Log.e("ERROR", "Network error: " + throwable.getMessage());
 
+
             }
+
+
+
         });
-
     }
-
 
 
     @Override
@@ -158,12 +180,15 @@ public class LoginActivity extends AppCompatActivity  {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
-                account = task.getResult(ApiException.class);
-
+                 account = task.getResult(ApiException.class);
                 if (account == null) {
                     throw new ApiException(Status.RESULT_INTERNAL_ERROR);
                 }
                 Log.i(TAG, "firebaseAuthWithGoogle:" + account.getId());
+
+                // Adding account id to UserInfoHolder
+                UserInfoHolder.getInstance().setUserID(account.getId());
+
                 firebaseAuthWithGoogle(account.getIdToken());
 
             } catch (ApiException e) {

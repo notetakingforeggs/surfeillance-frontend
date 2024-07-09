@@ -24,6 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
         //binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            Log.i("line27", "onCreate: ");
             AppUser appUser = getIntent().getParcelableExtra("User", AppUser.class);
             Log.i("PROFILEACC",appUser.getUserName());
             String username = appUser.getUserName();

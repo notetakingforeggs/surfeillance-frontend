@@ -76,18 +76,19 @@ public class TripRepository {
         Log.i("deets", location.toString());
         NewTrip tripToAdd = newTripBuilder
                 // spot ID to be collected from backend pls
-                .withSpot(new Spot(1, location.getName()))
+                .withSpot(new Spot( (int) location.getSpotId(), location.getName()))
                 // userid also to come in from backend/session info
                 .withUser(new AppUser(1))
                 .withLocation(location)
                 .build();
         Log.i("pre call", tripToAdd.toString());
         Call call = tripApiService.addTrip(tripToAdd);
+
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
                 returnedTripAfterPost = (Trip) response.body();
-                Log.i("trip added", returnedTripAfterPost.toString());
+               // Log.i("trip added", returnedTripAfterPost.toString());
             }
 
             @Override

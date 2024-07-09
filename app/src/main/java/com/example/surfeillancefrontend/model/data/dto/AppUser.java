@@ -4,8 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
-import androidx.databinding.library.baseAdapters.BR;
 
 public class AppUser extends BaseObservable implements Parcelable  {
         private long id;
@@ -19,20 +17,6 @@ public class AppUser extends BaseObservable implements Parcelable  {
 
     public AppUser(long id) {
         this.id = id;
-    }
-
-    public AppUser() {
-
-    }
-
-    @Bindable
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-                notifyPropertyChanged(BR.userName);
     }
 
     public AppUser(Parcel in) {
@@ -73,5 +57,69 @@ public class AppUser extends BaseObservable implements Parcelable  {
         dest.writeString(imageUrl);
         dest.writeString(email);
         dest.writeString(token);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getProfileText() {
+        return profileText;
+    }
+
+    public void setProfileText(String profileText) {
+        this.profileText = profileText;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getSkillLevel() {
+        return skillLevel;
+    }
+
+    public void setSkillLevel(String skillLevel) {
+        this.skillLevel = skillLevel;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
