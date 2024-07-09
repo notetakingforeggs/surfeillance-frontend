@@ -77,7 +77,7 @@ public class TripRepository {
         Log.i("deets", location.toString());
         NewTrip tripToAdd = newTripBuilder
                 // spot ID to be collected from backend pls
-                .withSpot(new Spot(1, location.getName()))
+                .withSpot(new Spot( (int) location.getSpotId(), location.getName()))
                 // userid also to come in from backend/session info
                 .withUser(new AppUser(Integer.parseInt(UserInfoHolder.getInstance().getUserID())))
                 .withLocation(location)
