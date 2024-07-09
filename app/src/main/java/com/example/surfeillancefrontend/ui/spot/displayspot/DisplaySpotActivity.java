@@ -25,9 +25,9 @@ public class DisplaySpotActivity extends AppCompatActivity {
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             Location spot = getIntent().getParcelableExtra("Spot", Location.class);
-            Log.i("test", spot.getName());
+//            Log.i("test", spot.getName());
             String name = spot.getName();
-            Log.i("test", "22222222222222");
+//            Log.i("test", "22222222222222");
             String details = spot.getDetails();
             String requestTime = spot.getRequestTime();
             String latitude = spot.getLatitude();
@@ -42,8 +42,7 @@ public class DisplaySpotActivity extends AppCompatActivity {
             String highTideTime = spot.getHighTideTime();
             Double lowTideHeight = spot.getLowTideHeight();
             String lowTideTime = spot.getLowTideTime();
-
-
+            String windDirection = spot.getWindDirection();
 
             TextView spotNameTV = findViewById(R.id.spotNameTV);
             TextView spotDetailsTV = findViewById(R.id.descriptionTV);
@@ -51,21 +50,20 @@ public class DisplaySpotActivity extends AppCompatActivity {
             TextView latitudeTV = findViewById(R.id.latitudeTV);
             TextView waveDirectionTV = findViewById(R.id.waveDirectionTV);
             TextView timezoneTV = findViewById(R.id.timezoneTV);
+            TextView windDirectionTV = findViewById(R.id.windDirectionTV);
 
             spotNameTV.setText(name);
             spotDetailsTV.setText(details);
-            longitudeTV.setText(longitude);
+            longitudeTV.setText(String.format("Longitude: %.6s", longitude));
             latitudeTV.setText(latitude);
             waveDirectionTV.setText(waveDirection);
             timezoneTV.setText(timezone);
+            windDirectionTV.setText(String.format("Wind direction: %.6s", windDirection));
 
             postTripAndReturnToHomePage(spot);
-
         }
-
         navigateToHomePage();
         navigateToSpotChoiceActivity();
-
     }
     public void navigateToHomePage() {
         ImageButton goHomeButton = (ImageButton) findViewById(R.id.returnHome);
@@ -78,7 +76,6 @@ public class DisplaySpotActivity extends AppCompatActivity {
             }
         });
     }
-
     public void navigateToSpotChoiceActivity() {
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +87,6 @@ public class DisplaySpotActivity extends AppCompatActivity {
             }
         });
     }
-
     public void postTripAndReturnToHomePage(Location spot) {
         Button addTripAndReturnHome = (Button) findViewById(R.id.addTrip);
         addTripAndReturnHome.setOnClickListener(new View.OnClickListener() {
@@ -101,15 +97,12 @@ public class DisplaySpotActivity extends AppCompatActivity {
 
 
 
+
                 // Start the new activity i.e. return to homepage after posting trip to DB
                 Intent intent = new Intent(DisplaySpotActivity.this, MainActivity.class);
                 startActivity(intent);
-
-
             }
         });
     }
-
-
 }
 
