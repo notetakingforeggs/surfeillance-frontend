@@ -40,6 +40,25 @@ public class Location /*extends BaseObservable*/ implements Parcelable {
     String lowTideTime; // this is not in ConditionsDTO
     public Location() {
     }
+
+    /*
+    long spotId;
+    String name;
+    String details;
+    String requestTime;
+    Double latitude;
+    Double longitude;
+    String timezone;
+    Long waveHeight;
+    Long waveDirection;
+    Long wavePeriod;
+    Double windSpeed;
+    Double windDirection;
+    Double gusts;
+    Date lowTideTime;
+    Double lowTideHeight;
+    Date highTideTime;
+    Double highTideHeight;*/
     public Location(String windDirection, String name, String details, String requestTime, String latitude, String longitude, String timezone, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, Double gusts, Double highTideHeight, String highTideTime, Double lowTideHeight, String lowTideTime) {
         this.windDirection = windDirection;
         this.name = name;
