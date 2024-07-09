@@ -51,10 +51,10 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotAdapter.SpotViewHolder
         // we are creating a custom ViewHolder class here - it holds references to all the views (Button/s, TextView/s etc.) in the item layout i.e., location_item_layout.xml.
         // declare here the Views (Button/s, TextView/s etc) defined in location_item_layout.xml
         private TextView spotName;
-        private TextView longitude;
-        private TextView latitude;
-        private TextView timezone;
-        private TextView waveDirection;
+//        private TextView longitude;
+//        private TextView latitude;
+//        private TextView timezone;
+//        private TextView waveDirection;
 
         // SpotViewHolder acts as a cache, and stores references to the item views, reducing the need to keep calling findViewById() method every time the views need to be updated. This greatly reduces computational overhead and memory usage.
         public SpotViewHolder(@NonNull @NotNull View itemView, RecyclerViewInterface recyclerViewInterface) {
