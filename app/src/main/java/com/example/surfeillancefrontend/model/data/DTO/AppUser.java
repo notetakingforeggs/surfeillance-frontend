@@ -5,7 +5,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class AppUser implements Parcelable {
-        private int id;
+        private String id;
         private String userName;
         private String profileText;
         private String location;
@@ -14,12 +14,12 @@ public class AppUser implements Parcelable {
         private String email;
         private String token;
 
-    public AppUser(int id) {
+    public AppUser(String id) {
         this.id = id;
     }
 
     public AppUser(Parcel in) {
-        id = in.readInt();
+        id = in.readString();
         userName = in.readString();
         profileText = in.readString();
         location = in.readString();
@@ -48,7 +48,7 @@ public class AppUser implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeString(id);
         dest.writeString(userName);
         dest.writeString(profileText);
         dest.writeString(location);
