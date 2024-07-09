@@ -5,7 +5,6 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import com.example.surfeillancefrontend.model.data.DTO.AppUser;
 import com.example.surfeillancefrontend.model.data.DTO.UpdateRatingDTO;
-import com.example.surfeillancefrontend.model.data.DTO.UserInfoHolder;
 import com.example.surfeillancefrontend.model.data.Location;
 import com.example.surfeillancefrontend.model.data.NewTrip;
 import com.example.surfeillancefrontend.model.data.Spot;
@@ -79,16 +78,17 @@ public class TripRepository {
                 // spot ID to be collected from backend pls
                 .withSpot(new Spot( (int) location.getSpotId(), location.getName()))
                 // userid also to come in from backend/session info
-                .withUser(new AppUser(Integer.parseInt(UserInfoHolder.getInstance().getUserID())))
+                .withUser(new AppUser("1"))
                 .withLocation(location)
                 .build();
         Log.i("pre call", tripToAdd.toString());
         Call call = tripApiService.addTrip(tripToAdd);
+
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
                 returnedTripAfterPost = (Trip) response.body();
-                Log.i("trip added", returnedTripAfterPost.toString());
+               // Log.i("trip added", returnedTripAfterPost.toString());
             }
 
             @Override

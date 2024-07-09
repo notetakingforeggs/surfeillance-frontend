@@ -2,7 +2,6 @@ package com.example.surfeillancefrontend.ui.spot.displayspot;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -94,9 +93,6 @@ public class DisplaySpotActivity extends AppCompatActivity {
             public void onClick(View v) {
                 TripRepository tripRepository = new TripRepository(getApplication());
                 tripRepository.addTrip(spot);
-
-
-
 
                 // Start the new activity i.e. return to homepage after posting trip to DB
                 Intent intent = new Intent(DisplaySpotActivity.this, MainActivity.class);
