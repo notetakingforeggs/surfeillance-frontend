@@ -99,30 +99,6 @@ public class DisplaySpotActivity extends AppCompatActivity {
                 TripRepository tripRepository = new TripRepository(getApplication());
                 tripRepository.addTrip(spot);
 
-              /*  ApiClient.getInstance().create(SpotApiService.class).postSpot(spot).enqueue(new Callback<Location>() {
-                    @Override
-                    public void onResponse(Call<Location> call, Response<Location> response) {
-                        if (response.isSuccessful()) {
-                            Location responseBody = response.body();
-                            // Handle the response body
-                            Log.d("test", "onResponse() method invoked for POST request");
-                            Log.d("test", responseBody.getName());
-                            Toast.makeText(getApplicationContext(), "Added to your trips", Toast.LENGTH_LONG).show();
-                        } else {
-                            // Handle the error
-                            Log.d("test", "response unsuccessful");
-                            int statusCode = response.code();
-                            Log.e("API CALL", "Error: " + statusCode);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Location> call, Throwable throwable) {
-                        Log.d("test", "onFailure() method called for POST request");
-                        Log.e("API CALL", "Failure: ", throwable);
-                    }
-
-                });*/
 
 
                 // Start the new activity i.e. return to homepage after posting trip to DB

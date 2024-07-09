@@ -6,31 +6,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.login.LoginActivity"
-        android:background="@drawable/defaultbackground"
+        android:background="@drawable/splashlayers"
 >
 
-    <ImageView
+    <TextView
             android:id="@+id/surfeillancelogo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/app_logo"
+            android:text="Welcome to Surfeillance"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="30dp"
-    />
-
-    />
+            android:textSize="32dp"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="592dp"
+            android:textColor="@color/black"
+            app:layout_constraintHorizontal_bias="0.68"/>
     <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"    app:layout_constraintTop_toBottomOf="@id/surfeillancelogo"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/surfeillancelogo"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.665"
-            android:layout_marginBottom="160dp"/>
+            app:layout_constraintVertical_bias="0.904"
+            android:background="@drawable/transparent_background"
+    />
     <ImageButton
             android:id="@+id/returnHome"
             android:layout_width="wrap_content"
