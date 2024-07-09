@@ -1,11 +1,14 @@
-package com.example.surfeillancefrontend.model.data.DTO;
+package com.example.surfeillancefrontend.model.data.dto;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.databinding.library.baseAdapters.BR;
 
-public class AppUser implements Parcelable {
-        private int id;
+public class AppUser extends BaseObservable implements Parcelable  {
+        private long id;
         private String userName;
         private String profileText;
         private String location;
@@ -14,12 +17,26 @@ public class AppUser implements Parcelable {
         private String email;
         private String token;
 
-    public AppUser(int id) {
+    public AppUser(long id) {
         this.id = id;
     }
 
+    public AppUser() {
+
+    }
+
+    @Bindable
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+                notifyPropertyChanged(BR.userName);
+    }
+
     public AppUser(Parcel in) {
-        id = in.readInt();
+        id = in.readLong();
         userName = in.readString();
         profileText = in.readString();
         location = in.readString();
@@ -48,7 +65,7 @@ public class AppUser implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeLong(id);
         dest.writeString(userName);
         dest.writeString(profileText);
         dest.writeString(location);

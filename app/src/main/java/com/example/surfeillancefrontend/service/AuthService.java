@@ -1,10 +1,10 @@
 package com.example.surfeillancefrontend.service;
 
+import com.example.surfeillancefrontend.model.data.AuthResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 
 public interface AuthService {
-    @GET("hello")
-    Call<String> authenticate(@Header("Authorization") String authHeader);
+    @GET("health")
+    Call<AuthResponse> authenticate();
 }

@@ -5,16 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.surfeillancefrontend.R;
+import com.example.surfeillancefrontend.model.data.dto.AppUser;
+import com.example.surfeillancefrontend.model.data.dto.AppUserDTO;
 import com.example.surfeillancefrontend.service.ApiClient;
 import com.example.surfeillancefrontend.service.AuthService;
+import com.example.surfeillancefrontend.service.UserApiService;
+import com.example.surfeillancefrontend.ui.profile.ProfileActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.Task;
@@ -25,6 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity  {
     private static final String TAG = "LoginActivity";
@@ -32,14 +37,15 @@ public class LoginActivity extends AppCompatActivity  {
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     private AuthService authService;
-
+    private UserApiService userApiService;
+    private GoogleSignInAccount account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button loginButton = findViewById(R.id.sign_in_button);
+        SignInButton loginButton = findViewById(R.id.sign_in_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +65,8 @@ public class LoginActivity extends AppCompatActivity  {
 
         mAuth = FirebaseAuth.getInstance();
         authService = ApiClient.getInstance().create(AuthService.class);
+        userApiService = ApiClient.getInstance().create(UserApiService.class);
+
         if (mAuth.getCurrentUser() == null) {
             //setLoggedOutUi();
         } else {
@@ -88,6 +96,8 @@ public class LoginActivity extends AppCompatActivity  {
                                 .addOnCompleteListener(getIdTokenTask -> {
                                     if (getIdTokenTask.isSuccessful()) {
                                         String token = getIdTokenTask.getResult().getToken();
+                                        ApiClient.setAuthToken(token);
+
                                         authenticateWithBackend(token);
                                     } else {
                                         Log.w(TAG, "Fetching ID token failed", getIdTokenTask.getException());
@@ -106,49 +116,38 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
     private void authenticateWithBackend(String idToken) {
-        String authHeader = "Bearer " + idToken;
-        Call<String> call = authService.authenticate(authHeader);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-                if (response.isSuccessful()) {
-                    Log.d("SUCCESS", "Login successful: " + response.body());
 
-                    // Proceed to next activity
-                    // startActivity(new Intent(LoginActivity.this, NextActivity.class));
-                    // finish();
-                } else {
-                    Log.e("ERROR", "Login failed: " + response.errorBody());
+        AppUserDTO appUser = new AppUserDTO(account.getId(),
+                account.getDisplayName(), "","",
+                "BEGINNER",account.getPhotoUrl().toString(), account.getEmail(),account.getIdToken());
+
+        Call<AppUser> addUserCall = userApiService.addUser(appUser);
+        addUserCall.enqueue(new Callback<AppUser>() {
+            @Override
+            public void onResponse(Call<AppUser> call, Response<AppUser> response) {
+                if(response.isSuccessful()) {
+                    Log.i("User added", " " + response.body());
+                    AppUser appUser = response.body();
+                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                    intent.putExtra("User", appUser);
+                    startActivity(intent);
+
+                    //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                }
             }
 
-
-        }
-
             @Override
-            public void onFailure(Call<String> call, Throwable throwable) {
+            public void onFailure(Call<AppUser> call, Throwable throwable) {
+
                 Log.e("ERROR", "Network error: " + throwable.getMessage());
 
-
             }
-
-
-
         });
+
     }
 
-    private void signOut() {
-        // Firebase sign out
-        mAuth.signOut();
 
-        // Google sign out
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                task -> {
-                    Log.i(TAG, "signOut:success");
-                    //setLoggedOutUi();
-                    Snackbar.make(findViewById(android.R.id.content),
-                            "Logout successful", Snackbar.LENGTH_LONG).show();
-                });
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -159,7 +158,8 @@ public class LoginActivity extends AppCompatActivity  {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
+                account = task.getResult(ApiException.class);
+
                 if (account == null) {
                     throw new ApiException(Status.RESULT_INTERNAL_ERROR);
                 }
