@@ -44,6 +44,7 @@ public class Location /*extends BaseObservable*/ implements Parcelable {
     }
     public Location(long spotId, String windDirection, String name, String details, String requestTime, String latitude, String longitude, String timezone, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, Double gusts, Double highTideHeight, String highTideTime, Double lowTideHeight, String lowTideTime) {
         this.spotId = spotId;
+
         this.windDirection = windDirection;
         this.name = name;
         this.details = details;
