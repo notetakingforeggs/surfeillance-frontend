@@ -40,7 +40,8 @@
                 app:layout_constraintStart_toEndOf="@id/logoImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="@{trip.spot.locationName}"
-                android:textSize="46px"
+                android:textSize="56px"
+                android:layout_marginTop="10dp"
                 android:textAlignment="textStart"
                 android:gravity="start"
         />
@@ -70,6 +71,7 @@
                 app:layout_constraintBottom_toTopOf="@id/windConstraintLayout"
                 android:layout_margin="30dp"
                 app:layout_constraintDimensionRatio="0.3"
+                app:flow_horizontalAlign="start"
 
 
         >
@@ -90,8 +92,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@id/waveIcon"
-                    app:layout_constraintEnd_toEndOf="parent"
-
+                    android:layout_marginLeft="30dp"
             />
 
             <TextView
@@ -100,9 +101,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/waveHeight"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/waveDirection"
                     app:layout_constraintStart_toEndOf="@id/waveIcon"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginLeft="30dp"
 
             />
 
@@ -114,13 +115,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/wavePeriod"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/waveIcon"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginLeft="30dp"
 
             />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -153,8 +153,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/windDirection"
                     app:layout_constraintStart_toEndOf="@id/weatherIcon"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginLeft="30dp"
 
             />
 
@@ -164,9 +165,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/windSpeed"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/gusts"
                     app:layout_constraintStart_toEndOf="@id/weatherIcon"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginLeft="30dp"
 
             />
 
@@ -178,13 +179,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/windDirection"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/weatherIcon"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginLeft="30dp"
 
             />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -217,17 +217,12 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tideImage"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginLeft="30dp"
 
             />
 
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 
 
         <TextView
