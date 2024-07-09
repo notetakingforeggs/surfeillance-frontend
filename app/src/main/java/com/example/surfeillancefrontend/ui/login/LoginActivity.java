@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.surfeillancefrontend.MainActivity;
@@ -43,7 +42,7 @@ public class LoginActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_login);
 
         SignInButton loginButton = findViewById(R.id.sign_in_button);
-        navigateToHomePage();
+        //navigateToHomePage();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +84,12 @@ public class LoginActivity extends AppCompatActivity  {
                         Snackbar.make(findViewById(android.R.id.content),
                                 "Login successful", Snackbar.LENGTH_LONG).show();
                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+                        // and then you are logged in so go to homepage?
+                        // Start the new activity
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+
                         if (firebaseUser == null) {
                             Toast.makeText(this, "Google Login failed", Toast.LENGTH_SHORT).show();
                             return;
@@ -93,8 +98,6 @@ public class LoginActivity extends AppCompatActivity  {
                                 .addOnCompleteListener(getIdTokenTask -> {
                                     if (getIdTokenTask.isSuccessful()) {
                                         String token = getIdTokenTask.getResult().getToken();
-
-
 
                                         authenticateWithBackend(token);
 
@@ -192,16 +195,16 @@ public class LoginActivity extends AppCompatActivity  {
         }
     }
 
-    public void navigateToHomePage() {
-        ImageButton goHomeButton = (ImageButton) findViewById(R.id.returnHome);
-        goHomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start the new activity i.e. return to previous screen
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
+//    public void navigateToHomePage() {
+//        ImageButton goHomeButton = (ImageButton) findViewById(R.id.returnHome);
+//        goHomeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Start the new activity i.e. return to previous screen
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//    }
 
 }
