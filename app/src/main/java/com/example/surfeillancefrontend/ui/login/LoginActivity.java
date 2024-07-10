@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
         AppUserDTO appUser = new AppUserDTO(account.getId(),
                 account.getDisplayName(), "", "",
                 "BEGINNER", account.getPhotoUrl().toString(), account.getEmail(), null);
-
+        Log.i(TAG, "authenticateWithBackend:" + appUser.getEmail());
 
         // if user does not exist in database
         // for this we would need a get user by something other than id, something that comes from the account object
@@ -139,20 +139,20 @@ public class LoginActivity extends AppCompatActivity {
 
         UserApiService userApiService = ApiClient.getInstance().create(UserApiService.class);
 
-        //check if user exists already and store id in user info holder
-        Call<AppUser> findUserCall = userApiService.getUserByEmail(appUser.getEmail());
-        findUserCall.enqueue(new Callback<AppUser>() {
-            @Override
-            public void onResponse(Call<AppUser> call, Response<AppUser> response) {
-                AppUser appUserFromEmail = response.body();
-                UserInfoHolder.getInstance().setUserID(String.valueOf(appUserFromEmail.getId()));
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("User", appUser);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onFailure(Call<AppUser> call, Throwable throwable) {
+//        //check if user exists already and store id in user info holder
+//        Call<AppUser> findUserCall = userApiService.getUserByEmail(appUser.getEmail());
+//        findUserCall.enqueue(new Callback<AppUser>() {
+//            @Override
+//            public void onResponse(Call<AppUser> call, Response<AppUser> response) {
+//                AppUser appUserFromEmail = response.body();
+//                UserInfoHolder.getInstance().setUserID(String.valueOf(appUserFromEmail.getId()));
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                intent.putExtra("User", appUser);
+//                startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<AppUser> call, Throwable throwable) {
 
                 // send user to backend
                 Call<AppUser> addUserCall = userApiService.addUser(appUser);
@@ -179,8 +179,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
-    }
+//        });
+//    }
 
 
     @Override
