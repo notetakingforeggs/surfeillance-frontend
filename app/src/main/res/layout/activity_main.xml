@@ -7,7 +7,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="50dp"
             tools:context=".MainActivity"
             android:background="@drawable/defaultbackground"
             tools:layout_editor_absoluteY="498dp" tools:layout_editor_absoluteX="0dp">
@@ -19,7 +18,9 @@
                 app:srcCompat="@drawable/app_logo"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteY="217dp"
-                tools:layout_editor_absoluteX="104dp"/>
+                tools:layout_editor_absoluteX="104dp"
+                android:layout_marginTop="50dp"
+        />
 
         <Button
                 android:id="@+id/chooseSpotButton"

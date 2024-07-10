@@ -9,95 +9,275 @@
                 type="com.example.surfeillancefrontend.model.data.Location"/>
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/innerConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="50dp"
             android:background="@drawable/defaultbackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="0dp"
     >
 
         <ImageView
-                android:id="@+id/surfeillancelogo"
+                android:id="@+id/logoImage"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/logo"
+                android:background="@android:color/transparent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+        />
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/spotTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/logoImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@{spot.name}"
+                android:textSize="56px"
+                android:layout_marginTop="10dp"
+                android:textAlignment="textStart"
+                android:gravity="start"
+        />
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tripDate"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/spotTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text='@{"current conditions at " + spot.requestTime}'
+                android:textSize="28px"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+        />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/wavesConstraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/app_logo"
-                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/item_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logoImage"
+                app:layout_constraintBottom_toTopOf="@id/windConstraintLayout"
+                android:layout_margin="30dp"
+                app:layout_constraintDimensionRatio="0.3"
+                app:flow_horizontalAlign="start"
+
+
+        >
+            <ImageView
+                    android:id="@+id/waveIcon"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/wave"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+            />
+
+            <TextView
+                    android:text='@{"Wave height: " + spot.waveHeight + " meters"}'
+                    android:id="@+id/waveHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/waveIcon"
+                    android:layout_marginLeft="30dp"
+            />
+
+            <TextView
+                    android:text='@{"Wave period: " + spot.wavePeriod + "Seconds"}'
+                    android:id="@+id/wavePeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/waveHeight"
+                    app:layout_constraintBottom_toTopOf="@id/waveDirection"
+                    app:layout_constraintStart_toEndOf="@id/waveIcon"
+                    android:layout_marginLeft="30dp"
+
+            />
+
+            <TextView
+                    android:text='@{"Wave direction: " + spot.waveDirection + " degrees"}'
+                    android:id="@+id/waveDirection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/wavePeriod"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/waveIcon"
+                    android:layout_marginLeft="30dp"
+
+            />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/windConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logoImage"
+                app:layout_constraintBottom_toTopOf="@id/windConstraintLayout"
+                android:layout_margin="30dp"
+                app:layout_constraintDimensionRatio="0.3"
+
+
+        >
+            <ImageView
+                    android:id="@+id/weatherIcon"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/weather"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+            />
+
+            <TextView
+                    android:text='@{"Wind speed: " + spot.windSpeed + " mph"}'
+                    android:id="@+id/windSpeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/windDirection"
+                    app:layout_constraintStart_toEndOf="@id/weatherIcon"
+                    android:layout_marginLeft="30dp"
+
+            />
+
+            <TextView
+                    android:text='@{"Wind direction: " + spot.windDirection + "Degrees"}'
+                    android:id="@+id/windDirection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/windSpeed"
+                    app:layout_constraintBottom_toTopOf="@id/gusts"
+                    app:layout_constraintStart_toEndOf="@id/weatherIcon"
+                    android:layout_marginLeft="30dp"
+
+            />
+
+            <TextView
+                    android:text='@{"Gust speed: " + spot.gusts + " mph"}'
+                    android:id="@+id/gusts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/windDirection"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/weatherIcon"
+                    android:layout_marginLeft="30dp"
+
+            />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tideConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/windConstraintLayout"
+                android:layout_margin="30dp"
+                app:layout_constraintDimensionRatio="0.3"
+
+
+        >
+            <ImageView
+                    android:id="@+id/tideImage"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/moon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+            />
+<LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:flow_horizontalAlign="start"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tideImage"
+>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"High tide is at" + spot.highTideTime + "o-clock"}'
+
+            />
+            <TextView
+                    app:highTideHeight='@{spot.highTideHeight}'
+                    android:id="@+id/highTideHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+            />
+</LinearLayout>
+            <TextView
+                    app:lowTideHeight="@{spot.lowTideHeight}"
+                    android:id="@+id/lowTideHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/tideImage"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginLeft="30dp"
+
+            />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/submitTripPrompt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/submitTripButton"
+                app:layout_constraintTop_toBottomOf="@id/tideConstraintLayout"
+                android:layout_marginHorizontal="50dp"
+                android:text="Went for a surf at this location in these conditions? Why not keep a record for future reference?"
+        />
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@android:drawable/arrow_down_float"
+                android:id="@+id/imageView"
+                app:layout_constraintBottom_toTopOf="@id/submitTripButton"
+                app:layout_constraintTop_toBottomOf="@id/submitTripPrompt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-        <TextView
-                android:id="@+id/spotNameTV"
-                android:textSize="22sp"
-                android:textColor="@color/blue"
-                android:textStyle="bold"
+        <com.google.android.material.button.MaterialButton
+                android:text="Submit Trip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@={spot.name}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/surfeillancelogo"/>
-        <TextView
-                android:id="@+id/descriptionTV"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="italic"
-                android:text="@={spot.details}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spotNameTV"/>
-        <TextView
-                android:id="@+id/longitudeTV"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text='@{ "Longitude: " + spot.longitude}'
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/descriptionTV"/>
-
--->
-        <TextView
-                android:id="@+id/latitudeTV"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text='@{"Latitude: " +spot.latitude}'
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/longitudeTV"/>
-        <TextView
-                android:id="@+id/timezoneTV"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{spot.timezone}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/latitudeTV"/>
-        <TextView
-                android:id="@+id/waveDirectionTV"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text='@{spot.waveDirection + " degrees"}'
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/timezoneTV"/>
-
-        <TextView
-                android:id="@+id/windDirectionTV"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{spot.windDirection}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/waveDirectionTV"/>
-
-        <Button
-                android:id="@+id/addTrip"
-                android:text="Add to my trips"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                app:layout_constraintTop_toBottomOf="@id/windDirectionTV"
+                android:id="@+id/submitTripButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:backgroundTint="@color/blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginBottom="50dp"
         />
 
         <ImageButton
@@ -105,9 +285,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@android:drawable/ic_menu_revert"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:backgroundTint="@color/blue"/>
+
         <ImageButton
                 android:id="@+id/returnHome"
                 android:layout_width="wrap_content"
@@ -117,7 +297,5 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:backgroundTint="@color/blue"/>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
