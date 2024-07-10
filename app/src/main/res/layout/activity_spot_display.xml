@@ -12,7 +12,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="50dp">
+            android:padding="50dp"
+            android:background="@drawable/defaultbackground"
+    >
 
         <ImageView
                 android:id="@+id/surfeillancelogo"
@@ -47,15 +49,17 @@
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@={spot.longitude}"
+                android:text='@{ "Longitude: " + spot.longitude}'
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/descriptionTV"/>
+
+-->
         <TextView
                 android:id="@+id/latitudeTV"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@={spot.latitude}"
+                android:text='@{"Latitude: " +spot.latitude}'
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/longitudeTV"/>
         <TextView
@@ -63,7 +67,7 @@
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@={spot.timezone}"
+                android:text="@{spot.timezone}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/latitudeTV"/>
         <TextView
@@ -71,7 +75,7 @@
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@={spot.waveDirection}"
+                android:text='@{spot.waveDirection + " degrees"}'
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/timezoneTV"/>
 
@@ -80,7 +84,7 @@
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@={spot.windDirection}"
+                android:text="@{spot.windDirection}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/waveDirectionTV"/>
 
@@ -113,14 +117,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:backgroundTint="@color/blue"/>
 
-        <TextView
-                android:id="@+id/mainActivityRef"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(3) SpotDisplayActivity"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

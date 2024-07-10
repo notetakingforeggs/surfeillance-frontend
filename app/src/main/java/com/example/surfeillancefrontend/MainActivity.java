@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.surfeillancefrontend.model.data.dto.AppUser;
 import com.example.surfeillancefrontend.ui.profile.ProfileActivity;
 import com.example.surfeillancefrontend.ui.spot.spotchoice.SpotChoiceActivity;
 import com.example.surfeillancefrontend.ui.trip.tripchoice.TripChoiceActivity;
 
 public class MainActivity extends AppCompatActivity {
+AppUser appUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,9 +19,17 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.Theme_MyApp);
 
         setContentView(R.layout.activity_main);
+
+        // get trip from extra
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            appUser = getIntent().getParcelableExtra("User", AppUser.class);
+        } else {
+            appUser = getIntent().getParcelableExtra("User");
+        }
         navigateToSpotChoiceActivity();
         navigateToUserAccount();
         navigateToUsersTrips();
+
     }
     public void navigateToSpotChoiceActivity() {
         Button chooseTrip = (Button) findViewById(R.id.chooseSpotButton);
@@ -48,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                intent.putExtra("User", appUser);
                 startActivity(intent);
             }
         });

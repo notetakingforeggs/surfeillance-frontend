@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.surfeillancefrontend.MainActivity;
 import com.example.surfeillancefrontend.R;
@@ -93,7 +94,7 @@ public class DisplaySpotActivity extends AppCompatActivity {
             public void onClick(View v) {
                 TripRepository tripRepository = new TripRepository(getApplication());
                 tripRepository.addTrip(spot);
-
+                Toast.makeText(getApplicationContext(), "Your trip has been added to the database", Toast.LENGTH_LONG).show();
                 // Start the new activity i.e. return to homepage after posting trip to DB
                 Intent intent = new Intent(DisplaySpotActivity.this, MainActivity.class);
                 startActivity(intent);

@@ -9,6 +9,7 @@ import com.example.surfeillancefrontend.model.data.Location;
 import com.example.surfeillancefrontend.model.data.NewTrip;
 import com.example.surfeillancefrontend.model.data.Spot;
 import com.example.surfeillancefrontend.model.data.Trip;
+import com.example.surfeillancefrontend.model.data.dto.UserInfoHolder;
 import com.example.surfeillancefrontend.service.ApiClient;
 import com.example.surfeillancefrontend.service.NewTripBuilder;
 import com.example.surfeillancefrontend.service.TripApiService;
@@ -34,8 +35,7 @@ public class TripRepository {
 
     public MutableLiveData<List<Trip>> getMutableLiveDate() {
 
-        // currently hardcoded but should take user id from active session once we have that implemented
-        Call call = tripApiService.getTripsByUserId("1");
+        Call call = tripApiService.getTripsByUserId(UserInfoHolder.getInstance().getUserID());
 
         call.enqueue(new Callback<List<Trip>>() {
             @Override
@@ -78,7 +78,7 @@ public class TripRepository {
                 // spot ID to be collected from backend pls
                 .withSpot(new Spot( (int) location.getSpotId(), location.getName()))
                 // userid also to come in from backend/session info
-                .withUser(new AppUser(1))
+                .withUser(new AppUser(Integer.valueOf(UserInfoHolder.getInstance().getUserID())))
                 .withLocation(location)
                 .build();
         Log.i("pre call", tripToAdd.toString());
