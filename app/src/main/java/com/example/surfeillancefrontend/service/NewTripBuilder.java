@@ -53,8 +53,9 @@ public class NewTripBuilder {
                 location.getWaveHeight().doubleValue(),
                 location.getWaveDirection(),
                 location.getWavePeriod().doubleValue(),
+                // windspeed is null, which is not ok
                 0,
-                null,
+                location.getWindDirection(),
                 (int) Math.round(location.getGusts()),
                 location.getLowTideHeight(),
                 location.getHighTideHeight(),
