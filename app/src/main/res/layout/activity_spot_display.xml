@@ -48,15 +48,17 @@
         />
         <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tripDate"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/spotTitle"
+                app:layout_constraintBottom_toTopOf="@id/wavesConstraintLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text='@{"current conditions at " + spot.requestTime}'
+                android:text='@{"Below are the current conditions at " + spot.requestTime.toString()}'
                 android:textSize="28px"
+                android:layout_marginTop="10dp"
                 android:textAlignment="center"
-                android:gravity="center_horizontal"
+
         />
 
 
@@ -96,7 +98,7 @@
             />
 
             <TextView
-                    android:text='@{"Wave period: " + spot.wavePeriod + "Seconds"}'
+                    android:text='@{"Wave period: " + spot.wavePeriod + " Seconds"}'
                     android:id="@+id/wavePeriod"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -108,7 +110,7 @@
             />
 
             <TextView
-                    android:text='@{"Wave direction: " + spot.waveDirection + " degrees"}'
+                    android:text='@{"Wave direction: " + spot.waveDirection + " Degrees"}'
                     android:id="@+id/waveDirection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -160,7 +162,7 @@
             />
 
             <TextView
-                    android:text='@{"Wind direction: " + spot.windDirection + "Degrees"}'
+                    android:text='@{"Wind direction: " + spot.windDirection + " Degrees"}'
                     android:id="@+id/windDirection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -214,33 +216,63 @@
         android:layout_height="wrap_content"
         app:flow_horizontalAlign="start"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@id/tideImage"
+        app:layout_constraintStart_toEndOf="@id/tideImage"
+        android:layout_marginTop="5dp"
 >
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{"High tide is at" + spot.highTideTime + "o-clock"}'
+                    android:text='@{"High tide is at " + spot.highTideTime}'
 
             />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=", and is "/>
+    />
             <TextView
                     app:highTideHeight='@{spot.highTideHeight}'
                     android:id="@+id/highTideHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
             />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" meters high."/>
 </LinearLayout>
-            <TextView
-                    app:lowTideHeight="@{spot.lowTideHeight}"
-                    android:id="@+id/lowTideHeight"
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/tideImage"
+                    app:flow_horizontalAlign="start"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginLeft="30dp"
+                    app:layout_constraintStart_toEndOf="@id/tideImage"
+                    android:layout_marginBottom="5dp"
+            >
 
-            />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{"Low tide is at " + spot.lowTideTime}'
+
+                />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=", and is "/>
+                />
+                <TextView
+                        app:highTideHeight='@{spot.lowTideHeight}'
+                        android:id="@+id/lowTideHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" meters high."/>
+            </LinearLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -255,6 +287,7 @@
                 app:layout_constraintBottom_toTopOf="@id/submitTripButton"
                 app:layout_constraintTop_toBottomOf="@id/tideConstraintLayout"
                 android:layout_marginHorizontal="50dp"
+                app:layout_constraintVertical_bias="0.8"
                 android:text="Went for a surf at this location in these conditions? Why not keep a record for future reference?"
         />
 

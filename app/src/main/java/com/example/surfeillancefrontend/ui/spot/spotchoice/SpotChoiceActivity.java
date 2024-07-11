@@ -85,9 +85,8 @@ public class SpotChoiceActivity extends AppCompatActivity implements RecyclerVie
         Intent intent = new Intent(SpotChoiceActivity.this, DisplaySpotActivity.class); // this code navigates from 1 Activity to another
         Location spot = spots.get(position); // this code takes a Location spot at the argued position from the List<Location> spots
         intent.putExtra("Spot", spot); // putExtra() sends whatever data you pass as an argument to the new Activity
-        Log.i(spot.getName(), "0000000000000000");
+        Log.i("Fresh from Backend", spot.toString());
         startActivity(intent); // this code switches the current Activity to the new Activity and passes a Location object called spot
-        Log.i(spot.getName(), "999");
 
     }
 }

@@ -265,7 +265,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:numStars="5"
-                android:rating="5"
                 android:isIndicator="true"
         />
 
