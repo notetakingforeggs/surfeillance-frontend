@@ -80,7 +80,7 @@ public class TripRepository {
                 // userid also to come in from backend/session info
                 .withUser(new AppUser(Integer.valueOf(UserInfoHolder.getInstance().getUserID())))
                 .withLocation(location)
-                .build();
+                    .build();
         Log.i("pre call", tripToAdd.toString());
         Call call = tripApiService.addTrip(tripToAdd);
 

@@ -5,8 +5,6 @@ import android.os.Parcelable;
 import com.example.surfeillancefrontend.model.data.dto.AppUser;
 import com.example.surfeillancefrontend.model.data.dto.AppUserDTO;
 
-import java.util.Date;
-
 public class NewTrip implements Parcelable {
     private Integer tripId;
     private AppUser appUser;
@@ -22,11 +20,11 @@ public class NewTrip implements Parcelable {
     private int gusts;
     private Double lowTideHeight;
     private Double highTideHeight;
-    private Date lowTideDate;
-    private Date highTideDate;
+    private String lowTideDate;
+    private String highTideDate;
 
 
-    public NewTrip(AppUser appUser, Spot spot, Integer surfRating, Integer infoRating, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, Double lowTideHeight, Double highTideHeight, Date lowTideDate, Date highTideDate) {
+    public NewTrip(AppUser appUser, Spot spot, Integer surfRating, Integer infoRating, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, Double lowTideHeight, Double highTideHeight, String lowTideDate, String highTideDate) {
         this.appUser = appUser;
         this.spot = spot;
         this.surfRating = surfRating;
@@ -44,7 +42,7 @@ public class NewTrip implements Parcelable {
         this.highTideDate = highTideDate;
     }
 
-    public NewTrip(AppUser appUser, Spot spot, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, Double lowTideHeight, Double highTideHeight, Date lowTideDate, Date highTideDate) {
+    public NewTrip(AppUser appUser, Spot spot, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, Double lowTideHeight, Double highTideHeight, String lowTideDate, String highTideDate) {
         this.appUser = appUser;
         this.spot = spot;
         this.date = date;
@@ -172,23 +170,22 @@ public class NewTrip implements Parcelable {
         this.highTideHeight = highTideHeight;
     }
 
-    public Date getLowTideDate() {
+    public String getLowTideDate() {
         return lowTideDate;
     }
 
-    public void setLowTideDate(Date lowTideDate) {
+    public void setLowTideDate(String lowTideDate) {
         this.lowTideDate = lowTideDate;
     }
 
-    public Date getHighTideDate() {
+    public String getHighTideDate() {
         return highTideDate;
     }
 
-    public void setHighTideDate(Date highTideDate) {
+    public void setHighTideDate(String highTideDate) {
         this.highTideDate = highTideDate;
     }
-
-    // do we even need parcelling?
+// do we even need parcelling?
 
     protected NewTrip(Parcel in) {
         tripId = in.readInt();

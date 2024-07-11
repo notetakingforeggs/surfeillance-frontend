@@ -31,8 +31,10 @@ public class DisplaySpotActivity extends AppCompatActivity {
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             Location spot = getIntent().getParcelableExtra("Spot", Location.class);
+            Log.d(TAG, "before binding: " + spot);
             if (spot != null) {
                 binding.setSpot(spot);
+                Log.d(TAG, "before posting: " + spot);
 
             } else {
                 Log.i("null", "onCreate: ");
