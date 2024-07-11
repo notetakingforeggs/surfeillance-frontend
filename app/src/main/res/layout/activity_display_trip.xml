@@ -210,16 +210,69 @@
                     app:layout_constraintStart_toStartOf="parent"
             />
 
-            <TextView
-                    android:text='@{"High tide height: " + trip.tideHeight + " meters"}'
-                    android:id="@+id/highTideHeight"
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:flow_horizontalAlign="start"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tideImage"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="5dp"
+            >
 
-            />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{"High tide is at " + trip.highTideDate}'
+
+                />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=", and is "/>
+                />
+                <TextView
+                        app:highTideHeight='@{trip.highTideHeight}'
+                        android:id="@+id/highTideHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" meters high."/>
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:flow_horizontalAlign="start"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tideImage"
+                    android:layout_marginBottom="5dp"
+            >
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{"Low tide is at " + trip.lowTideDate}'
+
+                />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=", and is "/>
+                />
+                <TextView
+                        app:highTideHeight='@{trip.lowTideHeight}'
+                        android:id="@+id/lowTideHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" meters high."/>
+            </LinearLayout>
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

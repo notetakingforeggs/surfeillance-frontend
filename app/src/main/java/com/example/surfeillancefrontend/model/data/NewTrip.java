@@ -5,6 +5,8 @@ import android.os.Parcelable;
 import com.example.surfeillancefrontend.model.data.dto.AppUser;
 import com.example.surfeillancefrontend.model.data.dto.AppUserDTO;
 
+import java.util.Date;
+
 public class NewTrip implements Parcelable {
     private Integer tripId;
     private AppUser appUser;
@@ -18,10 +20,13 @@ public class NewTrip implements Parcelable {
     private double windSpeed;
     private String windDirection;
     private int gusts;
-    private double tideHeight;
+    private Double lowTideHeight;
+    private Double highTideHeight;
+    private Date lowTideDate;
+    private Date highTideDate;
 
 
-    public NewTrip(AppUser appUser, Spot spot, Integer surfRating, Integer infoRating, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, double tideHeight) {
+    public NewTrip(AppUser appUser, Spot spot, Integer surfRating, Integer infoRating, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, Double lowTideHeight, Double highTideHeight, Date lowTideDate, Date highTideDate) {
         this.appUser = appUser;
         this.spot = spot;
         this.surfRating = surfRating;
@@ -33,11 +38,13 @@ public class NewTrip implements Parcelable {
         this.windSpeed = windSpeed;
         this.windDirection = windDirection;
         this.gusts = gusts;
-        this.tideHeight = tideHeight;
+        this.lowTideHeight = lowTideHeight;
+        this.highTideHeight = highTideHeight;
+        this.lowTideDate = lowTideDate;
+        this.highTideDate = highTideDate;
     }
 
-    public NewTrip( AppUser appUser, Spot spot, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, double tideHeight) {
-
+    public NewTrip(AppUser appUser, Spot spot, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, Double lowTideHeight, Double highTideHeight, Date lowTideDate, Date highTideDate) {
         this.appUser = appUser;
         this.spot = spot;
         this.date = date;
@@ -47,7 +54,10 @@ public class NewTrip implements Parcelable {
         this.windSpeed = windSpeed;
         this.windDirection = windDirection;
         this.gusts = gusts;
-        this.tideHeight = tideHeight;
+        this.lowTideHeight = lowTideHeight;
+        this.highTideHeight = highTideHeight;
+        this.lowTideDate = lowTideDate;
+        this.highTideDate = highTideDate;
     }
 
     public int getTripId() {
@@ -146,13 +156,39 @@ public class NewTrip implements Parcelable {
         this.gusts = gusts;
     }
 
-    public double getTideHeight() {
-        return tideHeight;
+    public Double getLowTideHeight() {
+        return lowTideHeight;
     }
 
-    public void setTideHeight(double tideHeight) {
-        this.tideHeight = tideHeight;
+    public void setLowTideHeight(Double lowTideHeight) {
+        this.lowTideHeight = lowTideHeight;
     }
+
+    public Double getHighTideHeight() {
+        return highTideHeight;
+    }
+
+    public void setHighTideHeight(Double highTideHeight) {
+        this.highTideHeight = highTideHeight;
+    }
+
+    public Date getLowTideDate() {
+        return lowTideDate;
+    }
+
+    public void setLowTideDate(Date lowTideDate) {
+        this.lowTideDate = lowTideDate;
+    }
+
+    public Date getHighTideDate() {
+        return highTideDate;
+    }
+
+    public void setHighTideDate(Date highTideDate) {
+        this.highTideDate = highTideDate;
+    }
+
+    // do we even need parcelling?
 
     protected NewTrip(Parcel in) {
         tripId = in.readInt();
@@ -167,7 +203,6 @@ public class NewTrip implements Parcelable {
         windSpeed = in.readDouble();
         windDirection = in.readString();
         gusts = in.readInt();
-        tideHeight = in.readDouble();
     }
 
     public static final Creator<Trip> CREATOR = new Creator<Trip>() {
@@ -196,7 +231,6 @@ public class NewTrip implements Parcelable {
         dest.writeDouble(windSpeed);
         dest.writeString(windDirection);
         dest.writeInt(gusts);
-        dest.writeDouble(tideHeight);
     }
 
     @Override
@@ -219,7 +253,10 @@ public class NewTrip implements Parcelable {
                 ", windSpeed=" + windSpeed +
                 ", windDirection='" + windDirection + '\'' +
                 ", gusts=" + gusts +
-                ", tideHeight=" + tideHeight +
+                ", highTideHeight=" + highTideHeight +
+                ", lowTideHeight=" + lowTideHeight +
+                ", highTidedate=" + highTideDate +
+                ", lowTideDate=" + lowTideDate +
                 '}';
     }
 }

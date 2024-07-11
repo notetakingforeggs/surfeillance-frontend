@@ -17,10 +17,13 @@ public class Trip implements Parcelable {
     private double windSpeed;
     private String windDirection;
     private int gusts;
-    private double tideHeight;
+    private Double lowTideHeight;
+    private Double highTideHeight;
+    private String lowTideDate;
+    private String highTideDate;
 
 
-    public Trip(AppUserDTO appUserDTO, Spot spot, Integer surfRating, Integer infoRating, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, double tideHeight) {
+    public Trip(AppUserDTO appUserDTO, Spot spot, Integer surfRating, Integer infoRating, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, Double lowTideHeight, Double highTideHeight, String  lowTideDate, String highTideDate) {
         this.appUserDTO = appUserDTO;
         this.spot = spot;
         this.surfRating = surfRating;
@@ -32,11 +35,13 @@ public class Trip implements Parcelable {
         this.windSpeed = windSpeed;
         this.windDirection = windDirection;
         this.gusts = gusts;
-        this.tideHeight = tideHeight;
+        this.lowTideHeight = lowTideHeight;
+        this.highTideHeight = highTideHeight;
+        this.lowTideDate = lowTideDate;
+        this.highTideDate = highTideDate;
     }
 
-    public Trip(AppUserDTO appUserDTO, Spot spot, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, double tideHeight) {
-
+    public Trip(AppUserDTO appUserDTO, Spot spot, String date, double waveHeight, String waveDirection, double wavePeriod, double windSpeed, String windDirection, int gusts, Double lowTideHeight, Double highTideHeight, String lowTideDate, String highTideDate) {
         this.appUserDTO = appUserDTO;
         this.spot = spot;
         this.date = date;
@@ -46,7 +51,10 @@ public class Trip implements Parcelable {
         this.windSpeed = windSpeed;
         this.windDirection = windDirection;
         this.gusts = gusts;
-        this.tideHeight = tideHeight;
+        this.lowTideHeight = lowTideHeight;
+        this.highTideHeight = highTideHeight;
+        this.lowTideDate = lowTideDate;
+        this.highTideDate = highTideDate;
     }
 
     public int getTripId() {
@@ -145,12 +153,36 @@ public class Trip implements Parcelable {
         this.gusts = gusts;
     }
 
-    public double getTideHeight() {
-        return tideHeight;
+    public Double getLowTideHeight() {
+        return lowTideHeight;
     }
 
-    public void setTideHeight(double tideHeight) {
-        this.tideHeight = tideHeight;
+    public void setLowTideHeight(Double lowTideHeight) {
+        this.lowTideHeight = lowTideHeight;
+    }
+
+    public Double getHighTideHeight() {
+        return highTideHeight;
+    }
+
+    public void setHighTideHeight(Double highTideHeight) {
+        this.highTideHeight = highTideHeight;
+    }
+
+    public String getLowTideDate() {
+        return lowTideDate;
+    }
+
+    public void setLowTideDate(String lowTideDate) {
+        this.lowTideDate = lowTideDate;
+    }
+
+    public String getHighTideDate() {
+        return highTideDate;
+    }
+
+    public void setHighTideDate(String highTideDate) {
+        this.highTideDate = highTideDate;
     }
 
     protected Trip(Parcel in) {
@@ -174,7 +206,15 @@ public class Trip implements Parcelable {
         windSpeed = in.readDouble();
         windDirection = in.readString();
         gusts = in.readInt();
-        tideHeight = in.readDouble();
+        if (in.readByte() == 0){
+            lowTideHeight = null;
+        }else {lowTideHeight = in.readDouble();}
+        if (in.readByte() == 0){
+            highTideHeight = null;
+        }else {highTideHeight = in.readDouble();}
+        lowTideDate = in.readString();
+        highTideDate = in.readString();
+
     }
 
     public static final Creator<Trip> CREATOR = new Creator<Trip>() {
@@ -213,7 +253,26 @@ public class Trip implements Parcelable {
         dest.writeDouble(windSpeed);
         dest.writeString(windDirection);
         dest.writeInt(gusts);
-        dest.writeDouble(tideHeight);
+
+        if (lowTideHeight == null){
+            dest.writeByte((byte) 0);
+        }else{
+            dest.writeByte((byte)1);
+            dest.writeDouble(lowTideHeight);
+        }
+        if (highTideHeight == null){
+            dest.writeByte((byte) 0);
+        }else{
+            dest.writeByte((byte)1);
+            dest.writeDouble(highTideHeight);
+        }
+        dest.writeString(lowTideDate);
+        dest.writeString(highTideDate);
+        /*
+    private Double lowTideHeight;
+    private Double highTideHeight;
+    private Date lowTideDate;
+    private Date highTideDate;*/
     }
 
     @Override
@@ -236,7 +295,10 @@ public class Trip implements Parcelable {
                 ", windSpeed=" + windSpeed +
                 ", windDirection='" + windDirection + '\'' +
                 ", gusts=" + gusts +
-                ", tideHeight=" + tideHeight +
+                ", hightideHeight=" + highTideDate +
+                ", hightidetime=" + highTideDate +
+                ",lowtideheight = " + lowTideHeight +
+                ", low tide time = " + lowTideDate +
                 '}';
     }
 }
