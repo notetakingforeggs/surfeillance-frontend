@@ -9,12 +9,10 @@ import com.example.surfeillancefrontend.databinding.ActivityProfileBinding;
 import com.example.surfeillancefrontend.model.data.dto.AppUser;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileActivity extends AppCompatActivity {
 
    private ActivityProfileBinding binding;
-    private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
@@ -39,7 +37,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void signOut() {
         // Firebase sign out
-        mAuth.signOut();
 
         // Google sign out
         mGoogleSignInClient.signOut().addOnCompleteListener(this,

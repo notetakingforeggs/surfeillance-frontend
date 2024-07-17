@@ -26,6 +26,7 @@ public class SpotChoiceActivity extends AppCompatActivity implements RecyclerVie
     List<Location> spots;
     RecyclerView recyclerView;
     SpotApiService spotApiService;
+    String TAG = "SpotChoiceActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { // You must implement this callback, which fires when the system creates your activity. Your implementation should initialize the essential components of your activity; for example, your app should create views and bind data to lists here.
@@ -43,6 +44,7 @@ public class SpotChoiceActivity extends AppCompatActivity implements RecyclerVie
         recyclerView.setLayoutManager(layoutManager);
 
         spotApiService = ApiClient.getInstance().create(SpotApiService.class);
+        Log.d(TAG, "Apiclient creation ");
         spotApiService.getAllSpots().enqueue(new Callback<List<Location>>() {
             @Override
             public void onResponse(Call<List<Location>> call, Response<List<Location>> response) {
@@ -52,10 +54,11 @@ public class SpotChoiceActivity extends AppCompatActivity implements RecyclerVie
             }
             @Override
             public void onFailure(Call<List<Location>> call, Throwable throwable) {
-                Log.d("test", "HTTP GET request NOT sent");
+                Log.d(TAG, "HTTP GET request Failed");
             }
         });
     } // When onCreate() finishes, the next callback is always onStart(). As onCreate() exits, the activity enters the Started state, and the activity becomes visible to the user. This callback contains what amounts to the activity’s final preparations for coming to the foreground and becoming interactive.
+
     public void navigateToPreviousActivity() {
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {

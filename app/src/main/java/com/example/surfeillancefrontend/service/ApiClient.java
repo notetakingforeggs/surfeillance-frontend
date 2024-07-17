@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 public class ApiClient {
     private static Retrofit retrofit;
-    private static String token;
 
 
     private ApiClient() {
@@ -24,26 +23,33 @@ public class ApiClient {
 
     public static Retrofit getInstance() {
         if (retrofit == null) {
-            String token = UserInfoHolder.getInstance().getToken();
+            //String token = UserInfoHolder.getInstance().getToken();
 
 
-            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            //HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            // loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
+
+//
+//            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//                    .addInterceptor(new Interceptor() {
+//                        @NotNull
+//                        @Override
+//                        public Response intercept(@NotNull Interceptor.Chain chain) throws IOException {
+//                            Request newRequest = chain.request().newBuilder()
+//                                    .addHeader("Authorization", "Bearer " + token )
+//                                    .build();
+//                            return chain.proceed(newRequest);
+//                        }})
+//                    .addInterceptor(loggingInterceptor)
+//                    .connectTimeout(300, TimeUnit.SECONDS)
+//                    .writeTimeout(300, TimeUnit.SECONDS)
+//                    .readTimeout(300, TimeUnit.SECONDS)
+//                    .build();
+//
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                    .addInterceptor(new Interceptor() {
-                        @NotNull
-                        @Override
-                        public Response intercept(@NotNull Interceptor.Chain chain) throws IOException {
-                            Request newRequest = chain.request().newBuilder()
-                                    .addHeader("Authorization", "Bearer " + token )
-                                    .build();
-                            return chain.proceed(newRequest);
-                        }})
-                    .addInterceptor(loggingInterceptor)
-                    .connectTimeout(300, TimeUnit.SECONDS)
-                    .writeTimeout(300, TimeUnit.SECONDS)
-                    .readTimeout(300, TimeUnit.SECONDS)
+                    .connectTimeout(300, TimeUnit.SECONDS) // Adjust timeout as necessary
+                    .readTimeout(300, TimeUnit.SECONDS) // Adjust timeout as necessary
                     .build();
 
             retrofit = new Retrofit.Builder()
