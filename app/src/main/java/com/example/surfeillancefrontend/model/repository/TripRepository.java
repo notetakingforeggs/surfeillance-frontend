@@ -35,7 +35,9 @@ public class TripRepository {
 
     public MutableLiveData<List<Trip>> getMutableLiveDate() {
 
-        Call call = tripApiService.getTripsByUserId(UserInfoHolder.getInstance().getUserID());
+        // User login has been removed so trips doesnt work unless hardcoded
+//        Call call = tripApiService.getTripsByUserId(UserInfoHolder.getInstance().getUserID());
+        Call call = tripApiService.getTripsByUserId("1");
 
         call.enqueue(new Callback<List<Trip>>() {
             @Override
@@ -53,9 +55,9 @@ public class TripRepository {
     }
 
     public Trip editTripInfo(Trip editedTrip) {
-       UpdateRatingDTO ratings = new UpdateRatingDTO(editedTrip.getSurfRating(), editedTrip.getInfoRating());
-        Call call = tripApiService.editTripByTripId(editedTrip.getTripId(), ratings );
-         call.enqueue(new Callback() {
+        UpdateRatingDTO ratings = new UpdateRatingDTO(editedTrip.getSurfRating(), editedTrip.getInfoRating());
+        Call call = tripApiService.editTripByTripId(editedTrip.getTripId(), ratings);
+        call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
                 returnedTripAfterPut = (Trip) response.body();
@@ -67,20 +69,21 @@ public class TripRepository {
                         "repo faill edit", "onFailure: ");
             }
         });
-         return returnedTripAfterPut;
+        return returnedTripAfterPut;
     }
+
     public Trip addTrip(Location location) {
 
         newTripBuilder = new NewTripBuilder();
         Log.i("in trip repo", location.getName());
-        Log.i("deets", location.toString());
+        Log.i("New Trip Location", location.toString());
         NewTrip tripToAdd = newTripBuilder
                 // spot ID to be collected from backend pls
-                .withSpot(new Spot( (int) location.getSpotId(), location.getName()))
-                // userid also to come in from backend/session info
-                .withUser(new AppUser(Integer.valueOf(UserInfoHolder.getInstance().getUserID())))
+                .withSpot(new Spot((int) location.getSpotId(), location.getName()))
                 .withLocation(location)
-                    .build();
+                // does it need a user? maybe change the builder
+                .withUser(new AppUser(1))
+                .build();
         Log.i("pre call", tripToAdd.toString());
         Call call = tripApiService.addTrip(tripToAdd);
 
@@ -88,7 +91,7 @@ public class TripRepository {
             @Override
             public void onResponse(Call call, Response response) {
                 returnedTripAfterPost = (Trip) response.body();
-               // Log.i("trip added", returnedTripAfterPost.toString());
+                // Log.i("trip added", returnedTripAfterPost.toString());
             }
 
             @Override

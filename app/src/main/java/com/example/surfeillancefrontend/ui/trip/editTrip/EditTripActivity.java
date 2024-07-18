@@ -60,7 +60,7 @@ public class EditTripActivity extends AppCompatActivity {
                 editedTrip.setInfoRating(forecastRating);
                 viewModel.tripRepository.editTripInfo(editedTrip);
                 Toast.makeText(getApplicationContext(), "Your update has been registered", Toast.LENGTH_LONG).show();
-                Log.i("UserID in edit", UserInfoHolder.getInstance().getUserID());
+//                Log.i("UserID in edit", UserInfoHolder.getInstance().getUserID());
                 Intent intent = new Intent(EditTripActivity.this, MainActivity.class);
                 startActivity(intent);
             }

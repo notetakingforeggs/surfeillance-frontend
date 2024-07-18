@@ -37,34 +37,39 @@ public class NewTripBuilder {
 
 
 
-//        Date highTime = null;
-//        Date lowTime = null;
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-//            OffsetDateTime offsetDateTimeLow = OffsetDateTime.parse(location.getLowTideTime(), DateTimeFormatter.BASIC_ISO_DATE);
-//            OffsetDateTime offsetDateTimeHigh = OffsetDateTime.parse(location.getHighTideTime(), DateTimeFormatter.BASIC_ISO_DATE);
-//
-//            Log.i("in builder", "build: ");
-//            highTime = Date.from(offsetDateTimeHigh.toInstant());
-//            lowTime = Date.from(offsetDateTimeLow.toInstant());
-//
-//            Log.i("TAG", "build: " + highTime);
-
-
-            constructedTrip = new NewTrip(user,
+            constructedTrip = new NewTrip(
+                    user,
                     spot,
                     date,
-                    location.getWaveHeight().doubleValue(),
+                    location.getWaveHeight(),
                     location.getWaveDirection(),
-                    location.getWavePeriod().doubleValue(),
+                    location.getWavePeriod(),
                     // windspeed is null, which is not ok
                     0,
                     location.getWindDirection(),
                     (int) Math.round(location.getGusts()),
                     location.getLowTideHeight(),
                     location.getHighTideHeight(),
-                    location.getLowTideTime(),
-                    location.getHighTideTime()
+//                    location.getLowTideTime(),
+                    "3",
+//                    location.getHighTideTime()
+                    "4"
             );
+
+        /*      this.appUser = appUser;
+        this.spot = spot;
+        this.date = date;
+        this.waveHeight = waveHeight;
+        this.waveDirection = waveDirection;
+        this.wavePeriod = wavePeriod;
+        this.windSpeed = windSpeed;
+        this.windDirection = windDirection;
+        this.gusts = gusts;
+        this.lowTideHeight = lowTideHeight;
+        this.highTideHeight = highTideHeight;
+        this.lowTideDate = lowTideDate;
+        this.highTideDate = highTideDate;
+    }*/
 
 
         return constructedTrip;
